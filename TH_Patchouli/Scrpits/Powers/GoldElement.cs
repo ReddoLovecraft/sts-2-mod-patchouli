@@ -12,6 +12,8 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
+using MegaCrit.Sts2.Core.Models.Potions;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 using Patchouib.Scrpits.Main;
@@ -29,7 +31,17 @@ namespace TH_Patchouli.Scrpits.Powers
 
         public string TscnPath => "res://TH_Patchouli/ArtWorks/VFX/gold.tscn";
 
-        //protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<IgnitePower>()];
+        protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<StrengthPower>()];
         public GoldElement() { }
+         public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
+        {
+            if (player != base.Owner.Player)
+            {
+                return;
+            }
+            this.Flash();
+            await PowerCmd.Apply<FlexPotionPower>(Owner,Amount,Owner,null);
+			await PowerCmd.Decrement(this);
+        }
     }
 }

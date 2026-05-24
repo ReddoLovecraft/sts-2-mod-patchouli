@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using Patchouib.Scrpits.Main;
+using TH_Patchouli.Scrpits.Main;
 using TH_Patchouli.Scrpits.Powers;
 
 
@@ -322,41 +323,9 @@ namespace TH_Patchouli.Scripts.Main
 				{
 					return;
 				}
-
-				if(isSingleElement)
-				{
-					int amount = cardPlay.Card.EnergyCost.GetWithModifiers(CostModifiers.Local);
-					if(amount<=0)amount=1;
-					switch (ElementTypes[0])
-				{
-					case ElementEnum.Fire:
-					await PowerCmd.Apply<FireElement>(Owner.Creature, amount,Owner.Creature,this);
-					break;
-					case ElementEnum.Water:
-					await PowerCmd.Apply<WaterElement>(Owner.Creature, amount,Owner.Creature,this);
-					break;
-					case ElementEnum.Dirt:
-					await PowerCmd.Apply<DirtElement>(Owner.Creature, amount,Owner.Creature,this);
-					break;
-					case ElementEnum.Gold:
-					await PowerCmd.Apply<GoldElement>(Owner.Creature, amount,Owner.Creature,this);
-					break;
-					case ElementEnum.Wood:
-					await PowerCmd.Apply<WoodElement>(Owner.Creature, amount,Owner.Creature,this);
-					break;
-					case ElementEnum.Lunar:
-					await PowerCmd.Apply<LunarElement>(Owner.Creature, amount,Owner.Creature,this);
-					break;
-					case ElementEnum.Sun:
-					await PowerCmd.Apply<SunElement>(Owner.Creature, amount,Owner.Creature,this);
-					break;
-					case ElementEnum.None:
-					break;
-				default:
-					break;
-				}
-				}
-				
+				int amount = cardPlay.Card.EnergyCost.GetWithModifiers(CostModifiers.Local);
+				if(amount<=0)amount=1;
+				await ToolBox.GainElement(this.ElementTypes,amount,Owner.Creature);
 			}
 		}
 		List<PileType> IRightClickableCardModel.Pile => new List<PileType>{PileType.Hand};
@@ -370,6 +339,10 @@ namespace TH_Patchouli.Scripts.Main
 				
 			}
 		}
+		public virtual async Task<PowerModel> OnChosen(int amount)
+        {
+           return null;
+        }
 	}
   
 }

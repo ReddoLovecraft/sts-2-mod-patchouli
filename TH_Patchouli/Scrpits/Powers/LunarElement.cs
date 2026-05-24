@@ -31,5 +31,15 @@ namespace TH_Patchouli.Scrpits.Powers
 
         //protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<IgnitePower>()];
         public LunarElement() { }
+         public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
+        {
+            if (player != base.Owner.Player)
+            {
+                return;
+            }
+            this.Flash();
+            await CardPileCmd.Draw(choiceContext,Amount/2,Owner.Player);
+			await PowerCmd.Decrement(this);
+        }
     }
 }

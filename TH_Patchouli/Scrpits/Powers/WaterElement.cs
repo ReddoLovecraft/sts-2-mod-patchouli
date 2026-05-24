@@ -29,7 +29,17 @@ namespace TH_Patchouli.Scrpits.Powers
 
         public string TscnPath => "res://TH_Patchouli/ArtWorks/VFX/water.tscn";
 
-        //protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<IgnitePower>()];
+        protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<FreezePower>()];
         public WaterElement() { }
+         public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
+        {
+            if (player != base.Owner.Player)
+            {
+                return;
+            }
+            this.Flash();
+            await PowerCmd.Apply<FreezePower>(CombatState.HittableEnemies,Amount,Owner,null);
+			await PowerCmd.Decrement(this);
+        }
     }
 }

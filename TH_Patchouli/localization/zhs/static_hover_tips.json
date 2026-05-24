@@ -1,6 +1,7 @@
 {
 	"ELEMENT.title": "元素",
-	"ELEMENT.description": "分为：金、木、水、火、土、日、月。\n在你的回合结束时减少[blue]1[/blue]。\n打出拥有对应[gold]元素[/gold]的卡牌时获得等同于其耗能点[gold]元素[/gold](至少1点)。\n[gold]右键[/gold]帕秋莉的卡牌时可使用同类[gold]元素[/gold]对其进行[red]强化[/red](每点可使所有数值提高[blue]1[/blue]点)或使用不同[gold]元素[/gold]将卡牌[purple]变化[/purple]为指定卡牌。",
+	"ELEMENT.description": "分为：金、木、水、火、土、日、月。\n打出拥有对应[gold]元素[/gold]的卡牌时获得等同于其耗能点[gold]元素[/gold](至少1点)，在你的回合结束时减少[blue]1[/blue]点。\n[gold]右键[/gold]帕秋莉的卡牌时可使用同类[gold]元素[/gold]对其进行[red]强化[/red](每点可使所有数值提高[blue]1[/blue]点)或使用不同[gold]元素[/gold]将卡牌[purple]变化[/purple]为指定卡牌。",
+	"ELEMENT.selectionScreenPrompt": "选择一种[gold]元素[/gold]。",
 	"GOLD.title": "[gold]金[/gold]",
 	"WOOD.title": "[green]木[/green]",
 	"WATER.title": "[blue]水[/blue]",
