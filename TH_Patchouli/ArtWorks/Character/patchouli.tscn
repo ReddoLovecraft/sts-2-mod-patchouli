@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7oe5xuur378"]
+
+[ext_resource type="SpineSkeletonDataResource" uid="uid://bbqaokmddn12s" path="res://TH_Patchouli/ArtWorks/Character/patchouli.tres" id="1_03h26"]
+
+[node name="Youmu" type="Node2D"]
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("1_03h26")
+preview_skin = "default"
+preview_animation = "idle"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+position = Vector2(15, -300)
+scale = Vector2(3, 3)
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -88.0
+offset_top = -321.0
+offset_right = 122.0
+offset_bottom = -2.0
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true

@@ -1,0 +1,587 @@
+
+skeleton.png
+size: 1890,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+attack/attack-_0000_attackCa000.png
+  rotate: true
+  xy: 704, 2
+  size: 48, 97
+  orig: 90, 115
+  offset: 6, 6
+  index: -1
+attack/attack-_0001_attackCa001.png
+  rotate: true
+  xy: 1099, 2
+  size: 52, 94
+  orig: 90, 115
+  offset: 11, 6
+  index: -1
+attack/attack-_0002_attackCa002.png
+  rotate: true
+  xy: 1195, 2
+  size: 54, 94
+  orig: 90, 115
+  offset: 10, 6
+  index: -1
+attack/attack-_0003_attackCa003.png
+  rotate: true
+  xy: 1641, 6
+  size: 59, 90
+  orig: 90, 115
+  offset: 14, 6
+  index: -1
+attack/attack-_0004_attackCa004.png
+  rotate: false
+  xy: 1683, 71
+  size: 66, 90
+  orig: 90, 115
+  offset: 20, 6
+  index: -1
+attack/attack-_0005_attackCa005.png
+  rotate: false
+  xy: 1631, 67
+  size: 50, 92
+  orig: 90, 115
+  offset: 20, 6
+  index: -1
+attack/attack-_0006_attackCa006.png
+  rotate: false
+  xy: 1567, 65
+  size: 62, 93
+  orig: 90, 115
+  offset: 13, 6
+  index: -1
+attack/attack-_0007_attackCa007.png
+  rotate: false
+  xy: 1591, 161
+  size: 62, 93
+  orig: 90, 115
+  offset: 13, 6
+  index: -1
+attack/attack-_0008_attackCa008.png
+  rotate: false
+  xy: 1537, 160
+  size: 52, 94
+  orig: 90, 115
+  offset: 13, 6
+  index: -1
+attack/attack-_0009_attackCa009.png
+  rotate: false
+  xy: 1182, 58
+  size: 54, 97
+  orig: 90, 115
+  offset: 7, 6
+  index: -1
+attack/attack-_0010_attackCa010.png
+  rotate: false
+  xy: 855, 54
+  size: 56, 99
+  orig: 90, 115
+  offset: 2, 6
+  index: -1
+cast/cast-_0000_spellCa000.png
+  rotate: true
+  xy: 898, 2
+  size: 50, 99
+  orig: 81, 105
+  offset: 19, 1
+  index: -1
+cast/cast-_0001_spellCa001.png
+  rotate: false
+  xy: 1142, 157
+  size: 55, 97
+  orig: 81, 105
+  offset: 17, 1
+  index: -1
+cast/cast-_0002_spellCa002.png
+  rotate: false
+  xy: 1114, 57
+  size: 66, 97
+  orig: 81, 105
+  offset: 8, 1
+  index: -1
+cast/cast-_0003_spellCa003.png
+  rotate: false
+  xy: 1281, 61
+  size: 79, 95
+  orig: 81, 105
+  offset: 1, 3
+  index: -1
+cast/cast-_0004_spellCa004.png
+  rotate: false
+  xy: 1461, 160
+  size: 74, 94
+  orig: 81, 105
+  offset: 5, 2
+  index: -1
+cast/cast-_0005_spellCa005.png
+  rotate: false
+  xy: 1314, 159
+  size: 72, 95
+  orig: 81, 105
+  offset: 7, 1
+  index: -1
+cast/cast-_0006_spellCa006.png
+  rotate: false
+  xy: 1362, 62
+  size: 71, 95
+  orig: 81, 105
+  offset: 8, 1
+  index: -1
+cast/cast-_0007_spellCa007.png
+  rotate: false
+  xy: 1435, 62
+  size: 69, 95
+  orig: 81, 105
+  offset: 10, 1
+  index: -1
+cast/cast-_0008_spellCa008.png
+  rotate: false
+  xy: 1252, 158
+  size: 60, 96
+  orig: 81, 105
+  offset: 14, 1
+  index: -1
+cast/cast-_0009_spellCa009.png
+  rotate: false
+  xy: 1001, 156
+  size: 54, 98
+  orig: 81, 105
+  offset: 16, 1
+  index: -1
+cast/cast-_0010_spellCa010.png
+  rotate: true
+  xy: 999, 2
+  size: 52, 98
+  orig: 81, 105
+  offset: 18, 1
+  index: -1
+cast/cast-_0011_spellCa011.png
+  rotate: false
+  xy: 1388, 159
+  size: 71, 95
+  orig: 81, 105
+  offset: 8, 1
+  index: -1
+die/die-_0000_down000.png
+  rotate: false
+  xy: 1810, 123
+  size: 76, 59
+  orig: 112, 88
+  offset: 22, 14
+  index: -1
+die/die-_0001_down001.png
+  rotate: false
+  xy: 1733, 3
+  size: 75, 66
+  orig: 112, 88
+  offset: 23, 14
+  index: -1
+die/die-_0002_down002.png
+  rotate: true
+  xy: 1810, 184
+  size: 70, 78
+  orig: 112, 88
+  offset: 21, 5
+  index: -1
+die/die-_0003_down003.png
+  rotate: false
+  xy: 1375, 2
+  size: 81, 58
+  orig: 112, 88
+  offset: 7, 10
+  index: -1
+die/die-_0004_down004.png
+  rotate: false
+  xy: 1291, 3
+  size: 82, 56
+  orig: 112, 88
+  offset: 8, 11
+  index: -1
+die/die-_0005_down005.png
+  rotate: false
+  xy: 803, 2
+  size: 93, 49
+  orig: 112, 88
+  offset: 3, 11
+  index: -1
+die/die-_0006_down006.png
+  rotate: false
+  xy: 607, 4
+  size: 95, 45
+  orig: 112, 88
+  offset: 4, 11
+  index: -1
+die/die-_0007_down007.png
+  rotate: true
+  xy: 108, 151
+  size: 103, 40
+  orig: 112, 88
+  offset: 4, 10
+  index: -1
+die/die-_0008_down008.png
+  rotate: true
+  xy: 2, 40
+  size: 106, 38
+  orig: 112, 88
+  offset: 4, 10
+  index: -1
+die/die-_0009_down009.png
+  rotate: true
+  xy: 2, 148
+  size: 106, 39
+  orig: 112, 88
+  offset: 4, 9
+  index: -1
+hit/hit-_0000_hitUpper000.png
+  rotate: false
+  xy: 781, 53
+  size: 72, 99
+  orig: 91, 108
+  offset: 1, 3
+  index: -1
+hit/hit-_0001_hitUpper001.png
+  rotate: false
+  xy: 819, 155
+  size: 62, 99
+  orig: 91, 108
+  offset: 9, 3
+  index: -1
+hit/hit-_0002_hitUpper002.png
+  rotate: false
+  xy: 150, 152
+  size: 57, 102
+  orig: 91, 108
+  offset: 18, 3
+  index: -1
+idle/idle-_0000_stand000.png
+  rotate: false
+  xy: 441, 153
+  size: 54, 101
+  orig: 55, 105
+  offset: 0, 1
+  index: -1
+idle/idle-_0001_stand001.png
+  rotate: false
+  xy: 620, 52
+  size: 54, 100
+  orig: 55, 105
+  offset: 0, 1
+  index: -1
+idle/idle-_0002_stand002.png
+  rotate: false
+  xy: 659, 154
+  size: 53, 100
+  orig: 55, 105
+  offset: 0, 1
+  index: -1
+idle/idle-_0003_stand003.png
+  rotate: false
+  xy: 883, 155
+  size: 53, 99
+  orig: 55, 105
+  offset: 0, 1
+  index: -1
+idle/idle-_0004_stand004.png
+  rotate: false
+  xy: 676, 52
+  size: 51, 100
+  orig: 55, 105
+  offset: 1, 1
+  index: -1
+idle/idle-_0005_stand005.png
+  rotate: false
+  xy: 729, 52
+  size: 50, 100
+  orig: 55, 105
+  offset: 1, 1
+  index: -1
+idle/idle-_0006_stand006.png
+  rotate: false
+  xy: 504, 50
+  size: 49, 101
+  orig: 55, 105
+  offset: 1, 1
+  index: -1
+idle/idle-_0007_stand007.png
+  rotate: false
+  xy: 452, 50
+  size: 50, 101
+  orig: 55, 105
+  offset: 0, 1
+  index: -1
+idle/idle-_0008_stand008.png
+  rotate: false
+  xy: 263, 152
+  size: 51, 102
+  orig: 55, 105
+  offset: 0, 1
+  index: -1
+idle/idle-_0009_stand009.png
+  rotate: false
+  xy: 209, 152
+  size: 52, 102
+  orig: 55, 105
+  offset: 0, 1
+  index: -1
+idle/idle-_0010_stand010.png
+  rotate: false
+  xy: 171, 48
+  size: 53, 102
+  orig: 55, 105
+  offset: 0, 1
+  index: -1
+idle/idle-_0011_stand011.png
+  rotate: false
+  xy: 396, 50
+  size: 54, 101
+  orig: 55, 105
+  offset: 0, 1
+  index: -1
+idle/idle-_0012_stand012.png
+  rotate: false
+  xy: 280, 48
+  size: 51, 102
+  orig: 55, 105
+  offset: 0, 1
+  index: -1
+idle/idle-_0013_stand013.png
+  rotate: false
+  xy: 497, 153
+  size: 50, 101
+  orig: 55, 105
+  offset: 0, 1
+  index: -1
+idle/idle-_0014_stand014.png
+  rotate: false
+  xy: 549, 153
+  size: 49, 101
+  orig: 55, 105
+  offset: 1, 1
+  index: -1
+idle/idle-_0015_stand015.png
+  rotate: false
+  xy: 767, 154
+  size: 50, 100
+  orig: 55, 105
+  offset: 1, 1
+  index: -1
+idle/idle-_0016_stand016.png
+  rotate: false
+  xy: 714, 154
+  size: 51, 100
+  orig: 55, 105
+  offset: 1, 1
+  index: -1
+idle/idle-_0017_stand017.png
+  rotate: false
+  xy: 226, 48
+  size: 52, 102
+  orig: 55, 105
+  offset: 0, 1
+  index: -1
+rest/rest-_0000_sit003.png
+  rotate: false
+  xy: 1751, 182
+  size: 52, 72
+  orig: 55, 97
+  offset: 2, 0
+  index: -1
+rest/rest-_0001_sit004.png
+  rotate: false
+  xy: 1751, 108
+  size: 51, 72
+  orig: 55, 97
+  offset: 3, 0
+  index: -1
+shop/shop-_0000_walkFront000.png
+  rotate: true
+  xy: 507, 3
+  size: 45, 98
+  orig: 48, 102
+  offset: 2, 2
+  index: -1
+shop/shop-_0001_walkFront001.png
+  rotate: true
+  xy: 407, 3
+  size: 45, 98
+  orig: 48, 102
+  offset: 1, 2
+  index: -1
+shop/shop-_0002_walkFront002.png
+  rotate: true
+  xy: 208, 2
+  size: 44, 97
+  orig: 48, 102
+  offset: 1, 2
+  index: -1
+shop/shop-_0003_walkFront003.png
+  rotate: false
+  xy: 1057, 156
+  size: 41, 98
+  orig: 48, 102
+  offset: 3, 2
+  index: -1
+shop/shop-_0004_walkFront004.png
+  rotate: false
+  xy: 913, 54
+  size: 41, 99
+  orig: 48, 102
+  offset: 3, 2
+  index: -1
+shop/shop-_0005_walkFront005.png
+  rotate: false
+  xy: 1072, 56
+  size: 40, 98
+  orig: 48, 102
+  offset: 2, 2
+  index: -1
+shop/shop-_0006_walkFront006.png
+  rotate: true
+  xy: 307, 4
+  size: 42, 98
+  orig: 48, 102
+  offset: 1, 2
+  index: -1
+shop/shop-_0007_walkFront007.png
+  rotate: false
+  xy: 1238, 58
+  size: 41, 97
+  orig: 48, 102
+  offset: 1, 2
+  index: -1
+shop/shop-_0008_walkFront008.png
+  rotate: false
+  xy: 1100, 156
+  size: 40, 98
+  orig: 48, 102
+  offset: 3, 2
+  index: -1
+shop/shop-_0009_walkFront009.png
+  rotate: true
+  xy: 108, 2
+  size: 43, 98
+  orig: 48, 102
+  offset: 3, 2
+  index: -1
+spell/spell-_0000_spellKa000.png
+  rotate: false
+  xy: 600, 154
+  size: 57, 100
+  orig: 65, 103
+  offset: 0, 3
+  index: -1
+spell/spell-_0001_spellKa001.png
+  rotate: false
+  xy: 1016, 56
+  size: 54, 98
+  orig: 65, 103
+  offset: 0, 5
+  index: -1
+spell/spell-_0002_spellKa002.png
+  rotate: true
+  xy: 1458, 7
+  size: 53, 94
+  orig: 65, 103
+  offset: 0, 9
+  index: -1
+spell/spell-_0003_spellKa003.png
+  rotate: false
+  xy: 1655, 163
+  size: 49, 91
+  orig: 65, 103
+  offset: 0, 12
+  index: -1
+spell/spell-_0004_spellKa004.png
+  rotate: true
+  xy: 1554, 2
+  size: 60, 85
+  orig: 65, 103
+  offset: 0, 18
+  index: -1
+spell/spell-_0005_spellKa005.png
+  rotate: false
+  xy: 1810, 41
+  size: 65, 80
+  orig: 65, 103
+  offset: 0, 23
+  index: -1
+spell/spell-_0006_spellKa006.png
+  rotate: false
+  xy: 1199, 157
+  size: 51, 97
+  orig: 65, 103
+  offset: 0, 6
+  index: -1
+spell/spell-_0007_spellKa007.png
+  rotate: false
+  xy: 379, 153
+  size: 60, 101
+  orig: 65, 103
+  offset: 0, 2
+  index: -1
+spell/spell-_0008_spellKa008.png
+  rotate: false
+  xy: 43, 151
+  size: 63, 103
+  orig: 65, 103
+  offset: 0, 0
+  index: -1
+spell/spell-_0009_spellKa009.png
+  rotate: false
+  xy: 108, 47
+  size: 61, 102
+  orig: 65, 103
+  offset: 0, 1
+  index: -1
+spell/spell-_0010_spellKa010.png
+  rotate: false
+  xy: 316, 153
+  size: 61, 101
+  orig: 65, 103
+  offset: 0, 2
+  index: -1
+spell/spell-_0011_spellKa011.png
+  rotate: false
+  xy: 333, 50
+  size: 61, 101
+  orig: 65, 103
+  offset: 0, 2
+  index: -1
+spell/spell-_0012_spellKa012.png
+  rotate: false
+  xy: 42, 43
+  size: 64, 103
+  orig: 65, 103
+  offset: 0, 0
+  index: -1
+spell/spell-_0013_spellKa013.png
+  rotate: false
+  xy: 555, 51
+  size: 63, 100
+  orig: 65, 103
+  offset: 0, 3
+  index: -1
+spell/spell-_0014_spellKa014.png
+  rotate: false
+  xy: 938, 156
+  size: 61, 98
+  orig: 65, 103
+  offset: 0, 5
+  index: -1
+spell/spell-_0015_spellKa015.png
+  rotate: false
+  xy: 1506, 64
+  size: 59, 94
+  orig: 65, 103
+  offset: 0, 9
+  index: -1
+spell/spell-_0016_spellKa016.png
+  rotate: false
+  xy: 956, 56
+  size: 58, 98
+  orig: 65, 103
+  offset: 0, 5
+  index: -1

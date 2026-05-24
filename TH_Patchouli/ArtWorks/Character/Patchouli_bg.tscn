@@ -1,0 +1,134 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqj6cg3juydum"]
+
+[ext_resource type="Texture2D" uid="uid://dnb7lrr64fwcw" path="res://TH_Patchouli/ArtWorks/Character/patchouli.jpeg" id="1_hemk1"]
+[ext_resource type="Texture2D" uid="uid://bp2xp7et8s4q1" path="res://TH_Patchouli/ArtWorks/Character/p2d.png" id="2_0nlfp"]
+
+[node name="Patchouli_bg" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -307.0
+offset_right = 1984.0
+offset_bottom = 893.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.44705883, 0.49803922, 1, 1)
+metadata/_edit_lock_ = true
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1529.0
+offset_top = -764.0
+offset_right = 410.0
+offset_bottom = 399.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_hemk1")
+
+[node name="dirt" type="CPUParticles2D" parent="."]
+position = Vector2(514, 280)
+amount = 77
+lifetime = 7.0
+preprocess = 7.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(2000, 1)
+gravity = Vector2(27, 27)
+orbit_velocity_min = 0.05
+orbit_velocity_max = 0.2
+angle_min = 45.0
+angle_max = 90.0
+scale_amount_min = 7.0
+scale_amount_max = 7.0
+color = Color(0.52924615, 0.2867402, 0.12680942, 1)
+
+[node name="water" type="CPUParticles2D" parent="."]
+position = Vector2(751, 503)
+amount = 7
+lifetime = 7.0
+preprocess = 7.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(2000, 1)
+gravity = Vector2(27, 27)
+orbit_velocity_min = 0.05
+orbit_velocity_max = 0.2
+angle_min = 45.0
+angle_max = 90.0
+scale_amount_min = 7.0
+scale_amount_max = 7.0
+color = Color(0.14219514, 0.38461053, 0.8746203, 1)
+
+[node name="wood" type="CPUParticles2D" parent="."]
+position = Vector2(1129, 820)
+amount = 7
+lifetime = 7.0
+preprocess = 7.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(2000, 1)
+gravity = Vector2(27, 27)
+orbit_velocity_min = 0.05
+orbit_velocity_max = 0.2
+angle_min = 45.0
+angle_max = 90.0
+scale_amount_min = 7.0
+scale_amount_max = 7.0
+color = Color(1.0588765e-06, 0.51733744, 0.18797994, 1)
+
+[node name="fire" type="CPUParticles2D" parent="."]
+position = Vector2(127, 186)
+amount = 7
+lifetime = 7.0
+preprocess = 7.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(2000, 1)
+gravity = Vector2(27, 27)
+orbit_velocity_min = 0.05
+orbit_velocity_max = 0.2
+angle_min = 45.0
+angle_max = 90.0
+scale_amount_min = 7.0
+scale_amount_max = 7.0
+color = Color(0.78039217, 0.07058824, 0.29803923, 1)
+
+[node name="gold" type="CPUParticles2D" parent="."]
+position = Vector2(900, 389)
+amount = 7
+lifetime = 7.0
+preprocess = 7.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(2000, 1)
+gravity = Vector2(27, 27)
+orbit_velocity_min = 0.05
+orbit_velocity_max = 0.2
+angle_min = 45.0
+angle_max = 90.0
+scale_amount_min = 7.0
+scale_amount_max = 7.0
+color = Color(0.7808738, 0.7347207, 0.29660735, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(732.5, 412.5)
+scale = Vector2(5.755162, 3.5317216)
+texture = ExtResource("2_0nlfp")

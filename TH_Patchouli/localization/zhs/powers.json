@@ -1,0 +1,25 @@
+{
+  "TH_PATCHOULI-FIRE_ELEMENT.title": "火元素",
+  "TH_PATCHOULI-FIRE_ELEMENT.description": "变化和活动的“火”",
+  "TH_PATCHOULI-FIRE_ELEMENT.smartDescription": "当前拥有：[blue]{Amount}[/blue]点[red]火元素[/red]，在你的回合开始时减少[blue]1[/blue]点。\n每当你给予[gold]点燃[/gold]时，额外给予[blue]{Amount}[/blue]层。",
+  "TH_PATCHOULI-WATER_ELEMENT.title": "水元素",
+  "TH_PATCHOULI-WATER_ELEMENT.description": "寂静和净化的“水”",
+  "TH_PATCHOULI-WATER_ELEMENT.smartDescription": "当前拥有：[blue]{Amount}[/blue]点[blue]水元素[/blue]，在你的回合开始时减少[blue]1[/blue]点并给予所有敌人[blue]{Amount}[/blue]层[gold]冻结[/gold]。",
+  "TH_PATCHOULI-WOOD_ELEMENT.title": "木元素",
+  "TH_PATCHOULI-WOOD_ELEMENT.description": "生命和觉醒的“木”",
+  "TH_PATCHOULI-WOOD_ELEMENT.smartDescription": "当前拥有：[blue]{Amount}[/blue]点[green]木元素[/green]，在你的回合开始时减少[blue]1[/blue]点。\n在你的回合结束时，回复[blue]{Amount}[/blue]点生命。",
+  "TH_PATCHOULI-DIRT_ELEMENT.title": "土元素",
+  "TH_PATCHOULI-DIRT_ELEMENT.description": "基础和不动的“土”",
+  "TH_PATCHOULI-DIRT_ELEMENT.smartDescription": "当前拥有：[blue]{Amount}[/blue]点[brown]土元素[/brown]，在你的回合开始时减少[blue]1[/blue]点。\n在你的回合结束时，获得[blue]{Amount}[/blue]点[gold]格挡[/gold]。",
+  "TH_PATCHOULI-GOLD_ELEMENT.title": "金元素",
+  "TH_PATCHOULI-GOLD_ELEMENT.description": "果实和丰收的“金”",
+  "TH_PATCHOULI-GOLD_ELEMENT.smartDescription": "果实和丰收的“金”\n当前拥有：[blue]{Amount}[/blue]",
+  "TH_PATCHOULI-SUN_ELEMENT.title": "日元素",
+  "TH_PATCHOULI-SUN_ELEMENT.description": "机动和攻击的“日”",
+  "TH_PATCHOULI-SUN_ELEMENT.smartDescription": "机动和攻击的“日”\n当前拥有：[blue]{Amount}[/blue]",
+  "TH_PATCHOULI-LUNAR_ELEMENT.title": "月元素",
+  "TH_PATCHOULI-LUNAR_ELEMENT.description": "被动和防御的“月”",
+  "TH_PATCHOULI-LUNAR_ELEMENT.smartDescription": "被动和防御的“月”\n当前拥有：[blue]{Amount}[/blue]"
+}
+
+  

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwi1fpakrpej1"]
+
+[ext_resource type="Script" uid="uid://0g44aemllimn" path="res://TH_Patchouli/ArtWorks/Character/PatchouliShop.cs" id="1_gsp4q"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://bbqaokmddn12s" path="res://TH_Patchouli/ArtWorks/Character/patchouli.tres" id="2_lsp7u"]
+
+[node name="sakuya_merchant" type="Node2D"]
+script = ExtResource("1_gsp4q")
+
+[node name="SpineSprite" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_lsp7u")
+preview_skin = "default"
+preview_animation = "relaxed_loop"
+preview_frame = false
+preview_time = 0.0
+scale = Vector2(3, 3)

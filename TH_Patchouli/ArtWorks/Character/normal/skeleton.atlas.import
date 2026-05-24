@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://v071c4s0dvua"
+path="res://.godot/imported/skeleton.atlas-f2026f7fe33f15d6137c327c03034cb6.spatlas"
+
+[deps]
+
+source_file="res://TH_Patchouli/ArtWorks/Character/normal/skeleton.atlas"
+dest_files=["res://.godot/imported/skeleton.atlas-f2026f7fe33f15d6137c327c03034cb6.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

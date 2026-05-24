@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://bqsi2ml6levgi"
+path="res://.godot/imported/skeleton.skel-a7f9b4022ac19fe9ac7558458b614210.spskel"
+
+[deps]
+
+source_file="res://TH_Patchouli/ArtWorks/Character/normal/skeleton.skel"
+dest_files=["res://.godot/imported/skeleton.skel-a7f9b4022ac19fe9ac7558458b614210.spskel"]
+
+[params]
+

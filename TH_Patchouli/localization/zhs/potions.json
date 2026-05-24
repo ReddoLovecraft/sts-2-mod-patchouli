@@ -1,0 +1,12 @@
+{ 
+  "TH_RIN-PREVENTING_ROT_POTION.title": "永远亭秘制防腐剂",
+  "TH_RIN-PREVENTING_ROT_POTION.description": "所有敌人掉落的[gold]尸体[/gold]不会[green]腐烂[/green]。",
+  "TH_RIN-BOTTLE_OF_WRAITH.title": "瓶中怨灵",
+  "TH_RIN-BOTTLE_OF_WRAITH.description": "生成[blue]3[/blue]个[gold]怨灵[/gold]。", 
+  "TH_RIN-TRUE_FIRE_POTION.title": "真·火焰药水",
+  "TH_RIN-TRUE_FIRE_POTION.description": "给予[blue]10[/blue]层[gold]点燃[/gold]。",
+  "TH_RIN-NUCLEAR_FUEL.title": "核能燃料",
+  "TH_RIN-NUCLEAR_FUEL.description": "获得{Energy:energyIcons()}。获得[blue]6[/blue]层[gold]消亡[/gold]。",
+  "TH_RIN-CORPSE_BAR.title": "木天蓼酒",
+  "TH_RIN-CORPSE_BAR.description": "获得[blue]5[/blue]层[gold]活力[/gold]。在你的下[blue]3[/blue]个回合开始时，获得[blue]5[/blue]层[gold]活力[/gold]。"
+}
