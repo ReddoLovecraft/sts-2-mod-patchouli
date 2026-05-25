@@ -1,7 +1,9 @@
+using System;
 using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -169,6 +171,29 @@ namespace TH_Patchouli.Scrpits.Main
                     default:
                         break;
                }
+            }
+
+            Player? player = owner.Player;
+            if (player == null || owner.CombatState == null)
+            {
+                return;
+            }
+
+            int totalGained = Math.Max(0, amount) * Math.Max(0, elementList.Count);
+            if (totalGained <= 0)
+            {
+                return;
+            }
+
+            foreach (PileType pileType in new[] { PileType.Hand, PileType.Draw, PileType.Discard, PileType.Exhaust, PileType.Play })
+            {
+                foreach (CardModel card in pileType.GetPile(player).Cards)
+                {
+                    if (card is TH_Patchouli.Scrpits.Cards.SevenWitch)
+                    {
+                        card.EnergyCost.AddThisCombat(-totalGained, reduceOnly: true);
+                    }
+                }
             }
         }
         public static void GainElementRandomly(int amount,Creature owner)
