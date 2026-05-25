@@ -21,16 +21,6 @@ namespace TH_Patchouli.Scrpits.Powers
 	{
 		public override PowerType Type => PowerType.Buff;
 		public override PowerStackType StackType => PowerStackType.Counter;
-		public override bool IsInstanced => true;
-
-		public override async Task BeforeApplied(Creature target, decimal amount, Creature? applier, CardModel? cardSource)
-		{
-			foreach (EmeraldCityPower existing in target.Powers.OfType<EmeraldCityPower>().ToList())
-			{
-				await PowerCmd.Remove(existing);
-			}
-		}
-
 		public override async Task BeforeDamageReceived(PlayerChoiceContext choiceContext, Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
 		{
 			if (CombatState == null || target != Owner || amount <= 0 || dealer == null || dealer.Side == Owner.Side)
@@ -44,9 +34,9 @@ namespace TH_Patchouli.Scrpits.Powers
 
 		public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
 		{
-			if (side == Owner.Side)
+			if (side != Owner.Side)
 			{
-				await PowerCmd.Remove(this);
+				await PowerCmd.Decrement(this);
 			}
 		}
 	}

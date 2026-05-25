@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -26,8 +27,16 @@ namespace TH_Patchouli.Scrpits.Cards
 	[Pool(typeof(PatchouliCardPool))]
 	public sealed class BuryInLake : PatchouliCardModel
 	{
-		private static readonly List<ElementEnum> _elementTypes = new() { ElementEnum.Water, ElementEnum.Fire };
+		private static readonly List<ElementEnum> _elementTypes = new() { ElementEnum.Water};
 		public override List<ElementEnum> ElementTypes => _elementTypes;
+
+		protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+		[
+			HoverTipFactory.FromKeyword(CardKeyword.Exhaust),
+			base.EnergyHoverTip,
+			HoverTipFactory.FromPower<TH_Patchouli.Scrpits.Powers.WaterElement>(),
+			HoverTipFactory.FromPower<TH_Patchouli.Scrpits.Powers.FireElement>()
+		];
 
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(10m, ValueProp.Move), new EnergyVar(1), new CardsVar(1)];
 

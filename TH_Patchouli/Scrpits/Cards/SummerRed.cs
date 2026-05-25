@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -18,6 +19,12 @@ namespace TH_Patchouli.Scrpits.Cards
 	{
 		private static readonly List<ElementEnum> _elementTypes = new() { ElementEnum.Fire };
 		public override List<ElementEnum> ElementTypes => _elementTypes;
+
+		protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+		[
+			HoverTipFactory.FromPower<TH_Patchouli.Scrpits.Powers.FireElement>(),
+			HoverTipFactory.FromPower<IgnitePower>()
+		];
 
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(2, ValueProp.Move), new CardsVar(2)];
 
@@ -39,8 +46,14 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
 		{
+			
 			if (CombatState == null || Owner == null)
 			{
+				return;
+			}
+			if(cardPlay.Card==this)
+			{
+				await base.AfterCardPlayed(context, cardPlay);
 				return;
 			}
 			if (cardPlay.Card is SummerRed)
@@ -49,10 +62,7 @@ namespace TH_Patchouli.Scrpits.Cards
 			}
 			if (cardPlay.Card is PatchouliCardModel pcm && pcm.ElementTypes.Contains(ElementEnum.Fire))
 			{
-				if (PileType.Discard.GetPile(Owner).Cards.Contains(this))
-				{
-					await CardPileCmd.Add(this, PileType.Hand);
-				}
+				await CardPileCmd.Add(this, PileType.Hand);
 			}
 		}
 

@@ -30,7 +30,7 @@ namespace TH_Patchouli.Scrpits.Powers
 
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Block)];
 
-		public override Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+		public override Task BeforeTurnEndVeryEarly(PlayerChoiceContext choiceContext, CombatSide side)
 		{
 			if (side == Owner.Side)
 			{
@@ -47,7 +47,11 @@ namespace TH_Patchouli.Scrpits.Powers
 			}
 			return Task.CompletedTask;
 		}
-
+		public override Task AfterModifyingHpLostBeforeOsty()
+	{
+		Flash();
+		return Task.CompletedTask;
+	}
 		public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
 		{
 			if (target != Owner || _reductionThisRound <= 0 || amount <= 0 || dealer == null || dealer.Side == Owner.Side)

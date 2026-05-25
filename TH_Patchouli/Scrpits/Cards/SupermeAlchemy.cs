@@ -26,7 +26,12 @@ namespace TH_Patchouli.Scripts.Cards
 public sealed class SupermeAlchemy : PatchouliCardModel
 {
 	 public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain,CardKeyword.Exhaust];
-	protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromCard<ElementTransmutation>(base.IsUpgraded)];
+	protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+	[
+		HoverTipFactory.FromKeyword(CardKeyword.Retain),
+		HoverTipFactory.FromKeyword(CardKeyword.Exhaust),
+		HoverTipFactory.FromCard<ElementTransmutation>(base.IsUpgraded)
+	];
 
 	public SupermeAlchemy() : base(1, CardType.Skill, CardRarity.Ancient, TargetType.Self)
 	{

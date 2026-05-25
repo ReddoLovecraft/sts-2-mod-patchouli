@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -29,7 +30,14 @@ namespace TH_Patchouli.Scrpits.Cards
 		private static readonly List<ElementEnum> _elementTypes = new() { ElementEnum.Fire };
 		public override List<ElementEnum> ElementTypes => _elementTypes;
 
-		protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(20m, ValueProp.Move), new CardsVar(5)];
+		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<TH_Patchouli.Scrpits.Powers.FireElement>()];
+
+		protected override IEnumerable<DynamicVar> CanonicalVars =>
+		[
+			new CalculationBaseVar(20m),
+			new ExtraDamageVar(5m),
+			new CalculatedDamageVar(ValueProp.Move).WithMultiplier(CalculateFireCardCount),
+		];
 
 		public ElmoExplosion() : base(3, CardType.Attack, CardRarity.Rare, TargetType.AllEnemies)
 		{
@@ -37,8 +45,8 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		public override void BoostWhenElementEnhanced(int boostAmount)
 		{
-			DynamicVars.Damage.UpgradeValueBy(boostAmount);
-			DynamicVars.Cards.UpgradeValueBy(boostAmount);
+			DynamicVars.CalculationBase.UpgradeValueBy(boostAmount);
+			DynamicVars.ExtraDamage.UpgradeValueBy(boostAmount);
 		}
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -47,25 +55,33 @@ namespace TH_Patchouli.Scrpits.Cards
 			{
 				return;
 			}
+			await DamageCmd.Attack(DynamicVars.CalculatedDamage).FromCard(this).TargetingAllOpponents(CombatState).Execute(choiceContext);
+		}
+
+		protected override void OnUpgrade()
+		{
+			DynamicVars.CalculationBase.UpgradeValueBy(2);
+			DynamicVars.ExtraDamage.UpgradeValueBy(3);
+		}
+
+		private static decimal CalculateFireCardCount(CardModel card, Creature? _)
+		{
+			if (card.Owner == null)
+			{
+				return 0m;
+			}
 
 			HashSet<CardModel> allCards = [];
 			foreach (PileType pt in new[] { PileType.Draw, PileType.Hand, PileType.Discard, PileType.Exhaust, PileType.Play })
 			{
-				foreach (CardModel c in pt.GetPile(Owner).Cards)
+				foreach (CardModel c in pt.GetPile(card.Owner).Cards)
 				{
 					allCards.Add(c);
 				}
 			}
 
 			int fireCount = allCards.OfType<PatchouliCardModel>().Count(c => c.ElementTypes.Contains(ElementEnum.Fire));
-			int bonus = fireCount * DynamicVars.Cards.IntValue;
-			await DamageCmd.Attack(DynamicVars.Damage.BaseValue + bonus).FromCard(this).TargetingAllOpponents(CombatState).Execute(choiceContext);
-		}
-
-		protected override void OnUpgrade()
-		{
-			DynamicVars.Damage.UpgradeValueBy(2);
-			DynamicVars.Cards.UpgradeValueBy(3);
+			return Math.Max(0, fireCount);
 		}
 	}
 }

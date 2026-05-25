@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -28,8 +29,18 @@ namespace TH_Patchouli.Scrpits.Cards
 	{
 		private static readonly List<ElementEnum> _elementTypes = new() { ElementEnum.Gold };
 		public override List<ElementEnum> ElementTypes => _elementTypes;
+			protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+		[
+			HoverTipFactory.FromPower<StrengthPower>()
+		];
 
-		protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(14m, ValueProp.Move), new CardsVar(3)];
+		protected override IEnumerable<DynamicVar> CanonicalVars =>
+		[
+			new CalculationBaseVar(14m),
+			new ExtraDamageVar(1m),
+			new CalculatedDamageVar(ValueProp.Move).WithMultiplier(CalculateExtraStrengthDamage),
+			new CardsVar(3),
+		];
 
 		public SilverDragon() : base(2, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
 		{
@@ -43,16 +54,21 @@ namespace TH_Patchouli.Scrpits.Cards
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
 			ArgumentNullException.ThrowIfNull(cardPlay.Target);
-			int strength = Owner.Creature.GetPower<StrengthPower>()?.Amount ?? 0;
-			int multiplier = Math.Max(0, DynamicVars.Cards.IntValue);
-			int extraStrengthDamage = Math.Max(0, strength * Math.Max(0, multiplier - 1));
-			decimal damage = DynamicVars.Damage.BaseValue + extraStrengthDamage;
-			await DamageCmd.Attack(damage).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
+			await DamageCmd.Attack(DynamicVars.CalculatedDamage).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
 		}
 
 		protected override void OnUpgrade()
 		{
 			DynamicVars.Cards.UpgradeValueBy(2);
+		}
+
+		private static decimal CalculateExtraStrengthDamage(CardModel card, Creature? _)
+		{
+			SilverDragon self = (SilverDragon)card;
+			int strength = self.Owner.Creature.GetPower<StrengthPower>()?.Amount ?? 0;
+			int multiplier = Math.Max(0, self.DynamicVars.Cards.IntValue);
+			int extraStrength = Math.Max(0, strength) * Math.Max(0, multiplier - 1);
+			return extraStrength;
 		}
 	}
 }

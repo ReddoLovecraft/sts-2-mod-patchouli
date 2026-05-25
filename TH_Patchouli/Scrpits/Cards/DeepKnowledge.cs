@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -26,7 +27,20 @@ namespace TH_Patchouli.Scrpits.Cards
 	[Pool(typeof(PatchouliCardPool))]
 	public sealed class DeepKnowledge : PatchouliCardModel
 	{
-		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(1)];
+		protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+		[
+			HoverTipFactory.FromPower<StrengthPower>(),
+			HoverTipFactory.FromPower<DexterityPower>()
+		];
+
+		protected override IEnumerable<DynamicVar> CanonicalVars =>
+		[
+			new CardsVar(1),
+			new EnergyVar(0),
+			new CalculationBaseVar(1m),
+			new CalculationExtraVar(1m),
+			new CalculatedVar("CalculatedPower").WithMultiplier(CalculatePositiveBuffs),
+		];
 
 		public DeepKnowledge() : base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 		{
@@ -35,12 +49,13 @@ namespace TH_Patchouli.Scrpits.Cards
 		public override void BoostWhenElementEnhanced(int boostAmount)
 		{
 			DynamicVars.Cards.UpgradeValueBy(boostAmount);
+			DynamicVars.CalculationBase.UpgradeValueBy(boostAmount);
+			DynamicVars.CalculationExtra.UpgradeValueBy(boostAmount);
 		}
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
-			int positive = Owner.Creature.Powers.Count(p => p.Type == PowerType.Buff);
-			int total = DynamicVars.Cards.IntValue * (1 + positive);
+			int total = Math.Max(0, (int)((CalculatedVar)DynamicVars["CalculatedPower"]).Calculate(cardPlay.Target));
 			await PowerCmd.Apply<StrengthPower>(Owner.Creature, total, Owner.Creature, this);
 			await PowerCmd.Apply<DexterityPower>(Owner.Creature, total, Owner.Creature, this);
 		}
@@ -48,6 +63,15 @@ namespace TH_Patchouli.Scrpits.Cards
 		protected override void OnUpgrade()
 		{
 			EnergyCost.UpgradeBy(-1);
+		}
+
+		private static decimal CalculatePositiveBuffs(CardModel card, Creature? _)
+		{
+			if (card.Owner?.Creature == null)
+			{
+				return 0m;
+			}
+			return card.Owner.Creature.Powers.Count(p => p.Type == PowerType.Buff);
 		}
 	}
 }

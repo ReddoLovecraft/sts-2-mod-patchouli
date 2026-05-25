@@ -46,13 +46,6 @@ namespace TH_Patchouli.Scrpits.Powers
 			{
 				_originalAmount = (int)Math.Max(0m, amount);
 			}
-
-			List<BubbleShield> existing = target.Powers.OfType<BubbleShield>().ToList();
-			for (int i = 0; i < existing.Count; i++)
-			{
-				existing[i]._suppressExplodeOnRemove = true;
-				await PowerCmd.Remove(existing[i]);
-			}
 		}
 
 		public override Task AfterApplied(Creature? applier, CardModel? cardSource)
@@ -64,7 +57,7 @@ namespace TH_Patchouli.Scrpits.Powers
 			EnsureOriginalAmountVar();
 			return Task.CompletedTask;
 		}
-
+		
 		public override decimal ModifyHpLostBeforeOsty(Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
 		{
 			if (target != Owner || Amount <= 0 || amount <= 0)
@@ -82,10 +75,14 @@ namespace TH_Patchouli.Scrpits.Powers
 			Flash();
 			return amount - prevent;
 		}
-
-		public override async Task AfterCurrentHpChanged(Creature creature, decimal delta)
+		public override Task AfterModifyingHpLostBeforeOsty()
+	{
+		Flash();
+		return Task.CompletedTask;
+	}
+		public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
 		{
-			if (creature != Owner)
+			if (target != Owner)
 			{
 				return;
 			}

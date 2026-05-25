@@ -29,6 +29,7 @@ namespace TH_Patchouli.Scrpits.Powers
 			{
 				return;
 			}
+			this.Flash();
 			await PowerCmd.Apply<FreezePower>(CombatState.HittableEnemies, Amount, Owner, null);
 		}
 	}

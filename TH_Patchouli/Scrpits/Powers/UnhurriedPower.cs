@@ -25,7 +25,6 @@ namespace TH_Patchouli.Scrpits.Powers
 
 		public override PowerType Type => PowerType.Buff;
 		public override PowerStackType StackType => PowerStackType.Counter;
-		public override bool IsInstanced => true;
 		public override Color AmountLabelColor => PowerModel._normalAmountLabelColor;
 		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/GE32.png";
 		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/GE64.png";
@@ -35,15 +34,10 @@ namespace TH_Patchouli.Scrpits.Powers
 
 		public override async Task BeforeApplied(Creature target, decimal amount, Creature? applier, CardModel? cardSource)
 		{
-			foreach (UnhurriedPower existing in target.Powers.OfType<UnhurriedPower>().ToList())
-			{
-				await PowerCmd.Remove(existing);
-			}
-
 			if (cardSource is PatchouliCardModel pcm)
 			{
 				_draw = pcm.DynamicVars.Cards.IntValue;
-				DynamicVars.Cards.BaseValue = _draw;
+				DynamicVars.Cards.BaseValue += _draw;
 			}
 		}
 
@@ -59,6 +53,7 @@ namespace TH_Patchouli.Scrpits.Powers
 			if (empty && !_wasDrawPileEmpty)
 			{
 				_wasDrawPileEmpty = true;
+				Flash();
 				await CardPileCmd.Draw(new BlockingPlayerChoiceContext(), _draw, Owner.Player);
 				await PlayerCmd.GainEnergy(Amount, Owner.Player);
 				return;

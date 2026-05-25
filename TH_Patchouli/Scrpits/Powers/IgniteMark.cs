@@ -23,7 +23,7 @@ namespace TH_Patchouli.Scrpits.Powers
 		public IgniteMark()
 		{
 		}
-
+	
 		public override bool TryModifyPowerAmountReceived(PowerModel canonicalPower, Creature target, decimal amount, Creature? applier, out decimal modifiedAmount)
 		{
 			if (target == Owner && canonicalPower is IgnitePower)
@@ -33,6 +33,7 @@ namespace TH_Patchouli.Scrpits.Powers
 			}
 
 			modifiedAmount = amount;
+			 Flash();
 			return false;
 		}
 	}

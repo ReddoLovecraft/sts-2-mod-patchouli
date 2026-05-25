@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -30,6 +31,11 @@ namespace TH_Patchouli.Scrpits.Cards
 		public override List<ElementEnum> ElementTypes => _elementTypes;
 
 		public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+		protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+		[
+			HoverTipFactory.FromKeyword(CardKeyword.Exhaust),
+			HoverTipFactory.FromPower<IgnitePower>()
+		];
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(11)];
 
 		public RoyalFlare() : base(2, CardType.Skill, CardRarity.Rare, TargetType.AllEnemies)

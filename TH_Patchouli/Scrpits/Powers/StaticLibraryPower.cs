@@ -35,6 +35,7 @@ namespace TH_Patchouli.Scrpits.Powers
 			{
 				return;
 			}
+			Flash();
 			await CreatureCmd.GainBlock(Owner, Amount, ValueProp.Move, null);
 		}
 	}

@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -26,8 +27,9 @@ namespace TH_Patchouli.Scrpits.Cards
 	[Pool(typeof(PatchouliCardPool))]
 	public sealed class BookBite : PatchouliCardModel
 	{
+		public override bool GainsBlock => true;
 		public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
-		private int _bonusDamage;
+		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CardKeyword.Retain)];
 
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(7m, ValueProp.Move), new CardsVar(7)];
 
@@ -41,17 +43,11 @@ namespace TH_Patchouli.Scrpits.Cards
 			DynamicVars.Cards.UpgradeValueBy(boostAmount);
 		}
 
-		protected override void DeepCloneFields()
-		{
-			base.DeepCloneFields();
-			_bonusDamage = CloneOf is BookBite other ? other._bonusDamage : 0;
-		}
-
 		public override Task AfterCardRetained(CardModel card)
 		{
 			if (card == this)
 			{
-				_bonusDamage += DynamicVars.Cards.IntValue;
+				DynamicVars.Damage.BaseValue = Math.Max(0m, DynamicVars.Damage.BaseValue + DynamicVars.Cards.IntValue);
 			}
 			return Task.CompletedTask;
 		}
@@ -60,7 +56,7 @@ namespace TH_Patchouli.Scrpits.Cards
 		{
 			ArgumentNullException.ThrowIfNull(cardPlay.Target);
 
-			AttackCommand attack = await DamageCmd.Attack(DynamicVars.Damage.BaseValue + _bonusDamage).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
+			AttackCommand attack = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
 			int unblocked = attack.Results.Sum(r => r.UnblockedDamage);
 			if (unblocked > 0)
 			{

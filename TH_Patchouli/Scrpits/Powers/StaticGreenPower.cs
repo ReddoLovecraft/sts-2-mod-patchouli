@@ -33,11 +33,12 @@ namespace TH_Patchouli.Scrpits.Powers
 			{
 				return;
 			}
-
+			
 			int played = CombatManager.Instance.History.CardPlaysFinished.Count((CardPlayFinishedEntry e) =>
 				e.HappenedThisTurn(CombatState) && e.CardPlay.Card.Owner == Owner.Player);
 			if (played <= 5)
 			{
+				this.Flash();
 				await PowerCmd.Apply<DexterityPower>(Owner, Amount, Owner, null);
 			}
 		}

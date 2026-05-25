@@ -867,4 +867,6 @@ namespace TH_Patchouli.Scripts.Main
 			__result = string.IsNullOrEmpty(__result) ? suffix : __result.TrimEnd('\n') + "\n" + suffix;
 		}
 	}
+
+	
 }

@@ -55,6 +55,7 @@ namespace TH_Patchouli.Scrpits.Powers
 
 			for (int i = 0; i < Amount; i++)
 			{
+				Flash();
 				await PowerCmd.Apply<IgnitePower>(CombatState.HittableEnemies, ignite, Owner, null);
 			}
 		}

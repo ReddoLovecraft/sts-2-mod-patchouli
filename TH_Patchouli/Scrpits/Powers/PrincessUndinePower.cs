@@ -30,6 +30,7 @@ namespace TH_Patchouli.Scrpits.Powers
 			{
 				return;
 			}
+			Flash();
 			List<CardModel> cards = new();
 			for (int i = 0; i < Amount; i++)
 			{

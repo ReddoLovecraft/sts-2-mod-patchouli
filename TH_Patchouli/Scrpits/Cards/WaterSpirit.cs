@@ -8,8 +8,10 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using Patchouib.Scrpits.Main;
@@ -23,13 +25,18 @@ using TH_Patchouli.Scrpits.Powers;
 
 namespace TH_Patchouli.Scrpits.Cards
 {
-	[Pool(typeof(PatchouliCardPool))]
+	[Pool(typeof(StatusCardPool))]
 	public sealed class WaterSpirit : PatchouliCardModel
 	{
 		private static readonly List<ElementEnum> _elementTypes = new() { ElementEnum.Water };
 		public override List<ElementEnum> ElementTypes => _elementTypes;
 
 		public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
+		protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+		[
+			HoverTipFactory.FromKeyword(CardKeyword.Exhaust),
+			base.EnergyHoverTip
+		];
 
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(5m, ValueProp.Move), new EnergyVar(1)];
 

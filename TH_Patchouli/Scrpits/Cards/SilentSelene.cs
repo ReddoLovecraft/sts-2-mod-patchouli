@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -28,8 +29,13 @@ namespace TH_Patchouli.Scrpits.Cards
 	{
 		private static readonly List<ElementEnum> _elementTypes = new() { ElementEnum.Lunar };
 		public override List<ElementEnum> ElementTypes => _elementTypes;
-
+		protected override bool ShouldGlowGoldInternal => CombatManager.Instance.History.CardPlaysFinished.Count(
+                    (CardPlayFinishedEntry e) => 
+                        e.CardPlay.Card.Type == CardType.Attack && 
+                        e.CardPlay.Card.Owner == base.Owner && 
+                        e.HappenedThisTurn(base.CombatState))<=0;
 		public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+		protected override IEnumerable<IHoverTip> ExtraHoverTips => [base.EnergyHoverTip];
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(1), new EnergyVar(2)];
 
 		public SilentSelene() : base(0, CardType.Skill, CardRarity.Rare, TargetType.Self)

@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -26,6 +27,12 @@ namespace TH_Patchouli.Scrpits.Cards
 	[Pool(typeof(PatchouliCardPool))]
 	public sealed class KnowledgeGrab : PatchouliCardModel
 	{
+		protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+		[
+			HoverTipFactory.FromPower<StrengthPower>(),
+			HoverTipFactory.FromPower<DexterityPower>()
+		];
+
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(6m, ValueProp.Move), new CardsVar(2)];
 
 		public KnowledgeGrab() : base(1, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)

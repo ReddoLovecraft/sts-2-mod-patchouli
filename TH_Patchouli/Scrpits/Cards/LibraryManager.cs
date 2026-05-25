@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -26,12 +27,20 @@ namespace TH_Patchouli.Scrpits.Cards
 	[Pool(typeof(PatchouliCardPool))]
 	public sealed class LibraryManager : PatchouliCardModel
 	{
-		public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Innate];
+		protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+		[
+			
+			HoverTipFactory.FromKeyword(CardKeyword.Retain)
+		];
 
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(1)];
 
 		public LibraryManager() : base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 		{
+		}
+			protected override void OnUpgrade()
+		{
+			this.AddKeyword(CardKeyword.Innate);
 		}
 
 		public override void BoostWhenElementEnhanced(int boostAmount)

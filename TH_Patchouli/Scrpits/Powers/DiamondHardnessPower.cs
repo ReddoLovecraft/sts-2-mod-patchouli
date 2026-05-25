@@ -29,6 +29,7 @@ namespace TH_Patchouli.Scrpits.Powers
 			{
 				return;
 			}
+			this.Flash();
 			await PowerCmd.Apply<PlatingPower>(Owner, Amount, Owner, null);
 		}
 	}

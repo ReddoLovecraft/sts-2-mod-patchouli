@@ -4,6 +4,7 @@
 [ext_resource type="SpineSkeletonDataResource" uid="uid://bbqaokmddn12s" path="res://TH_Patchouli/ArtWorks/Character/patchouli.tres" id="2_lsp7u"]
 
 [node name="sakuya_merchant" type="Node2D"]
+position = Vector2(-5, -291)
 script = ExtResource("1_gsp4q")
 
 [node name="SpineSprite" type="SpineSprite" parent="."]

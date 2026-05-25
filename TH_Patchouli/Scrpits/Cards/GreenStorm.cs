@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -28,6 +29,8 @@ namespace TH_Patchouli.Scrpits.Cards
 	{
 		private static readonly List<ElementEnum> _elementTypes = new() { ElementEnum.Wood };
 		public override List<ElementEnum> ElementTypes => _elementTypes;
+
+		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<RegenPower>()];
 
 		protected override bool HasEnergyCostX => true;
 

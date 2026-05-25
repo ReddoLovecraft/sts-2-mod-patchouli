@@ -12,6 +12,7 @@ using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.Nodes.Vfx.Cards;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -22,11 +23,16 @@ using TH_Patchouli.Scrpits.Powers;
 
 namespace TH_Patchouli.Scripts.Cards
 {
-[Pool(typeof(PatchouliCardPool))]
+[Pool(typeof(ColorlessCardPool))]
 public sealed class ElementTransmutation : PatchouliCardModel
 {
 	public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain,CardKeyword.Exhaust];
-	protected override IEnumerable<IHoverTip> ExtraHoverTips => [Tools.GetStaticKeyword("Element")];
+	protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+	[
+		HoverTipFactory.FromKeyword(CardKeyword.Retain),
+		HoverTipFactory.FromKeyword(CardKeyword.Exhaust),
+		Tools.GetStaticKeyword("Element")
+	];
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> { new CardsVar(1),new DynamicVar("Power",3m) };
 
 	public override void BoostWhenElementEnhanced(int boostAmount)
@@ -34,7 +40,7 @@ public sealed class ElementTransmutation : PatchouliCardModel
 		this.DynamicVars["Power"].UpgradeValueBy(boostAmount);
 		this.DynamicVars.Cards.UpgradeValueBy(boostAmount);
 	}
-	public ElementTransmutation() : base(0, CardType.Skill, CardRarity.Basic, TargetType.Self)
+	public ElementTransmutation() : base(0, CardType.Skill, CardRarity.Common, TargetType.Self)
 	{
 	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

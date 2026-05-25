@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -29,7 +30,14 @@ namespace TH_Patchouli.Scrpits.Cards
 		private static readonly List<ElementEnum> _elementTypes = new() { ElementEnum.Fire };
 		public override List<ElementEnum> ElementTypes => _elementTypes;
 
-		protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(10m, ValueProp.Move)];
+		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<IgnitePower>()];
+
+		protected override IEnumerable<DynamicVar> CanonicalVars =>
+		[
+			new CalculationBaseVar(10m),
+			new ExtraDamageVar(1m),
+			new CalculatedDamageVar(ValueProp.Move).WithMultiplier(CalculateTotalIgnite),
+		];
 
 		public AgniRadiance() : base(2, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
 		{
@@ -37,7 +45,7 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		public override void BoostWhenElementEnhanced(int boostAmount)
 		{
-			DynamicVars.Damage.UpgradeValueBy(boostAmount);
+			DynamicVars.CalculationBase.UpgradeValueBy(boostAmount);
 		}
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -46,13 +54,22 @@ namespace TH_Patchouli.Scrpits.Cards
 			{
 				return;
 			}
-			int totalIgnite = CombatState.HittableEnemies.Sum(e => e.GetPower<IgnitePower>()?.Amount ?? 0);
-			await DamageCmd.Attack(DynamicVars.Damage.BaseValue + totalIgnite).FromCard(this).TargetingAllOpponents(CombatState).Execute(choiceContext);
+			await DamageCmd.Attack(DynamicVars.CalculatedDamage).FromCard(this).TargetingAllOpponents(CombatState).Execute(choiceContext);
 		}
 
 		protected override void OnUpgrade()
 		{
-			DynamicVars.Damage.UpgradeValueBy(3);
+			DynamicVars.CalculationBase.UpgradeValueBy(3);
+		}
+
+		private static decimal CalculateTotalIgnite(CardModel card, Creature? _)
+		{
+			if (card.CombatState == null)
+			{
+				return 0m;
+			}
+			int totalIgnite = card.CombatState.HittableEnemies.Sum(e => e.GetPower<IgnitePower>()?.Amount ?? 0);
+			return Math.Max(0, totalIgnite);
 		}
 	}
 }

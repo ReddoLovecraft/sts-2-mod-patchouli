@@ -35,7 +35,7 @@ namespace TH_Patchouli.Scrpits.Cards
 		{
 			AttackCommand attack = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
 			int unblocked = attack.Results.Sum(r => r.UnblockedDamage);
-			await CreatureCmd.GainBlock(Owner.Creature, unblocked, ValueProp.Move, cardPlay);
+			await CreatureCmd.GainBlock(Owner.Creature, unblocked, ValueProp.Unpowered, cardPlay);
 		}
 
 		protected override void OnUpgrade()

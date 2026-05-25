@@ -24,15 +24,15 @@ using TH_Patchouli.Scrpits.Powers;
 namespace TH_Patchouli.Scrpits.Cards
 {
 	[Pool(typeof(PatchouliCardPool))]
-	public sealed class CloudWitch : PatchouliCardModel
+	public sealed class CloudForm : PatchouliCardModel
 	{
-		public CloudWitch() : base(2, CardType.Power, CardRarity.Rare, TargetType.Self)
+		public CloudForm() : base(3, CardType.Power, CardRarity.Ancient, TargetType.Self)
 		{
 		}
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
-			await PowerCmd.Apply<CloudWitchPower>(Owner.Creature, 1, Owner.Creature, this);
+			await PowerCmd.Apply<CloudFormPower>(Owner.Creature, 1, Owner.Creature, this);
 		}
 
 		protected override void OnUpgrade()

@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -28,13 +29,18 @@ namespace TH_Patchouli.Scrpits.Cards
 	{
 		private static readonly List<ElementEnum> _elementTypes = new() { ElementEnum.Water };
 		public override List<ElementEnum> ElementTypes => _elementTypes;
-
-		public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Innate];
+		protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+		[
+			HoverTipFactory.FromCard<WaterSpirit>()
+		];
 
 		public PrincessUndine() : base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 		{
 		}
-
+		protected override void OnUpgrade()
+		{
+			this.AddKeyword(CardKeyword.Innate);
+		}
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
 			await PowerCmd.Apply<PrincessUndinePower>(Owner.Creature, 1, Owner.Creature, this);

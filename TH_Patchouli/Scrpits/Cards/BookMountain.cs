@@ -26,30 +26,42 @@ namespace TH_Patchouli.Scrpits.Cards
 	[Pool(typeof(PatchouliCardPool))]
 	public sealed class BookMountain : PatchouliCardModel
 	{
-		protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(8m, ValueProp.Move), new CardsVar(3)];
+		protected override IEnumerable<DynamicVar> CanonicalVars =>
+		[
+			new CalculationBaseVar(8m),
+			new ExtraDamageVar(3m),
+			new CalculatedDamageVar(ValueProp.Move).WithMultiplier(CalculateHandCount),
+		];
 
-		public BookMountain() : base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+		public BookMountain() : base(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 		{
 		}
 
 		public override void BoostWhenElementEnhanced(int boostAmount)
 		{
-			DynamicVars.Damage.UpgradeValueBy(boostAmount);
-			DynamicVars.Cards.UpgradeValueBy(boostAmount);
+			DynamicVars.CalculationBase.UpgradeValueBy(boostAmount);
+			DynamicVars.ExtraDamage.UpgradeValueBy(boostAmount);
 		}
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
 			ArgumentNullException.ThrowIfNull(cardPlay.Target);
-			int handCount = PileType.Hand.GetPile(Owner).Cards.Count;
-			decimal dmg = DynamicVars.Damage.BaseValue + handCount * DynamicVars.Cards.IntValue;
-			await DamageCmd.Attack(dmg).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
+			await DamageCmd.Attack(DynamicVars.CalculatedDamage).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
 		}
 
 		protected override void OnUpgrade()
 		{
-			DynamicVars.Damage.UpgradeValueBy(2);
-			DynamicVars.Cards.UpgradeValueBy(1);
+			DynamicVars.CalculationBase.UpgradeValueBy(2);
+			DynamicVars.ExtraDamage.UpgradeValueBy(1);
+		}
+
+		private static decimal CalculateHandCount(CardModel card, Creature? _)
+		{
+			if (card.Owner == null)
+			{
+				return 0m;
+			}
+			return PileType.Hand.GetPile(card.Owner).Cards.Count;
 		}
 	}
 }

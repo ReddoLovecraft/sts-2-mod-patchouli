@@ -26,9 +26,10 @@ namespace TH_Patchouli.Scrpits.Cards
 	[Pool(typeof(PatchouliCardPool))]
 	public sealed class TrilithonShake : PatchouliCardModel
 	{
+		public override bool GainsBlock => true;
 		private static readonly List<ElementEnum> _elementTypes = new() { ElementEnum.Dirt };
 		public override List<ElementEnum> ElementTypes => _elementTypes;
-
+		protected override bool ShouldGlowGoldInternal =>Owner.Creature.Block > 0;
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2)];
 
 		public TrilithonShake() : base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)

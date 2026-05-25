@@ -17,7 +17,10 @@ public partial class NPatchouliEnergyCounter : NEnergyCounter
 	private Node2D? _vfxFront;
 	private float _vfxBackBaseRotation;
 	private float _vfxFrontBaseRotation;
+	private Color _vfxBackBaseModulate;
+	private Color _vfxFrontBaseModulate;
 	private float _vfxRemainingSeconds;
+	private float _vfxTotalSeconds;
 
 	[Export]
 	public float VfxBackRotationSpeed { get; set; } = 25f;
@@ -26,7 +29,10 @@ public partial class NPatchouliEnergyCounter : NEnergyCounter
 	public float VfxFrontRotationSpeed { get; set; } = -18f;
 
 	[Export]
-	public float VfxDurationSeconds { get; set; } = 0.5f;
+	public float VfxDurationSeconds { get; set; } = 2.0f;
+
+	[Export]
+	public float VfxFadeOutSeconds { get; set; } = 1.0f;
 
 	public override void _EnterTree()
 	{
@@ -47,12 +53,14 @@ public partial class NPatchouliEnergyCounter : NEnergyCounter
 		if (_vfxBack != null)
 		{
 			_vfxBackBaseRotation = _vfxBack.Rotation;
+			_vfxBackBaseModulate = _vfxBack.Modulate;
 			_vfxBack.Visible = false;
 		}
 
 		if (_vfxFront != null)
 		{
 			_vfxFrontBaseRotation = _vfxFront.Rotation;
+			_vfxFrontBaseModulate = _vfxFront.Modulate;
 			_vfxFront.Visible = false;
 		}
 
@@ -93,6 +101,7 @@ public partial class NPatchouliEnergyCounter : NEnergyCounter
 		}
 
 		_vfxRemainingSeconds -= (float)delta;
+		UpdateVfxOpacity();
 
 		if (_vfxBack != null)
 		{
@@ -110,6 +119,42 @@ public partial class NPatchouliEnergyCounter : NEnergyCounter
 		}
 	}
 
+	private void UpdateVfxOpacity()
+	{
+		float total = _vfxTotalSeconds;
+		if (total <= 0.01f)
+		{
+			return;
+		}
+
+		float fadeSeconds = Mathf.Clamp(VfxFadeOutSeconds, 0f, total);
+		float alphaMultiplier;
+		if (fadeSeconds <= 0.01f)
+		{
+			alphaMultiplier = 1f;
+		}
+		else
+		{
+			alphaMultiplier = (_vfxRemainingSeconds >= fadeSeconds)
+				? 1f
+				: Mathf.Clamp(_vfxRemainingSeconds / fadeSeconds, 0f, 1f);
+		}
+
+		if (_vfxBack != null)
+		{
+			Color c = _vfxBackBaseModulate;
+			c.A *= alphaMultiplier;
+			_vfxBack.Modulate = c;
+		}
+
+		if (_vfxFront != null)
+		{
+			Color c = _vfxFrontBaseModulate;
+			c.A *= alphaMultiplier;
+			_vfxFront.Modulate = c;
+		}
+	}
+
 	private void StartVfx()
 	{
 		float duration = VfxDurationSeconds;
@@ -119,34 +164,42 @@ public partial class NPatchouliEnergyCounter : NEnergyCounter
 		}
 
 		_vfxRemainingSeconds = duration;
+		_vfxTotalSeconds = duration;
 
 		if (_vfxBack != null)
 		{
 			_vfxBack.Rotation = _vfxBackBaseRotation;
+			_vfxBack.Modulate = _vfxBackBaseModulate;
 			_vfxBack.Visible = true;
 		}
 
 		if (_vfxFront != null)
 		{
 			_vfxFront.Rotation = _vfxFrontBaseRotation;
+			_vfxFront.Modulate = _vfxFrontBaseModulate;
 			_vfxFront.Visible = true;
 		}
+
+		UpdateVfxOpacity();
 	}
 
 	private void StopVfx()
 	{
 		_vfxRemainingSeconds = 0f;
+		_vfxTotalSeconds = 0f;
 
 		if (_vfxBack != null)
 		{
 			_vfxBack.Visible = false;
 			_vfxBack.Rotation = _vfxBackBaseRotation;
+			_vfxBack.Modulate = _vfxBackBaseModulate;
 		}
 
 		if (_vfxFront != null)
 		{
 			_vfxFront.Visible = false;
 			_vfxFront.Rotation = _vfxFrontBaseRotation;
+			_vfxFront.Modulate = _vfxFrontBaseModulate;
 		}
 	}
 

@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace TH_Patchouli.Scrpits.Powers
 {
-	public sealed class CloudWitchPower : CustomPowerModel
+	public sealed class CloudFormPower : CustomPowerModel
 	{
 		private bool _pendingDiscard;
 
@@ -29,20 +29,19 @@ namespace TH_Patchouli.Scrpits.Powers
 
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Block)];
 
-		public override decimal ModifyDamageAdditive(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
+		public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
 		{
-			if (target != Owner || amount <= 0 || dealer == null || dealer.Side == Owner.Side)
+			if (target != Owner)
 			{
-				return 0m;
+				return 1m;
 			}
 
 			if (PileType.Draw.GetPile(Owner.Player).Cards.Count <= 0)
 			{
-				return 0m;
+				return 1m;
 			}
-
 			_pendingDiscard = true;
-			return -amount;
+			return 0m;
 		}
 
 		public override async Task BeforeDamageReceived(PlayerChoiceContext choiceContext, Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)

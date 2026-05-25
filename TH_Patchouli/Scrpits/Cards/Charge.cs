@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -26,7 +27,11 @@ namespace TH_Patchouli.Scrpits.Cards
 	[Pool(typeof(PatchouliCardPool))]
 	public sealed class Charge : PatchouliCardModel
 	{
-		public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
+		protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+		[
+			HoverTipFactory.FromKeyword(CardKeyword.Retain),
+			HoverTipFactory.FromPower<VigorPower>()
+		];
 
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(5)];
 

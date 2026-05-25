@@ -41,40 +41,26 @@ public sealed class ElementApply : PatchouliCardModel
 	{
 		await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 		await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);
-		if(!IsUpgraded)
-		{
-			CardModel cardModel = (await CardSelectCmd.FromHand(choiceContext, base.Owner, new CardSelectorPrefs(base.SelectionScreenPrompt, 1), card=>card is PatchouliCardModel plcm,null)).FirstOrDefault();
+		CardModel cardModel = (await CardSelectCmd.FromHand(choiceContext, base.Owner, new CardSelectorPrefs(base.SelectionScreenPrompt, 1), card=>card is PatchouliCardModel plcm,null)).FirstOrDefault();
 			if (cardModel != null&&cardModel is PatchouliCardModel plcm)
 			{
 				if(!plcm.ElementTypes.Contains(ElementEnum.None))
 				{
-					await ToolBox.GainElement(plcm.ElementTypes,1,base.Owner.Creature);
+					int amount = plcm.EnergyCost.GetWithModifiers(CostModifiers.Local);
+					if(amount<=0)amount=1;
+					await ToolBox.GainElement(plcm.ElementTypes,amount,base.Owner.Creature);
 				}
 				else
 				{
 					await ToolBox.OpenElementSelectGirdForCard(choiceContext,Owner.Creature,plcm);
 				}
 			}
-		}
-		else
-		{
-			foreach(PatchouliCardModel plcm in PileType.Hand.GetPile(Owner).Cards.Where(card=>card is PatchouliCardModel))
-			{
-				if(!plcm.ElementTypes.Contains(ElementEnum.None))
-				{
-					await ToolBox.GainElement(plcm.ElementTypes,1,base.Owner.Creature);
-				}
-				else
-				{
-					await ToolBox.OpenElementSelectGirdForCard(choiceContext,Owner.Creature,plcm);
-				}
-			}
-		}
+		
 	
 	}
 	protected override void OnUpgrade()
 	{
-		this.DynamicVars.Block.UpgradeValueBy(2);
+		this.DynamicVars.Block.UpgradeValueBy(3);
 	}
 }
 

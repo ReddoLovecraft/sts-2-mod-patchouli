@@ -9,8 +9,8 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.ValueProps;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,20 +19,11 @@ namespace TH_Patchouli.Scrpits.Powers
 {
 	public sealed class FallSlasherPower : CustomPowerModel
 	{
-		private static readonly Random _rng = new Random();
 		private bool _skipNext;
 
 		public override PowerType Type => PowerType.Buff;
 		public override PowerStackType StackType => PowerStackType.Counter;
-		public override bool IsInstanced => true;
 
-		public override async Task BeforeApplied(Creature target, decimal amount, Creature? applier, CardModel? cardSource)
-		{
-			foreach (FallSlasherPower existing in target.Powers.OfType<FallSlasherPower>().ToList())
-			{
-				await PowerCmd.Remove(existing);
-			}
-		}
 
 		public override Task AfterApplied(Creature? applier, CardModel? cardSource)
 		{
@@ -64,7 +55,9 @@ namespace TH_Patchouli.Scrpits.Powers
 				return;
 			}
 
-			int idx = _rng.Next(enemies.Count);
+			Rng rng = Owner.Player.RunState.Rng.CombatTargets;
+			this.Flash();
+			int idx = rng.NextInt(enemies.Count);
 			await CreatureCmd.Damage(context, enemies[idx], Amount, ValueProp.Unpowered | ValueProp.Move, dealer: Owner, cardSource: null);
 		}
 

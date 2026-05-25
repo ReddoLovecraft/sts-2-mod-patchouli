@@ -12,7 +12,7 @@ preview_skin = "default"
 preview_animation = "overgrowth_loop"
 preview_frame = false
 preview_time = 0.0
-position = Vector2(50, -80)
+position = Vector2(17, -772)
 scale = Vector2(8, 8)
 
 [node name="ControlRoot" type="Control" parent="."]

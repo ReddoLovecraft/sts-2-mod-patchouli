@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -28,20 +29,29 @@ namespace TH_Patchouli.Scrpits.Cards
 	{
 		private int _playedThisTurn;
 
-		protected override IEnumerable<DynamicVar> CanonicalVars => [new EnergyVar(2)];
+		protected override IEnumerable<DynamicVar> CanonicalVars =>
+		[
+			new EnergyVar(0),
+			new CalculationBaseVar(2m),
+			new CalculationExtraVar(-1m),
+			new CalculatedVar("CalculatedEnergy").WithMultiplier(CalculateEnergyReduction),
+		];
 
 		public ManaStore() : base(1, CardType.Skill, CardRarity.Common, TargetType.Self)
 		{
 		}
-
+		protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+	[
+		base.EnergyHoverTip
+	];
 		public override void BoostWhenElementEnhanced(int boostAmount)
 		{
-			DynamicVars.Energy.UpgradeValueBy(boostAmount);
+			DynamicVars.CalculationBase.UpgradeValueBy(boostAmount);
 		}
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
-			int energy = Math.Max(0, DynamicVars.Energy.IntValue - _playedThisTurn);
+			int energy = Math.Max(0, (int)((CalculatedVar)DynamicVars["CalculatedEnergy"]).Calculate(cardPlay.Target));
 			if (energy > 0)
 			{
 				await PlayerCmd.GainEnergy(energy, Owner);
@@ -60,7 +70,15 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override void OnUpgrade()
 		{
-			DynamicVars.Energy.UpgradeValueBy(1);
+			DynamicVars.CalculationBase.UpgradeValueBy(1);
+		}
+
+		private static decimal CalculateEnergyReduction(CardModel card, Creature? _)
+		{
+			ManaStore self = (ManaStore)card;
+			int baseEnergy = self.DynamicVars.CalculationBase.IntValue;
+			int reduction = Math.Min(self._playedThisTurn, baseEnergy);
+			return Math.Max(0, reduction);
 		}
 	}
 }

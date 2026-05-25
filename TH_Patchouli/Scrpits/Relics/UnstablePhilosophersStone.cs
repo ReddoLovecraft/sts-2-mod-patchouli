@@ -30,8 +30,9 @@ public class UnstablePhilosophersStone : CustomRelicModel
 	public override string PackedIconPath => $"res://TH_Patchouli/ArtWorks/Relics/{Id.Entry}.png";
     protected override string PackedIconOutlinePath => $"res://TH_Patchouli/ArtWorks/Relics/Outlines/{Id.Entry}.png";
     protected override string BigIconPath => $"res://TH_Patchouli/ArtWorks/Relics/{Id.Entry}.png";
-    public override RelicRarity Rarity => RelicRarity.Rare;
+    public override RelicRarity Rarity => RelicRarity.Starter;
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [Tools.GetStaticKeyword("Element")];
+	public override RelicModel? GetUpgradeReplacement() => ModelDb.Relic<PhilosophersStone>();
     public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
 	{
 		if (side == base.Owner.Creature.Side)

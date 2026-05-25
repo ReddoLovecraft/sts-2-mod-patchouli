@@ -8,6 +8,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -27,6 +28,8 @@ namespace TH_Patchouli.Scrpits.Cards
 	public sealed class Rest : PatchouliCardModel
 	{
 		public override IEnumerable<CardKeyword> CanonicalKeywords => IsUpgraded ? [] : [CardKeyword.Exhaust];
+		protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+			 [ HoverTipFactory.FromKeyword(CardKeyword.Retain),base.EnergyHoverTip];
 		public override bool GainsBlock => true;
 
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new BlockVar(10m, ValueProp.Move), new CardsVar(2), new EnergyVar(2)];
@@ -34,7 +37,10 @@ namespace TH_Patchouli.Scrpits.Cards
 		public Rest() : base(2, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
 		{
 		}
-
+		protected override void OnUpgrade()
+		{
+			this.RemoveKeyword(CardKeyword.Exhaust);
+		}
 		public override void BoostWhenElementEnhanced(int boostAmount)
 		{
 			DynamicVars.Block.UpgradeValueBy(boostAmount);

@@ -31,6 +31,7 @@ namespace TH_Patchouli.Scrpits.Powers
 			{
 				return;
 			}
+			this.Flash();
 			await PowerCmd.Apply<PoisonPower>(target, Amount, Owner, null);
 		}
 	}

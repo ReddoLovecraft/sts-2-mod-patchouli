@@ -1,3 +1,4 @@
+using BaseLib.Extensions;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
@@ -8,6 +9,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -28,6 +30,13 @@ namespace TH_Patchouli.Scrpits.Cards
 	{
 		private static readonly List<ElementEnum> _elementTypes = new() { ElementEnum.Gold };
 		public override List<ElementEnum> ElementTypes => _elementTypes;
+		protected override bool ShouldGlowGoldInternal => Owner.HasPower<Powers.GoldElement>();
+		protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+		[
+			HoverTipFactory.FromPower<Powers.GoldElement>(),
+			HoverTipFactory.FromPower<StrengthPower>(),
+			HoverTipFactory.FromPower<WeakPower>()
+		];
 
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(2)];
 

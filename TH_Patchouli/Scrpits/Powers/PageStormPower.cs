@@ -28,6 +28,7 @@ namespace TH_Patchouli.Scrpits.Powers
 			{
 				return;
 			}
+			Flash();
 			await CreatureCmd.Damage(new BlockingPlayerChoiceContext(), CombatState.HittableEnemies, Amount, ValueProp.Unpowered, Owner,null);
 		}
 	}
