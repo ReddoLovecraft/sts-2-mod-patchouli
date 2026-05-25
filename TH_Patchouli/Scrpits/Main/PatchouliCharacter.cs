@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Models.Cards;
 using TH_Patchouli.Relics;
+using TH_Patchouli.Scripts.Cards;
 using TH_Patchouli.Scrpits.Cards;
 
 
@@ -66,9 +67,8 @@ namespace TH_Patchouli.Scripts.Main
 			 ModelDb.Card<DefendSun>(),
 			 ModelDb.Card<DefendSun>(),
 			 ModelDb.Card<DefendLunar>(),
-			 ModelDb.Card<DefendLunar>()
-			//  ModelDb.Card<Defend>(),
-			//  ModelDb.Card<GhostFire>()
+			 ModelDb.Card<DefendLunar>(),
+			 ModelDb.Card<ElementRefinement>()
 		
 	];
 
@@ -168,7 +168,7 @@ namespace TH_Patchouli.Scripts.Main
 夏日之红(Summer Red)0c蓝攻击
 造成2->3点伤害。
 给予2->3层点燃。
-每当你打出拥有火元素的卡牌时，将这张牌放入你的手中。（同名卡牌除外）
+每当你打出拥有火元素的卡牌时，将这张牌放入你的手中，同名卡牌除外。
 火
 
 春日之风(Spring Wind) 0c蓝技能
@@ -238,7 +238,7 @@ Every-Angle Shot（全角度射击）1c蓝攻击
 消耗。
 
 火符「Ring of Agni」（火天神印）1c金技能
-给予3层点燃印记。(被给予点燃时，额外给予层数层点燃。)
+给予3层点燃印记。
 给予6->9层点燃。
 
 翡翠之城(Emerald City) 2费蓝技能
@@ -334,7 +334,7 @@ Every-Angle Shot（全角度射击）1c蓝攻击
 
 符之一「St. Elmo Explosion」（圣爱尔摩爆炸）3c金攻击
 对所有敌人造成20->22点伤害。
-你每有一张拥有火元素的牌，就额外造成5->8点伤害(无论其在何处)。
+你每有一张拥有火元素的牌，就额外造成5->8点伤害。不论其在何处。
 火。
 
 书页风暴 1c蓝能力
@@ -420,7 +420,7 @@ Every-Angle Shot（全角度射击）1c蓝攻击
 
 
 
-并为其附魔：深拷贝。深拷贝，每当其中一张牌被丢弃/打出/消耗时，其他牌也一同被丢弃/打出/消耗（不会重复生效）。
+
 
 获得8->10点格挡。
 1->2回合内你的元素不会因回合结束而减少。
@@ -432,6 +432,10 @@ Every-Angle Shot（全角度射击）1c蓝攻击
 将这张牌在本回合内首次打出前的耗能置为0点
 
 现在你的卡牌进入弃牌堆或消耗牌堆时，将其放回抽牌堆中。
+
+每当你变化卡牌时，将其升级。
+
+每当你变化卡牌时，将变化后的卡牌在本回合内首次打出前的耗能置为0点。
 
 在你的回合结束时，保留至多1→2张牌。
 

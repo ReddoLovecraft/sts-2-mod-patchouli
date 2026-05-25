@@ -98,31 +98,31 @@ namespace TH_Patchouli.Scrpits.Main
             CardModel cardModel = (await CardSelectCmd.FromSimpleGrid(choiceContext, cards, owner.Player, prefs)).FirstOrDefault();
             if (cardModel != null)
             {
-               if(cardModel is GoldElement )
+               if(cardModel is Cards.GoldElement )
                { 
                  toGainElementCard.SetElementTypes(new List<ElementEnum>{ ElementEnum.Gold});
                }
-               else if(cardModel is LunarElement )
+               else if(cardModel is Cards.LunarElement )
                { 
                  toGainElementCard.SetElementTypes(new List<ElementEnum>{ ElementEnum.Lunar});
                }
-               else if(cardModel is SunElement )
+               else if(cardModel is Cards.SunElement )
                { 
                  toGainElementCard.SetElementTypes(new List<ElementEnum>{ ElementEnum.Sun});
                }
-               else if(cardModel is FireElement )
+               else if(cardModel is Cards.FireElement )
                { 
                  toGainElementCard.SetElementTypes(new List<ElementEnum>{ ElementEnum.Fire});
                }
-               else if(cardModel is WaterElement )
+               else if(cardModel is Cards.WaterElement )
                { 
                  toGainElementCard.SetElementTypes(new List<ElementEnum>{ ElementEnum.Water});
                }
-               else if(cardModel is WoodElement )
+               else if(cardModel is Cards.WoodElement )
                { 
                  toGainElementCard.SetElementTypes(new List<ElementEnum>{ ElementEnum.Wood});
                }
-               else if(cardModel is DirtElement )
+               else if(cardModel is Cards.DirtElement )
                { 
                  toGainElementCard.SetElementTypes(new List<ElementEnum>{ ElementEnum.Dirt});
                }

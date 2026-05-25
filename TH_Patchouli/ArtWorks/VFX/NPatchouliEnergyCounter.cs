@@ -10,27 +10,23 @@ public partial class NPatchouliEnergyCounter : NEnergyCounter
 	private Player? _player;
 	private Label? _label;
 	private Control? _rotationLayers;
-	private TextureRect? _layer2;
 	private int _lastEnergy = int.MinValue;
 	private int _lastMaxEnergy = int.MinValue;
 
-	private readonly string[] _orbTexturePaths =
-	[
-		"res://TH_Patchouli/ArtWorks/Character/gold_card_orb.png",
-		"res://TH_Patchouli/ArtWorks/Character/wood_card_orb.png",
-		"res://TH_Patchouli/ArtWorks/Character/water_card_orb.png",
-		"res://TH_Patchouli/ArtWorks/Character/fire_card_orb.png",
-		"res://TH_Patchouli/ArtWorks/Character/dirt_card_orb.png",
-		"res://TH_Patchouli/ArtWorks/Character/sun_card_orb.png",
-		"res://TH_Patchouli/ArtWorks/Character/lunar_card_orb.png",
-	];
-
-	private Texture2D?[]? _orbTextures;
-	private int _orbFrameIndex;
-	private double _orbFrameTimer;
+	private Node2D? _vfxBack;
+	private Node2D? _vfxFront;
+	private float _vfxBackBaseRotation;
+	private float _vfxFrontBaseRotation;
+	private float _vfxRemainingSeconds;
 
 	[Export]
-	public float OrbFramesPerSecond { get; set; } = 10f;
+	public float VfxBackRotationSpeed { get; set; } = 25f;
+
+	[Export]
+	public float VfxFrontRotationSpeed { get; set; } = -18f;
+
+	[Export]
+	public float VfxDurationSeconds { get; set; } = 0.5f;
 
 	public override void _EnterTree()
 	{
@@ -45,25 +41,29 @@ public partial class NPatchouliEnergyCounter : NEnergyCounter
 		_player = ResolvePlayer();
 		_label = GetNodeOrNull<Label>("Label");
 		_rotationLayers = GetNodeOrNull<Control>("%RotationLayers");
-		_layer2 = GetNodeOrNull<TextureRect>("%Layers/Layer2");
+		_vfxBack = GetNodeOrNull<Node2D>("%EnergyVfxBack");
+		_vfxFront = GetNodeOrNull<Node2D>("%EnergyVfxFront");
 
-		_orbTextures = new Texture2D?[_orbTexturePaths.Length];
-		for (int i = 0; i < _orbTexturePaths.Length; i++)
+		if (_vfxBack != null)
 		{
-			_orbTextures[i] = ResourceLoader.Load<Texture2D>(_orbTexturePaths[i]);
+			_vfxBackBaseRotation = _vfxBack.Rotation;
+			_vfxBack.Visible = false;
 		}
 
-		RefreshLabel(force: true);
-		UpdateLayer2Visibility();
-		UpdateLayer2Texture(force: true);
+		if (_vfxFront != null)
+		{
+			_vfxFrontBaseRotation = _vfxFront.Rotation;
+			_vfxFront.Visible = false;
+		}
+
+		RefreshVisualState(force: true);
 	}
 
 	public override void _Process(double delta)
 	{
-		RefreshLabel(force: false);
-		UpdateLayer2Visibility();
+		RefreshVisualState(force: false);
 		RotateLayers(delta);
-		AdvanceOrbAnimation(delta);
+		UpdateVfx(delta);
 	}
 
 	private void RotateLayers(double delta)
@@ -76,17 +76,81 @@ public partial class NPatchouliEnergyCounter : NEnergyCounter
 		}
 
 		float speed = (player.PlayerCombatState.Energy == 0) ? 5f : 30f;
-		var children = rotationLayers.GetChildren();
-		for (int i = 0; i < children.Count; i++)
+		for (int i = 0; i < rotationLayers.GetChildCount(); i++)
 		{
-			if (children[i] is Control c)
+			if (rotationLayers.GetChild(i) is Control c)
 			{
 				c.RotationDegrees += (float)delta * speed * (i + 1);
 			}
 		}
 	}
 
-	private void RefreshLabel(bool force)
+	private void UpdateVfx(double delta)
+	{
+		if (_vfxRemainingSeconds <= 0f)
+		{
+			return;
+		}
+
+		_vfxRemainingSeconds -= (float)delta;
+
+		if (_vfxBack != null)
+		{
+			_vfxBack.RotationDegrees += (float)delta * VfxBackRotationSpeed;
+		}
+
+		if (_vfxFront != null)
+		{
+			_vfxFront.RotationDegrees += (float)delta * VfxFrontRotationSpeed;
+		}
+
+		if (_vfxRemainingSeconds <= 0f)
+		{
+			StopVfx();
+		}
+	}
+
+	private void StartVfx()
+	{
+		float duration = VfxDurationSeconds;
+		if (duration <= 0.01f)
+		{
+			return;
+		}
+
+		_vfxRemainingSeconds = duration;
+
+		if (_vfxBack != null)
+		{
+			_vfxBack.Rotation = _vfxBackBaseRotation;
+			_vfxBack.Visible = true;
+		}
+
+		if (_vfxFront != null)
+		{
+			_vfxFront.Rotation = _vfxFrontBaseRotation;
+			_vfxFront.Visible = true;
+		}
+	}
+
+	private void StopVfx()
+	{
+		_vfxRemainingSeconds = 0f;
+
+		if (_vfxBack != null)
+		{
+			_vfxBack.Visible = false;
+			_vfxBack.Rotation = _vfxBackBaseRotation;
+		}
+
+		if (_vfxFront != null)
+		{
+			_vfxFront.Visible = false;
+			_vfxFront.Rotation = _vfxFrontBaseRotation;
+		}
+	}
+
+	private void RefreshVisualState(bool force)
 	{
 		Player? player = _player;
 		Label? label = _label;
@@ -98,7 +162,9 @@ public partial class NPatchouliEnergyCounter : NEnergyCounter
 		int energy = player.PlayerCombatState.Energy;
 		int maxEnergy = player.PlayerCombatState.MaxEnergy;
 
-		if (!force && energy == _lastEnergy && maxEnergy == _lastMaxEnergy)
+		int oldEnergy = _lastEnergy;
+
+		if (!force && energy == oldEnergy && maxEnergy == _lastMaxEnergy)
 		{
 			return;
 		}
@@ -106,61 +172,10 @@ public partial class NPatchouliEnergyCounter : NEnergyCounter
 		_lastEnergy = energy;
 		_lastMaxEnergy = maxEnergy;
 		label.Text = $"{energy}/{maxEnergy}";
-	}
 
-	private void UpdateLayer2Visibility()
-	{
-		if (_layer2 == null)
+		if (oldEnergy != int.MinValue && energy > oldEnergy)
 		{
-			return;
-		}
-
-		int energy = _player?.PlayerCombatState.Energy ?? 1;
-		_layer2.Visible = energy > 0;
-	}
-
-	private void AdvanceOrbAnimation(double delta)
-	{
-		if (_layer2 == null || _orbTextures == null || _orbTextures.Length == 0 || !_layer2.Visible)
-		{
-			return;
-		}
-
-		float fps = OrbFramesPerSecond;
-		if (fps <= 0.01f)
-		{
-			return;
-		}
-
-		_orbFrameTimer += delta;
-		double frameDuration = 1.0 / fps;
-		if (_orbFrameTimer < frameDuration)
-		{
-			return;
-		}
-
-		int steps = (int)(_orbFrameTimer / frameDuration);
-		_orbFrameTimer -= steps * frameDuration;
-		_orbFrameIndex = (_orbFrameIndex + steps) % _orbTextures.Length;
-		UpdateLayer2Texture(force: false);
-	}
-
-	private void UpdateLayer2Texture(bool force)
-	{
-		if (_layer2 == null || _orbTextures == null || _orbTextures.Length == 0)
-		{
-			return;
-		}
-
-		Texture2D? tex = _orbTextures[_orbFrameIndex];
-		if (tex == null)
-		{
-			return;
-		}
-
-		if (force || _layer2.Texture != tex)
-		{
-			_layer2.Texture = tex;
+			StartVfx();
 		}
 	}
 

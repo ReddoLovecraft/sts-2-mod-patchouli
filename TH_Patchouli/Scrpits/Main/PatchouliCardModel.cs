@@ -75,6 +75,9 @@ namespace TH_Patchouli.Scripts.Main
 				CustomContentDictionary.AddModel(GetType());
 			}
 		}
+		public virtual void BoostWhenElementEnhanced(int boostAmount)
+		{
+		}
 		public CardModel SetElementTypes(List<ElementEnum> elementTypes)
 		{
 			List<ElementEnum> copied = elementTypes == null ? new List<ElementEnum> { ElementEnum.None } : new List<ElementEnum>(elementTypes);
@@ -340,9 +343,9 @@ namespace TH_Patchouli.Scripts.Main
 			}
 		}
 		public virtual async Task<PowerModel> OnChosen(int amount)
-        {
-           return null;
-        }
+		{
+		   return null;
+		}
 	}
   
 }

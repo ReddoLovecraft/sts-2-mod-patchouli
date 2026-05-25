@@ -29,7 +29,17 @@ namespace TH_Patchouli.Scrpits.Powers
 
         public string TscnPath => "res://TH_Patchouli/ArtWorks/VFX/sun.tscn";
 
-        //protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<IgnitePower>()];
+        protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.ForEnergy(this)];
         public SunElement() { }
+         public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
+        {
+            if (player != base.Owner.Player)
+            {
+                return;
+            }
+            this.Flash();
+            await PlayerCmd.GainEnergy(Amount/2,Owner.Player);
+			await PowerCmd.Decrement(this);
+        }
     }
 }
