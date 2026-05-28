@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using TH_Patchouli.Scripts.Main;
 using TH_Patchouli.Scrpits.Main;
-using TH_Patchouli.Scrpits.Powers.NewPowers;
+using TH_Patchouli.Scrpits.Powers;
 
 namespace TH_Patchouli.Scrpits.Cards
 {

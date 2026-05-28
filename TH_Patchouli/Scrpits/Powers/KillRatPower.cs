@@ -12,7 +12,7 @@ using System;
 using System.Threading.Tasks;
 using BaseLib.Extensions;
 
-namespace TH_Patchouli.Scrpits.Powers.NewPowers
+namespace TH_Patchouli.Scrpits.Powers 
 {
 	public sealed class KillRatPower : CustomPowerModel
 	{

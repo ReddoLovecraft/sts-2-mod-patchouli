@@ -10,7 +10,7 @@ using Patchoulib.Scrpits.Main;
 using System;
 using System.Threading.Tasks;
 
-namespace TH_Patchouli.Scrpits.Powers.NewPowers
+namespace TH_Patchouli.Scrpits.Powers 
 {
 	public sealed class DoubleMagicPower : CustomPowerModel
 	{

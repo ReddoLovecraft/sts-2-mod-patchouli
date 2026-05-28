@@ -6,7 +6,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace TH_Patchouli.Scrpits.Powers.NewPowers
+namespace TH_Patchouli.Scrpits.Powers 
 {
 	public sealed class UnpredictablePower : CustomPowerModel, ITransformListener
 	{

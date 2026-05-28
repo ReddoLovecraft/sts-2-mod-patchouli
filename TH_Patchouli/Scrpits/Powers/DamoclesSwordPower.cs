@@ -11,7 +11,7 @@ using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.ValueProps;
 using System.Threading.Tasks;
 
-namespace TH_Patchouli.Scrpits.Powers.NewPowers
+namespace TH_Patchouli.Scrpits.Powers
 {
 	public sealed class DamoclesSwordPower : CustomPowerModel
 	{

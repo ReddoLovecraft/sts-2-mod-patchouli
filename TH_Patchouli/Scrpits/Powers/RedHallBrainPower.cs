@@ -6,7 +6,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using System.Threading.Tasks;
 
-namespace TH_Patchouli.Scrpits.Powers.NewPowers
+namespace TH_Patchouli.Scrpits.Powers
 {
 	public sealed class RedHallBrainPower : CustomPowerModel, BaseLib.Hooks.IMaxHandSizeModifier
 	{

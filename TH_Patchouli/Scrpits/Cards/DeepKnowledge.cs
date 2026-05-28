@@ -74,7 +74,29 @@ namespace TH_Patchouli.Scrpits.Cards
 			{
 				return 0m;
 			}
-			return card.Owner.Creature.Powers.Count(p => p.Type == PowerType.Buff&&p is not Powers.GoldElement&&p is not Powers.WoodElement&&p is not Powers.WaterElement&&p is not Powers.FireElement&&p is not Powers.DirtElement&&p is not Powers.SunElement&&p is not Powers.LunarElement);
+			decimal result=0m;
+			foreach(PowerModel p in card.Owner?.Creature.Powers)
+			{
+				if(p.Type==PowerType.Buff)
+				{
+					if(p is Powers.SunElement)
+					continue;
+					if(p is Powers.LunarElement)
+					continue;
+					if(p is Powers.GoldElement)
+					continue;
+					if(p is Powers.WoodElement)
+					continue;
+					if(p is Powers.WaterElement)
+					continue;
+					if(p is Powers.FireElement)
+					continue;
+					if(p is Powers.DirtElement)
+					continue;
+					result++;
+				}
+			}
+			return result;
 		}
 	}
 }

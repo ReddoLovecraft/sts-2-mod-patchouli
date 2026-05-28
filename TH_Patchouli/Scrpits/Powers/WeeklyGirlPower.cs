@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 using TH_Patchouli.Scripts.Main;
 using TH_Patchouli.Scrpits.Main;
 
-namespace TH_Patchouli.Scrpits.Powers.NewPowers
+namespace TH_Patchouli.Scrpits.Powers
 {
 	public sealed class WeeklyGirlPower : CustomPowerModel
 	{

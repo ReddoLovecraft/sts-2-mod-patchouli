@@ -10,7 +10,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using System.Threading.Tasks;
 using TH_Patchouli.Scripts.Main;
 
-namespace TH_Patchouli.Scrpits.Powers.NewPowers
+namespace TH_Patchouli.Scrpits.Powers
 {
 	public sealed class SatelliteHimawariPower : CustomPowerModel
 	{

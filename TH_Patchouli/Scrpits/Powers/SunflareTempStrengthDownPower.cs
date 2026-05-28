@@ -3,7 +3,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using Patchouib.Scripts.Main;
 using TH_Patchouli.Scrpits.Cards;
 
-namespace TH_Patchouli.Scrpits.Powers.NewPowers
+namespace TH_Patchouli.Scrpits.Powers
 {
 	public sealed class SunflareTempStrengthDownPower : CustomTempStrengthPower
 	{
