@@ -21,6 +21,7 @@ using Patchouib.Scrpits.Main;
 using TH_Patchouli.Scripts.Main;
 using TH_Patchouli.Scrpits.Main;
 using TH_Patchouli.Scrpits.Powers;
+using MegaCrit.Sts2.Core.Commands.Builders;
 
 namespace TH_Patchouli.Scrpits.Cards
 {
@@ -32,26 +33,33 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<IgnitePower>()];
 
-		protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("Power", 5m), new CardsVar(1)];
+		protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(8m,ValueProp.Move)];
 
-		public WipeMoisture() : base(2, CardType.Power, CardRarity.Uncommon, TargetType.AllEnemies)
+		public WipeMoisture() : base(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
 		{
 		}
 
 		public override void BoostWhenElementEnhanced(int boostAmount)
 		{
-			DynamicVars["Power"].UpgradeValueBy(boostAmount);
-			DynamicVars.Cards.UpgradeValueBy(boostAmount);
+			this.DynamicVars.Damage.UpgradeValueBy(boostAmount);
 		}
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
-			await PowerCmd.Apply<WipeMoisturePower>(Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
+			ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
+        	AttackCommand attackCommand = await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
+            .WithHitFx("vfx/vfx_attack_slash")
+            .Execute(choiceContext);
+			if(cardPlay.Target!=null&&cardPlay.Target.IsAlive)
+			{
+				int res=attackCommand.Results.Sum((DamageResult r) => r.TotalDamage + r.OverkillDamage);
+				await PowerCmd.Apply<IgnitePower>(cardPlay.Target, res, Owner.Creature, this);
+			}
 		}
 
 		protected override void OnUpgrade()
 		{
-			EnergyCost.UpgradeBy(-1);
+			this.DynamicVars.Damage.UpgradeValueBy(2m);
 		}
 	}
 }

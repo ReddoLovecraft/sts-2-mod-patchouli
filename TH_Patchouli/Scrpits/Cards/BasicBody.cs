@@ -25,7 +25,7 @@ namespace TH_Patchouli.Scrpits.Cards
 		public override List<ElementEnum> ElementTypes => _elementTypes;
 		public override bool isSingleElement => false;
 		public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Unplayable, CardKeyword.Retain];
-		protected override IEnumerable<IHoverTip> ExtraHoverTips => [Tools.GetStaticKeyword("Element")];
+		protected override IEnumerable<IHoverTip> ExtraHoverTips => [Tools.GetStaticKeyword("Element"), HoverTipFactory.Static(StaticHoverTip.Transform)];
 
 		public BasicBody() : base(-1, CardType.Status, CardRarity.Status, TargetType.None)
 		{

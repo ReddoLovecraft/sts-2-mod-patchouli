@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
@@ -20,6 +21,7 @@ namespace TH_Patchouli.Scrpits.Main
 {
     public static class ToolBox
     {
+        
        public static int GetElementKinds(Creature owner)
        {
          int res=0;
@@ -183,6 +185,18 @@ namespace TH_Patchouli.Scrpits.Main
             if (totalGained <= 0)
             {
                 return;
+            }
+
+            if (elementList.Contains(ElementEnum.Sun))
+            {
+                List<CardModel> drawCards = PileType.Draw.GetPile(player).Cards.ToList();
+                foreach (CardModel card in drawCards)
+                {
+                    if (card is TH_Patchouli.Scrpits.Cards.SunRiseLight)
+                    {
+                        await CardCmd.AutoPlay(new BlockingPlayerChoiceContext(), card, null);
+                    }
+                }
             }
 
             foreach (PileType pileType in new[] { PileType.Hand, PileType.Draw, PileType.Discard, PileType.Exhaust, PileType.Play })

@@ -69,6 +69,7 @@ public partial class NPatchouliEnergyCounter : NEnergyCounter
 
 	public override void _Process(double delta)
 	{
+		_player ??= ResolvePlayer();
 		RefreshVisualState(force: false);
 		RotateLayers(delta);
 		UpdateVfx(delta);
@@ -212,8 +213,17 @@ public partial class NPatchouliEnergyCounter : NEnergyCounter
 			return;
 		}
 
-		int energy = player.PlayerCombatState.Energy;
-		int maxEnergy = player.PlayerCombatState.MaxEnergy;
+		int energy;
+		int maxEnergy;
+		try
+		{
+			energy = player.PlayerCombatState.Energy;
+			maxEnergy = player.PlayerCombatState.MaxEnergy;
+		}
+		catch
+		{
+			return;
+		}
 
 		int oldEnergy = _lastEnergy;
 

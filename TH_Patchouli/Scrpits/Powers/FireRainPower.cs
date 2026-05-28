@@ -19,7 +19,7 @@ using TH_Patchouli.Scripts.Main;
 
 namespace TH_Patchouli.Scrpits.Powers
 {
-	public sealed class WipeMoisturePower : CustomPowerModel
+	public sealed class FireRainPower : CustomPowerModel
 	{
 		public override PowerType Type => PowerType.Buff;
 		public override PowerStackType StackType => PowerStackType.Counter;

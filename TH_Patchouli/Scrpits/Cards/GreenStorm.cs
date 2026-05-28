@@ -29,6 +29,7 @@ namespace TH_Patchouli.Scrpits.Cards
 	{
 		private static readonly List<ElementEnum> _elementTypes = new() { ElementEnum.Wood };
 		public override List<ElementEnum> ElementTypes => _elementTypes;
+		public override bool CanBeGeneratedInCombat => false;
 
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<RegenPower>()];
 

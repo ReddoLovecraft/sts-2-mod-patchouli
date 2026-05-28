@@ -16,7 +16,7 @@ namespace TH_Patchouli.Scrpits.Cards
 	{
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [Tools.GetStaticKeyword("Element")];
 
-		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(4)];
+		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(3)];
 
 		public ElementManager() : base(2, CardType.Power, CardRarity.Uncommon, TargetType.Self)
 		{

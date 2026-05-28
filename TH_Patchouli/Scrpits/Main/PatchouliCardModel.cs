@@ -2,15 +2,32 @@ using BaseLib.Abstracts;
 using BaseLib.Extensions;
 using BaseLib.Patches.Content;
 using Godot;
+using MegaCrit.Sts2.Core.CardSelection;
+using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes.Combat;
+using MegaCrit.Sts2.Core.Nodes.Cards;
+using MegaCrit.Sts2.Core.Nodes.Screens.CardSelection;
+using MegaCrit.Sts2.Core.Nodes.Screens.Overlays;
+using MegaCrit.Sts2.Core.Multiplayer.Game;
+using MegaCrit.Sts2.Core.Runs;
 using Patchouib.Scrpits.Main;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using TH_Patchouli.Scrpits.Cards;
 using TH_Patchouli.Scrpits.Main;
-using TH_Patchouli.Scrpits.Powers;
+using TH_Patchouli.Scrpits.Multiplayer;
+using ElementPowers = TH_Patchouli.Scrpits.Powers;
 
 
 namespace TH_Patchouli.Scripts.Main
@@ -337,11 +354,531 @@ namespace TH_Patchouli.Scripts.Main
 
 		async Task IRightClickableCardModel.OnRightClick(PlayerChoiceContext context)
 		{
-			if(isSingleElement&&ElementTypes[0] == ElementEnum.None)
+			if (CombatState == null || Owner?.Creature == null)
 			{
-				
+				return;
+			}
+
+			if (ToolBox.GetElementKinds(Owner.Creature) <= 0)
+			{
+				return;
+			}
+
+			bool isMultiplayer = RunManager.Instance?.NetService?.Type.IsMultiplayer() ?? false;
+			if (isMultiplayer && !LocalContext.IsMe(Owner))
+			{
+				return;
+			}
+
+			List<ElementEnum> originalElements = GetDistinctElementsOrdered(ElementTypes);
+			HashSet<ElementEnum> originalElementsSet = originalElements.Count == 0 ? new HashSet<ElementEnum>() : new HashSet<ElementEnum>(originalElements);
+			bool originalHasAnyElement = originalElements.Count > 0;
+
+			int enhanceConsume = 0;
+			bool canEnhance = originalHasAnyElement && TryGetEnhanceConsumeAmount(Owner.Creature, originalElements, out enhanceConsume);
+
+			List<CardModel> transformTargets = GetTransformTargetsFromSpellPool(CombatState, Owner, this, originalElements, originalElementsSet);
+			bool canTransform = transformTargets.Count > 0;
+
+			List<CardModel> options = new List<CardModel>(2);
+			if (canEnhance)
+			{
+				options.Add(CreatePreviewCard<Enhancement>(Owner));
+			}
+			if (canTransform)
+			{
+				options.Add(CreatePreviewCard<Transformation>(Owner));
+			}
+
+			if (options.Count == 0)
+			{
+				return;
+			}
+
+			CardModel selectedOption;
+			if (isMultiplayer)
+			{
+				NPlayerHand.Instance?.CancelAllCardPlay();
+				NChooseACardSelectionScreen screen = NChooseACardSelectionScreen.ShowScreen(options, canSkip: true);
+				selectedOption = (await screen.CardsSelected()).FirstOrDefault();
+			}
+			else
+			{
+				selectedOption = await CardSelectCmd.FromChooseACardScreen(context, options, Owner, canSkip: true);
+			}
+			if (selectedOption == null)
+			{
+				return;
+			}
+
+			if (selectedOption is Enhancement)
+			{
+				if (enhanceConsume <= 0 || !canEnhance)
+				{
+					return;
+				}
+				if (isMultiplayer)
+				{
+					await PatchouliEnhancementRightClickSync.DoLocalAndSync(Owner, this, enhanceConsume);
+					return;
+				}
+
+				await ConsumeElements(Owner.Creature, originalElements, enhanceConsume, this);
+				BoostWhenElementEnhanced(enhanceConsume);
+				if (Pile != null)
+				{
+					NCard.FindOnTable(this)?.UpdateVisuals(Pile.Type, CardPreviewMode.Normal);
+				}
+			}
+			else if (selectedOption is Transformation)
+			{
+				if (!canTransform)
+				{
+					return;
+				}
+
+				CardSelectorPrefs prefs = new CardSelectorPrefs(ToolBox.GetCustomText("static_hover_tips", "transform", ".selectionScreenPrompt"), 0, 1);
+				CardModel chosen;
+				if (isMultiplayer)
+				{
+					NPlayerHand.Instance?.CancelAllCardPlay();
+					NSimpleCardSelectScreen grid = NSimpleCardSelectScreen.Create(transformTargets.ToList(), prefs);
+					NOverlayStack.Instance.Push(grid);
+					chosen = (await grid.CardsSelected()).FirstOrDefault();
+				}
+				else
+				{
+					chosen = (await CardSelectCmd.FromSimpleGrid(context, transformTargets, Owner, prefs)).FirstOrDefault();
+				}
+				if (chosen == null)
+				{
+					return;
+				}
+
+				int poolIndex = GetSpellCardPoolIndex(CombatState, Owner, chosen);
+				if (poolIndex < 0)
+				{
+					return;
+				}
+
+				if (isMultiplayer)
+				{
+					await PatchouliTransformationRightClickSync.DoLocalAndSync(Owner, this, poolIndex);
+					return;
+				}
+
+				CardModel replacement = CreateSpellCardFromPoolIndex(CombatState, Owner, poolIndex);
+				if (replacement == null)
+				{
+					return;
+				}
+				List<(ElementEnum element, int amount)> toConsume = CalculateTransformElementConsumption(this, replacement, originalElementsSet);
+				await CardCmd.Transform(this, replacement);
+				CardCmd.Preview(replacement);
+				for (int i = 0; i < toConsume.Count; i++)
+				{
+					(ElementEnum element, int amount) = toConsume[i];
+					if (amount <= 0)
+					{
+						continue;
+					}
+					await ConsumeElement(Owner.Creature, element, amount, this);
+				}
 			}
 		}
+
+		private static int GetSpellCardPoolIndex(CombatState combatState, Player owner, CardModel card)
+		{
+			List<CardModel> pool = CreateSpellCardPoolPreviewCards(owner);
+			for (int i = 0; i < pool.Count; i++)
+			{
+				if (pool[i].Id.Entry == card.Id.Entry)
+				{
+					return i;
+				}
+			}
+			return -1;
+		}
+
+		private static T CreatePreviewCard<T>(Player owner) where T : CardModel
+		{
+			T card = (T)ModelDb.Card<T>().ToMutable();
+			card.Owner = owner;
+			return card;
+		}
+
+		private static List<ElementEnum> GetDistinctElementsOrdered(List<ElementEnum>? elements)
+		{
+			List<ElementEnum> result = new List<ElementEnum>();
+			if (elements == null || elements.Count == 0)
+			{
+				return result;
+			}
+
+			HashSet<ElementEnum> seen = new HashSet<ElementEnum>();
+			for (int i = 0; i < elements.Count; i++)
+			{
+				ElementEnum e = elements[i];
+				if (e != ElementEnum.None && seen.Add(e))
+				{
+					result.Add(e);
+				}
+			}
+			result.Sort();
+			return result;
+		}
+
+		private static bool TryGetEnhanceConsumeAmount(Creature owner, List<ElementEnum> cardElements, out int consumeAmount)
+		{
+			consumeAmount = 0;
+			if (cardElements == null || cardElements.Count == 0)
+			{
+				return false;
+			}
+
+			int min = int.MaxValue;
+			foreach (ElementEnum e in cardElements)
+			{
+				int amount = GetElementAmount(owner, e);
+				if (amount <= 0)
+				{
+					consumeAmount = 0;
+					return false;
+				}
+				min = Math.Min(min, amount);
+			}
+
+			consumeAmount = min == int.MaxValue ? 0 : Math.Max(0, min);
+			return consumeAmount > 0;
+		}
+
+		private static int GetElementAmount(Creature owner, ElementEnum element)
+		{
+			return element switch
+			{
+				ElementEnum.Gold => owner.GetPower<ElementPowers.GoldElement>()?.Amount ?? 0,
+				ElementEnum.Lunar => owner.GetPower<ElementPowers.LunarElement>()?.Amount ?? 0,
+				ElementEnum.Sun => owner.GetPower<ElementPowers.SunElement>()?.Amount ?? 0,
+				ElementEnum.Fire => owner.GetPower<ElementPowers.FireElement>()?.Amount ?? 0,
+				ElementEnum.Water => owner.GetPower<ElementPowers.WaterElement>()?.Amount ?? 0,
+				ElementEnum.Wood => owner.GetPower<ElementPowers.WoodElement>()?.Amount ?? 0,
+				ElementEnum.Dirt => owner.GetPower<ElementPowers.DirtElement>()?.Amount ?? 0,
+				_ => 0
+			};
+		}
+
+		private static async Task ConsumeElements(Creature owner, List<ElementEnum> elements, int amount, CardModel? source)
+		{
+			if (amount <= 0 || elements == null || elements.Count == 0)
+			{
+				return;
+			}
+
+			for (int i = 0; i < elements.Count; i++)
+			{
+				await ConsumeElement(owner, elements[i], amount, source);
+			}
+		}
+
+		private static Task ConsumeElement(Creature owner, ElementEnum element, int amount, CardModel? source)
+		{
+			if (amount <= 0)
+			{
+				return Task.CompletedTask;
+			}
+
+			return element switch
+			{
+				ElementEnum.Gold => PowerCmd.Apply<ElementPowers.GoldElement>(owner, -amount, owner, source),
+				ElementEnum.Lunar => PowerCmd.Apply<ElementPowers.LunarElement>(owner, -amount, owner, source),
+				ElementEnum.Sun => PowerCmd.Apply<ElementPowers.SunElement>(owner, -amount, owner, source),
+				ElementEnum.Fire => PowerCmd.Apply<ElementPowers.FireElement>(owner, -amount, owner, source),
+				ElementEnum.Water => PowerCmd.Apply<ElementPowers.WaterElement>(owner, -amount, owner, source),
+				ElementEnum.Wood => PowerCmd.Apply<ElementPowers.WoodElement>(owner, -amount, owner, source),
+				ElementEnum.Dirt => PowerCmd.Apply<ElementPowers.DirtElement>(owner, -amount, owner, source),
+				_ => Task.CompletedTask
+			};
+		}
+
+		internal static int GetTransformEnergyCost(CardModel card)
+		{
+			if (card is BasicBody)
+			{
+				return 1;
+			}
+
+			int cost = card.EnergyCost.GetWithModifiers(CostModifiers.Local);
+			return Math.Max(0, cost);
+		}
+
+		private static List<CardModel> GetTransformTargetsFromSpellPool(
+			CombatState combatState,
+			Player owner,
+			PatchouliCardModel original,
+			List<ElementEnum> originalElements,
+			HashSet<ElementEnum> originalElementsSet)
+		{
+			List<CardModel> results = new List<CardModel>();
+			List<CardModel> allSpellCards = CreateSpellCardPoolPreviewCards(owner);
+			if (allSpellCards.Count == 0)
+			{
+				return results;
+			}
+
+			int originalCost = GetTransformEnergyCost(original);
+
+			for (int i = 0; i < allSpellCards.Count; i++)
+			{
+				CardModel candidate = allSpellCards[i];
+				if (candidate == null || ReferenceEquals(candidate, original) || candidate.GetType() == original.GetType())
+				{
+					continue;
+				}
+
+				if (candidate is not PatchouliCardModel candidatePcm)
+				{
+					continue;
+				}
+
+				List<ElementEnum> candidateElements = GetDistinctElementsOrdered(candidatePcm.ElementTypes);
+				if (candidateElements.Count <= 0)
+				{
+					continue;
+				}
+				HashSet<ElementEnum> candidateElementsSet = new HashSet<ElementEnum>(candidateElements);
+
+				if (original is not BasicBody)
+				{
+					bool containsAllOriginal = true;
+					foreach (ElementEnum e in originalElements)
+					{
+						if (!candidateElementsSet.Contains(e))
+						{
+							containsAllOriginal = false;
+							break;
+						}
+					}
+					if (!containsAllOriginal)
+					{
+						continue;
+					}
+				}
+
+				int candidateCost = GetTransformEnergyCost(candidatePcm);
+				bool ok = true;
+				for (int ei = 0; ei < candidateElements.Count; ei++)
+				{
+					ElementEnum e = candidateElements[ei];
+					int playerAmount = GetElementAmount(owner.Creature, e);
+					int credit = originalElementsSet.Contains(e) ? originalCost : 0;
+					if (playerAmount + credit < candidateCost)
+					{
+						ok = false;
+						break;
+					}
+				}
+				if (!ok)
+				{
+					continue;
+				}
+
+				results.Add(candidatePcm);
+			}
+
+			return results;
+		}
+
+		private static List<CardModel> CreateSpellCardPoolPreviewCards(Player owner)
+		{
+			List<CardModel> cards =
+			[
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.SecretChamber>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.PhilosopherStone>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.HydrogenousProminence>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.MoonDirt>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.GoodUp>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.GroundMouthpiece>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.BurnLunar>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.SunHangSky>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.EtheralFire>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.AshesRise>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.WaterMoon>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.NoachianDeluge>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.PhlogisticPillar>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.SunRise>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.Swamp>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.StarPredictor>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.WhisperRoot>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.AwakeEdict>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.GroundToSky>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.GoldSun>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.GoldSilver>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.WaterElf>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.LunarFire>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.SquareRingSword>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.LunarReaper>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.ElementalHarvester>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.LunarBook>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.RootActivation>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.SatelliteHimawari>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.SunshineReflector>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.EmeraldMegalith>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.DamoclesSword>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.RoyalDiamondRing>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.CircularLavaBelt>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.SunLunarTogether>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.HephaestusHammer>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.LavaCromlech>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.EmeraldMegalopolis>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.MercuryPoison>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.PhlogisticRain>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.Photosynthesis>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.TidalForce>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.GingerGust>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.ForestBlaze>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.FireWind>(owner),
+				CreatePreviewCard<TH_Patchouli.Scrpits.Cards.ElmoPillar>(owner),
+			];
+
+			return cards;
+		}
+
+		internal static CardModel? CreateSpellCardFromPoolIndex(CombatState combatState, Player owner, int index)
+		{
+			return index switch
+			{
+				0 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.SecretChamber>(owner),
+				1 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.PhilosopherStone>(owner),
+				2 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.HydrogenousProminence>(owner),
+				3 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.MoonDirt>(owner),
+				4 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.GoodUp>(owner),
+				5 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.GroundMouthpiece>(owner),
+				6 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.BurnLunar>(owner),
+				7 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.SunHangSky>(owner),
+				8 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.EtheralFire>(owner),
+				9 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.AshesRise>(owner),
+				10 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.WaterMoon>(owner),
+				11 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.NoachianDeluge>(owner),
+				12 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.PhlogisticPillar>(owner),
+				13 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.SunRise>(owner),
+				14 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.Swamp>(owner),
+				15 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.StarPredictor>(owner),
+				16 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.WhisperRoot>(owner),
+				17 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.AwakeEdict>(owner),
+				18 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.GroundToSky>(owner),
+				19 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.GoldSun>(owner),
+				20 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.GoldSilver>(owner),
+				21 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.WaterElf>(owner),
+				22 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.LunarFire>(owner),
+				23 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.SquareRingSword>(owner),
+				24 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.LunarReaper>(owner),
+				25 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.ElementalHarvester>(owner),
+				26 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.LunarBook>(owner),
+				27 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.RootActivation>(owner),
+				28 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.SatelliteHimawari>(owner),
+				29 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.SunshineReflector>(owner),
+				30 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.EmeraldMegalith>(owner),
+				31 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.DamoclesSword>(owner),
+				32 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.RoyalDiamondRing>(owner),
+				33 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.CircularLavaBelt>(owner),
+				34 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.SunLunarTogether>(owner),
+				35 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.HephaestusHammer>(owner),
+				36 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.LavaCromlech>(owner),
+				37 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.EmeraldMegalopolis>(owner),
+				38 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.MercuryPoison>(owner),
+				39 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.PhlogisticRain>(owner),
+				40 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.Photosynthesis>(owner),
+				41 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.TidalForce>(owner),
+				42 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.GingerGust>(owner),
+				43 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.ForestBlaze>(owner),
+				44 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.FireWind>(owner),
+				45 => combatState.CreateCard<TH_Patchouli.Scrpits.Cards.ElmoPillar>(owner),
+				_ => null
+			};
+		}
+
+		internal static List<CardModel> CreateSpellCardPoolCards(CombatState combatState, Player owner)
+		{
+			List<CardModel> cards =
+			[
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.SecretChamber>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.PhilosopherStone>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.HydrogenousProminence>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.MoonDirt>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.GoodUp>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.GroundMouthpiece>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.BurnLunar>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.SunHangSky>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.EtheralFire>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.AshesRise>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.WaterMoon>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.NoachianDeluge>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.PhlogisticPillar>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.SunRise>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.Swamp>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.StarPredictor>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.WhisperRoot>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.AwakeEdict>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.GroundToSky>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.GoldSun>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.GoldSilver>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.WaterElf>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.LunarFire>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.SquareRingSword>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.LunarReaper>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.ElementalHarvester>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.LunarBook>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.RootActivation>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.SatelliteHimawari>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.SunshineReflector>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.EmeraldMegalith>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.DamoclesSword>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.RoyalDiamondRing>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.CircularLavaBelt>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.SunLunarTogether>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.HephaestusHammer>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.LavaCromlech>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.EmeraldMegalopolis>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.MercuryPoison>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.PhlogisticRain>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.Photosynthesis>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.TidalForce>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.GingerGust>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.ForestBlaze>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.FireWind>(owner),
+				combatState.CreateCard<TH_Patchouli.Scrpits.Cards.ElmoPillar>(owner),
+			];
+
+			return cards;
+		}
+
+		internal static List<(ElementEnum element, int amount)> CalculateTransformElementConsumption(PatchouliCardModel original, CardModel transformed, HashSet<ElementEnum> originalElementsSet)
+		{
+			List<(ElementEnum element, int amount)> toConsume = new List<(ElementEnum element, int amount)>();
+			if (transformed is not PatchouliCardModel transformedPcm)
+			{
+				return toConsume;
+			}
+
+			List<ElementEnum> transformedElements = GetDistinctElementsOrdered(transformedPcm.ElementTypes);
+
+			int originalCost = GetTransformEnergyCost(original);
+			int transformedCost = GetTransformEnergyCost(transformedPcm);
+
+			for (int i = 0; i < transformedElements.Count; i++)
+			{
+				ElementEnum e = transformedElements[i];
+				int credit = originalElementsSet.Contains(e) ? originalCost : 0;
+				int need = Math.Max(0, transformedCost - credit);
+				if (need > 0)
+				{
+					toConsume.Add((e, need));
+				}
+			}
+
+			return toConsume;
+		}
+
 		public virtual async Task<PowerModel> OnChosen(int amount)
 		{
 		   return null;

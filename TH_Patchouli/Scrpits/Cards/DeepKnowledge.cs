@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Commands.Builders;
+using MegaCrit.Sts2.Core.ControllerInput.ControllerConfigs;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -14,6 +15,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using Patchouib.Scrpits.Main;
+using Patchoulib.Scrpits.Main;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +31,7 @@ namespace TH_Patchouli.Scrpits.Cards
 	{
 		protected override IEnumerable<IHoverTip> ExtraHoverTips =>
 		[
+			Tools.GetStaticKeyword("Element"),
 			HoverTipFactory.FromPower<StrengthPower>(),
 			HoverTipFactory.FromPower<DexterityPower>()
 		];
@@ -71,7 +74,7 @@ namespace TH_Patchouli.Scrpits.Cards
 			{
 				return 0m;
 			}
-			return card.Owner.Creature.Powers.Count(p => p.Type == PowerType.Buff);
+			return card.Owner.Creature.Powers.Count(p => p.Type == PowerType.Buff&&p is not Powers.GoldElement&&p is not Powers.WoodElement&&p is not Powers.WaterElement&&p is not Powers.FireElement&&p is not Powers.DirtElement&&p is not Powers.SunElement&&p is not Powers.LunarElement);
 		}
 	}
 }

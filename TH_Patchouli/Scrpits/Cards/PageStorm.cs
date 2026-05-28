@@ -28,7 +28,7 @@ namespace TH_Patchouli.Scrpits.Cards
 	{
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(1)];
 
-		public PageStorm() : base(1, CardType.Power, CardRarity.Uncommon, TargetType.AllEnemies)
+		public PageStorm() : base(2, CardType.Power, CardRarity.Uncommon, TargetType.AllEnemies)
 		{
 		}
 
@@ -44,7 +44,7 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override void OnUpgrade()
 		{
-			DynamicVars.Cards.UpgradeValueBy(1);
+			this.EnergyCost.UpgradeBy(-1);
 		}
 	}
 }

@@ -25,7 +25,10 @@ namespace TH_Patchouli.Scrpits.Cards
 		public DefendLunar() : base(1, CardType.Skill, CardRarity.Basic, TargetType.Self)
 		{
 		}
-
+			public override void BoostWhenElementEnhanced(int boostAmount)
+		{
+			DynamicVars.Block.UpgradeValueBy(boostAmount);
+		}
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
 			await CreatureCmd.GainBlock(base.Owner.Creature, base.DynamicVars.Block, cardPlay);

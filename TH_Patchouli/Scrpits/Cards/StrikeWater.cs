@@ -21,7 +21,10 @@ namespace TH_Patchouli.Scrpits.Cards
 		public StrikeWater() : base(1, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy)
 		{
 		}
-
+			public override void BoostWhenElementEnhanced(int boostAmount)
+		{
+			DynamicVars.Damage.UpgradeValueBy(boostAmount);
+		}
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
 			await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);

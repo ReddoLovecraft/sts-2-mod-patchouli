@@ -17,6 +17,10 @@ namespace TH_Patchouli.Scrpits.Cards
 		public override List<ElementEnum> ElementTypes => _elementTypes;
 
 		public override bool GainsBlock => true;
+		public override void BoostWhenElementEnhanced(int boostAmount)
+		{
+			DynamicVars.Block.UpgradeValueBy(boostAmount);
+		}
 
 		protected override HashSet<CardTag> CanonicalTags => new HashSet<CardTag> { CardTag.Defend };
 

@@ -13,4 +13,5 @@ preview_skin = "default"
 preview_animation = "relaxed_loop"
 preview_frame = false
 preview_time = 0.0
+position = Vector2(-4, -283)
 scale = Vector2(3, 3)

@@ -15,6 +15,7 @@ namespace TH_Patchouli.Scrpits.Cards
 	public sealed class DreamMake : PatchouliCardModel
 	{
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(1)];
+		public override bool CanBeGeneratedInCombat => false;
 
 		public DreamMake() : base(2, CardType.Skill, CardRarity.Rare, TargetType.Self)
 		{

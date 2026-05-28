@@ -1,6 +1,7 @@
 using BaseLib.Abstracts;
 using Godot;
 using MegaCrit.Sts2.Core.CardSelection;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -40,7 +41,24 @@ namespace TH_Patchouli.Scrpits.Powers
 			{
 				return;
 			}
-
+			IEnumerable<CardModel> selected = await CardSelectCmd.FromHand(choiceContext, Owner.Player, new CardSelectorPrefs(base.SelectionScreenPrompt, 0, max), null, null);
+			foreach (CardModel c in selected)
+			{
+				CardCmd.ApplyKeyword(c, CardKeyword.Retain);
+			}
+		}
+		public override async Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+		{
+			if (side != Owner.Side || CombatState == null)
+			{
+				return;
+			}
+				Flash();
+			int max = Math.Min(Amount, PileType.Hand.GetPile(Owner.Player).Cards.Count);
+			if (max <= 0)
+			{
+				return;
+			}
 			IEnumerable<CardModel> selected = await CardSelectCmd.FromHand(choiceContext, Owner.Player, new CardSelectorPrefs(base.SelectionScreenPrompt, 0, max), null, null);
 			foreach (CardModel c in selected)
 			{

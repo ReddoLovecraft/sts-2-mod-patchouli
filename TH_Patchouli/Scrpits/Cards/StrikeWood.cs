@@ -26,7 +26,10 @@ namespace TH_Patchouli.Scrpits.Cards
 		{
 			await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
 		}
-
+			public override void BoostWhenElementEnhanced(int boostAmount)
+		{
+			DynamicVars.Damage.UpgradeValueBy(boostAmount);
+		}
 		protected override void OnUpgrade()
 		{
 			DynamicVars.Damage.UpgradeValueBy(3);

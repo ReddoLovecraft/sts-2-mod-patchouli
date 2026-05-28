@@ -16,6 +16,7 @@ namespace TH_Patchouli.Scrpits.Cards
 	public sealed class SpringWind : PatchouliCardModel
 	{
 		private static readonly List<ElementEnum> _elementTypes = new() { ElementEnum.Wood };
+		public override bool CanBeGeneratedInCombat => false;
 		public override List<ElementEnum> ElementTypes => _elementTypes;
 
 		public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
