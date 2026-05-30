@@ -1,0 +1,104 @@
+[gd_scene load_steps=24 format=3]
+
+[ext_resource type="Script" path="res://TH_Patchouli/ArtWorks/VFX/NKnowledgeWallOrbitVfx.cs" id="1_script"]
+[ext_resource type="Material" path="res://TH_Patchouli/ArtWorks/VFX/canvas_item_material_additive_shared.tres" id="2_mat"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/cardMax000.png" id="3_f0"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/cardMax001.png" id="4_f1"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/cardMax002.png" id="5_f2"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/cardMax003.png" id="6_f3"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/cardMax004.png" id="7_f4"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/cardMax005.png" id="8_f5"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/cardMax006.png" id="9_f6"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/cardMax007.png" id="10_f7"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/cardMax008.png" id="11_f8"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/cardMax009.png" id="12_f9"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/cardMax010.png" id="13_f10"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/cardMax011.png" id="14_f11"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/cardMax012.png" id="15_f12"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/cardMax013.png" id="16_f13"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/cardMax014.png" id="17_f14"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/cardMax015.png" id="18_f15"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/cardMax016.png" id="19_f16"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/cardMax017.png" id="20_f17"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/cardMax018.png" id="21_f18"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/cardMax019.png" id="22_f19"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_base"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_f0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_f1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_f2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_f3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_f4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_f5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_f6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_f7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_f8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_f9")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_f10")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_f11")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_f12")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_f13")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_f14")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_f15")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_f16")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_f17")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_f18")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_f19")
+}],
+"loop": true,
+"name": &"default",
+"speed": 24.0
+}]
+
+[node name="KnowledgeWallOrbitVfx" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="CardTemplate" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+material = ExtResource("2_mat")
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_base")
+animation = &"default"
+autoplay = "default"
+visible = false

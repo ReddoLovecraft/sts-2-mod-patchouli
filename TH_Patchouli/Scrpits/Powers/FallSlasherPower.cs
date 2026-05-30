@@ -23,6 +23,9 @@ namespace TH_Patchouli.Scrpits.Powers
 
 		public override PowerType Type => PowerType.Buff;
 		public override PowerStackType StackType => PowerStackType.Counter;
+		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/FSP32.png";
+		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/FSP64.png";
+
 
 
 		public override Task AfterApplied(Creature? applier, CardModel? cardSource)

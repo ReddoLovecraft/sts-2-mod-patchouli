@@ -2,7 +2,7 @@
 
 [ext_resource type="SpineSkeletonDataResource" uid="uid://bbqaokmddn12s" path="res://TH_Patchouli/ArtWorks/Character/patchouli.tres" id="1_03h26"]
 
-[node name="Youmu" type="Node2D"]
+[node name="Patchouli" type="Node2D"]
 
 [node name="Visuals" type="SpineSprite" parent="."]
 skeleton_data_res = ExtResource("1_03h26")

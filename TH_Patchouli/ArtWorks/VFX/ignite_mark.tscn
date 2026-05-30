@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://TH_Patchouli/ArtWorks/VFX/NIgniteMarkVfx.cs" id="1_script"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/FireSign.png" id="2_tex"]
+[ext_resource type="Material" path="res://TH_Patchouli/ArtWorks/VFX/canvas_item_material_additive_shared.tres" id="3_mat"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/healLightAa000.png" id="4_light"]
+
+[node name="IgniteMarkVfx" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="Spotlight" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+z_index = 0
+centered = true
+texture = ExtResource("4_light")
+material = ExtResource("3_mat")
+modulate = Color(1, 0.35, 0.1, 0.55)
+
+[node name="FireSign" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+z_index = 10
+centered = true
+texture = ExtResource("2_tex")

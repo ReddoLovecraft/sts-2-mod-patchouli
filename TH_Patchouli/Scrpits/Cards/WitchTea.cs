@@ -15,7 +15,7 @@ namespace TH_Patchouli.Scrpits.Cards
 	{
 		public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Innate];
 		public override bool CanBeGeneratedInCombat => false;
-		public WitchTea() : base(1, CardType.Power, CardRarity.Rare, TargetType.Self)
+		public WitchTea() : base(2, CardType.Power, CardRarity.Rare, TargetType.Self)
 		{
 		}
 

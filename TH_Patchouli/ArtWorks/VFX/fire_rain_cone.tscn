@@ -1,0 +1,102 @@
+[gd_scene load_steps=24 format=3 uid="uid://dutvns1sk4lg0"]
+
+[ext_resource type="Script" uid="uid://d3yow7p0iwgne" path="res://TH_Patchouli/ArtWorks/VFX/NFireRainConeVfx.cs" id="1_script"]
+[ext_resource type="Material" uid="uid://c281ff8d6uddt" path="res://TH_Patchouli/ArtWorks/VFX/canvas_item_material_additive_shared.tres" id="2_mat"]
+[ext_resource type="Texture2D" uid="uid://cqgc6g0sdy5pi" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletIa000.png" id="3_f0"]
+[ext_resource type="Texture2D" uid="uid://h0ff5jowflpj" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletIa001.png" id="4_f1"]
+[ext_resource type="Texture2D" uid="uid://2a2sus83y4fg" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletIa002.png" id="5_f2"]
+[ext_resource type="Texture2D" uid="uid://cq7ah4qs66a71" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletIa003.png" id="6_f3"]
+[ext_resource type="Texture2D" uid="uid://b0l0skx0hf5rf" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletIa004.png" id="7_f4"]
+[ext_resource type="Texture2D" uid="uid://bfg2qmh7ko8h6" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletIa005.png" id="8_f5"]
+[ext_resource type="Texture2D" uid="uid://guw4h3jqitky" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletIa006.png" id="9_f6"]
+[ext_resource type="Texture2D" uid="uid://bqab8162gvs67" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletIa007.png" id="10_f7"]
+[ext_resource type="Texture2D" uid="uid://btscfiy3ah7h0" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletIa008.png" id="11_f8"]
+[ext_resource type="Texture2D" uid="uid://bgy0w6gqn3g47" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletIa009.png" id="12_f9"]
+[ext_resource type="Texture2D" uid="uid://csm3acly0ulr5" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletIa010.png" id="13_f10"]
+[ext_resource type="Texture2D" uid="uid://8ju72wq2vk8m" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletIa011.png" id="14_f11"]
+[ext_resource type="Texture2D" uid="uid://ckc2glpav58ba" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletIa012.png" id="15_f12"]
+[ext_resource type="Texture2D" uid="uid://7s418p8q77ww" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletIa013.png" id="16_f13"]
+[ext_resource type="Texture2D" uid="uid://cprdqsug6tlu3" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletIa014.png" id="17_f14"]
+[ext_resource type="Texture2D" uid="uid://c4wdnm3sww5c" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletIa015.png" id="18_f15"]
+[ext_resource type="Texture2D" uid="uid://bftcagr7qhvfs" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletIa016.png" id="19_f16"]
+[ext_resource type="Texture2D" uid="uid://dp60m3fe4ua8r" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletIa017.png" id="20_f17"]
+[ext_resource type="Texture2D" uid="uid://boonmy0gt6178" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletIa018.png" id="21_f18"]
+[ext_resource type="Texture2D" uid="uid://cynrg60vu11mj" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletIa019.png" id="22_f19"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_base"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_f0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_f1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_f2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_f3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_f4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_f5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_f6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_f7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_f8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_f9")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_f10")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_f11")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_f12")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_f13")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_f14")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_f15")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_f16")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_f17")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_f18")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_f19")
+}],
+"loop": false,
+"name": &"default",
+"speed": 24.0
+}]
+
+[node name="FireRainConeVfx" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+material = ExtResource("2_mat")
+position = Vector2(-2, -79)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_base")

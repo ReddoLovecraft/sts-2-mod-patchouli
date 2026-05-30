@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://caof58vt00yh5"]
+
+[ext_resource type="Script" uid="uid://cn6uvymgy5lga" path="res://TH_Patchouli/ArtWorks/VFX/NCloudFormWeatherVfx.cs" id="1_script"]
+
+[node name="CloudFormWeatherVfx" type="Node2D"]
+script = ExtResource("1_script")

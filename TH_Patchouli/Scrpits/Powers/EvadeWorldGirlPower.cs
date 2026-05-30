@@ -13,6 +13,9 @@ namespace TH_Patchouli.Scrpits.Powers
 		public override PowerType Type => PowerType.Buff;
 		public override PowerStackType StackType => PowerStackType.Counter;
 		public override Godot.Color AmountLabelColor => PowerModel._normalAmountLabelColor;
+		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/EWGP32.png";
+		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/EWGP64.png";
+
 		public override async Task AfterCardChangedPiles(CardModel card, PileType oldPileType, AbstractModel? source)
 		{
 			if (CombatState == null)

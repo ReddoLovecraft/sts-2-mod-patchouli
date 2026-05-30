@@ -18,6 +18,10 @@ namespace TH_Patchouli.Scrpits.Powers
 		public override PowerType Type => PowerType.Buff;
 		public override PowerStackType StackType => PowerStackType.Counter;
 		public override Godot.Color AmountLabelColor => PowerModel._normalAmountLabelColor;
+		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/DSP32.png";
+		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/DSP64.png";
+
+
 
 		public override Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
 		{

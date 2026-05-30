@@ -19,6 +19,10 @@ namespace TH_Patchouli.Scrpits.Powers
 		public override PowerType Type => PowerType.Debuff;
 		public override PowerStackType StackType => PowerStackType.Counter;
 		public override Godot.Color AmountLabelColor => PowerModel._debuffAmountLabelColor;
+		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/KRP32.png";
+		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/KRP64.png";
+
+
 
 		public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
 		{

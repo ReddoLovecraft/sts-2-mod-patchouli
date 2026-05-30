@@ -24,6 +24,8 @@ namespace TH_Patchouli.Scrpits.Powers
 		public override bool IsInstanced => true;
 		public override Color AmountLabelColor => PowerModel._normalAmountLabelColor;
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(5)];
+		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/BCMP32.png";
+		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/BCMP64.png";
 
 		public override Task BeforeApplied(Creature target, decimal amount, Creature? applier, CardModel? cardSource)
 		{

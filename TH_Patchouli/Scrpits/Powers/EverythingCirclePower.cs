@@ -15,6 +15,8 @@ namespace TH_Patchouli.Scrpits.Powers
 		public override PowerStackType StackType => PowerStackType.Counter;
 		public override Godot.Color AmountLabelColor => PowerModel._normalAmountLabelColor;
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Transform)];
+		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/ECP232.png";
+		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/ECP264.png";
 
 		public async Task AfterCardTransformed(PlayerChoiceContext choiceContext, CardModel transformedCard, CardModel resultCard, Creature player)
 		{

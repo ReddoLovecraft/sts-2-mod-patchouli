@@ -12,20 +12,22 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
 using Patchouib.Scrpits.Main;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TH_Patchouli.Scripts.Main;
+using TH_Patchouli.Scrpits.Main;
 
 namespace TH_Patchouli.Scrpits.Powers
 {
 	public sealed class FireRainPower : CustomPowerModel
 	{
+		private const string FireRainConeScenePath = "res://TH_Patchouli/ArtWorks/VFX/fire_rain_cone.tscn";
+
 		public override PowerType Type => PowerType.Buff;
 		public override PowerStackType StackType => PowerStackType.Counter;
 		public override Color AmountLabelColor => PowerModel._normalAmountLabelColor;
-		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/FE32.png";
-		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/FE64.png";
+		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/FRP32.png";
+		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/FRP64.png";
 
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(0)];
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<IgnitePower>()];
@@ -53,10 +55,36 @@ namespace TH_Patchouli.Scrpits.Powers
 				return;
 			}
 
+			TryPlayVfx();
+
 			for (int i = 0; i < Amount; i++)
 			{
 				Flash();
 				await PowerCmd.Apply<IgnitePower>(CombatState.HittableEnemies, ignite, Owner, null);
+			}
+		}
+
+		private void TryPlayVfx()
+		{
+			if (CombatState == null)
+			{
+				return;
+			}
+
+			foreach (Creature enemy in CombatState.HittableEnemies)
+			{
+				PatchouliVfxManager.PlayOnCreatureBase(enemy, FireRainConeScenePath, new Vector2(0f, -75f), (node, targetPos) =>
+				{
+					if (node is NFireRainConeVfx vfx)
+					{
+						vfx.HitGlobalPosition = targetPos;
+						vfx.StartHeight = 70f;
+						return;
+					}
+					node.GlobalPosition = targetPos;
+					PatchouliVfxManager.TrySetPropertyIfExists(node, "HitGlobalPosition", targetPos);
+					PatchouliVfxManager.TrySetPropertyIfExists(node, "StartHeight", 70f);
+				});
 			}
 		}
 	}

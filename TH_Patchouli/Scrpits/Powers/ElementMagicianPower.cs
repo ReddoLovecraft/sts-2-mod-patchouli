@@ -18,6 +18,10 @@ namespace TH_Patchouli.Scrpits.Powers
 		public override PowerStackType StackType => PowerStackType.None;
 		public override Godot.Color AmountLabelColor => PowerModel._normalAmountLabelColor;
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [Tools.GetStaticKeyword("Element")];
+		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/EMP332.png";
+		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/EMP364.png";
+
+
 
 		public override bool TryModifyEnergyCostInCombat(CardModel card, decimal originalCost, out decimal modifiedCost)
 		{

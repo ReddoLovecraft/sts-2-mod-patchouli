@@ -20,6 +20,8 @@ namespace TH_Patchouli.Scrpits.Powers
 		public override PowerStackType StackType => PowerStackType.Counter;
 		public override Color AmountLabelColor => PowerModel._normalAmountLabelColor;
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromCard<BasicBody>(false)];
+		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/EMP532.png";
+		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/EMP564.png";
 
 		public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, CombatState combatState)
 		{

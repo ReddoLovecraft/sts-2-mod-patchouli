@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://nfsiu6q4l27k"]
+[gd_scene load_steps=6 format=3 uid="uid://nfsiu6q4l27k"]
 
 [ext_resource type="Script" uid="uid://buvm037eepfi8" path="res://TH_Patchouli/ArtWorks/VFX/NPatchouliEnergyCounter.cs" id="1_k51tk"]
 [ext_resource type="Material" uid="uid://c281ff8d6uddt" path="res://TH_Patchouli/ArtWorks/VFX/canvas_item_material_additive_shared.tres" id="2_edobu"]
-[ext_resource type="Texture2D" uid="uid://nwy5uxwxs8ak" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/breakEF_out000.png" id="3_jawbf"]
-[ext_resource type="Texture2D" uid="uid://d3oicmk0wxx68" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/breakEF_in000.png" id="4_yrynq"]
+[ext_resource type="Texture2D" uid="uid://dfta8rrdewa77" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/baria000.png" id="4_2pjfr"]
 [ext_resource type="Texture2D" uid="uid://b14fhfktvf1l3" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/borderCrash000.png" id="5_48nlc"]
 
 [sub_resource type="FontVariation" id="FontVariation_kreon_bold_shared_font"]
@@ -26,8 +25,9 @@ z_as_relative = false
 position = Vector2(64, 64)
 
 [node name="Layer3" type="Sprite2D" parent="EnergyVfxBack"]
+self_modulate = Color(0.64782506, 0.13810533, 0.5362296, 1)
 material = ExtResource("2_edobu")
-scale = Vector2(0.8, 0.8)
+scale = Vector2(1.1, 1.1)
 texture = ExtResource("5_48nlc")
 
 [node name="Layers" type="Control" parent="."]
@@ -49,7 +49,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("3_jawbf")
 expand_mode = 1
 stretch_mode = 5
 
@@ -71,9 +70,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+rotation = 0.47869405
+scale = Vector2(1.5, 1.5)
 pivot_offset = Vector2(64, 64)
 mouse_filter = 2
-texture = ExtResource("4_yrynq")
+texture = ExtResource("4_2pjfr")
 expand_mode = 1
 stretch_mode = 5
 
@@ -86,24 +87,27 @@ rotation = 0.7853982
 
 [node name="Layer4" type="Sprite2D" parent="EnergyVfxFront"]
 modulate = Color(1, 1, 1, 0.75)
+self_modulate = Color(1, 0.29803923, 1, 1)
 material = ExtResource("2_edobu")
-scale = Vector2(0.7, 0.7)
+scale = Vector2(0.9, 0.9)
 texture = ExtResource("5_48nlc")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = -29.0
-offset_right = -16.0
-offset_bottom = 29.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.5
+offset_top = -25.0
+offset_right = 30.5
+offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.6431373)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
-theme_override_colors/font_outline_color = Color(0.17354357, 0.1532169, 0.7081205, 0.7411765)
+theme_override_colors/font_outline_color = Color(0.8605322, 0.33775344, 0.9031611, 0.7411765)
 theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 16

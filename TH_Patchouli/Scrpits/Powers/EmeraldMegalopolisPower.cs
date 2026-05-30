@@ -21,7 +21,9 @@ namespace TH_Patchouli.Scrpits.Powers
 		public override PowerStackType StackType => PowerStackType.Single;
 		public override Godot.Color AmountLabelColor => PowerModel._normalAmountLabelColor;
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Block)];
-
+		
+		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/EMP232.png";
+		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/EMP264.png";
 		public override Task AfterApplied(Creature? applier, CardModel? cardSource)
 		{
 			Owner.BlockChanged += OnOwnerBlockChanged;

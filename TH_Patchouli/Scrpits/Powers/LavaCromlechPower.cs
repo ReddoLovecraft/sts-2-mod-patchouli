@@ -19,6 +19,8 @@ namespace TH_Patchouli.Scrpits.Powers
 		public override PowerType Type => PowerType.Buff;
 		public override PowerStackType StackType => PowerStackType.Counter;
 		public override Godot.Color AmountLabelColor => PowerModel._normalAmountLabelColor;
+		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/LCP32.png";
+		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/LCP64.png";
 
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<IgnitePower>(),HoverTipFactory.Static(StaticHoverTip.Block)];
 

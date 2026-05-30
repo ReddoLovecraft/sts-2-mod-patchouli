@@ -25,6 +25,10 @@ namespace TH_Patchouli.Scrpits.Powers
 			}
 			return currentMaxHandSize + Amount;
 		}
+		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/RHBP32.png";
+		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/RHBP64.png";
+
+
 
 		public override async Task AfterPlayerTurnStartEarly(PlayerChoiceContext choiceContext, Player player)
 		{

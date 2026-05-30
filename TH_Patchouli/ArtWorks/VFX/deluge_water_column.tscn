@@ -1,0 +1,84 @@
+[gd_scene load_steps=19 format=3 uid="uid://dycekxqprvsl8"]
+
+[ext_resource type="Script" uid="uid://ba4xub1a48kfp" path="res://TH_Patchouli/ArtWorks/VFX/NDelugeWaterColumnVfx.cs" id="1_script"]
+[ext_resource type="Material" uid="uid://c281ff8d6uddt" path="res://TH_Patchouli/ArtWorks/VFX/canvas_item_material_additive_shared.tres" id="2_mat"]
+[ext_resource type="Texture2D" uid="uid://do1brbs0ujpx1" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletFa000.png" id="3_f0"]
+[ext_resource type="Texture2D" uid="uid://bb26rqcb3bm1c" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletFa001.png" id="4_f1"]
+[ext_resource type="Texture2D" uid="uid://wxaigiuwrt8r" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletFa002.png" id="5_f2"]
+[ext_resource type="Texture2D" uid="uid://cpy5fttsn8bkg" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletFa003.png" id="6_f3"]
+[ext_resource type="Texture2D" uid="uid://b7hlv5t75akx6" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletFa004.png" id="7_f4"]
+[ext_resource type="Texture2D" uid="uid://d15bj262l5bfj" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletFa005.png" id="8_f5"]
+[ext_resource type="Texture2D" uid="uid://bx555r3nf7wwd" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletFa006.png" id="9_f6"]
+[ext_resource type="Texture2D" uid="uid://brvcm2g8sgjod" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletFa007.png" id="10_f7"]
+[ext_resource type="Texture2D" uid="uid://d2o257sw1487m" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletFa008.png" id="11_f8"]
+[ext_resource type="Texture2D" uid="uid://jkb7ee42bki3" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletFa009.png" id="12_f9"]
+[ext_resource type="Texture2D" uid="uid://naris7kjq5k3" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletFa010.png" id="13_f10"]
+[ext_resource type="Texture2D" uid="uid://bsxjpmneigxbi" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletFa011.png" id="14_f11"]
+[ext_resource type="Texture2D" uid="uid://dg187rbthugl2" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletFa012.png" id="15_f12"]
+[ext_resource type="Texture2D" uid="uid://coltirbagu6pd" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletFa013.png" id="16_f13"]
+[ext_resource type="Texture2D" uid="uid://dxgupbavemak4" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletFa014.png" id="17_f14"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_base"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_f0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_f1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_f2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_f3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_f4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_f5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_f6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_f7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_f8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_f9")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_f10")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_f11")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_f12")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_f13")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_f14")
+}],
+"loop": false,
+"name": &"default",
+"speed": 24.0
+}]
+
+[node name="DelugeWaterColumnVfx" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+material = ExtResource("2_mat")
+position = Vector2(0, 256)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_base")
+frame = 14
+frame_progress = 1.0

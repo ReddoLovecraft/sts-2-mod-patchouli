@@ -13,6 +13,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 using Patchouib.Scrpits.Main;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TH_Patchouli.Scrpits.Main;
 
 namespace TH_Patchouli.Scrpits.Powers
 {
@@ -21,11 +22,23 @@ namespace TH_Patchouli.Scrpits.Powers
 		public override PowerType Type => PowerType.Debuff;
 		public override PowerStackType StackType => PowerStackType.Counter;
 		public override Color AmountLabelColor => PowerModel._debuffAmountLabelColor;
-		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/WE32.png";
-		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/WE64.png";
+		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/SB32.png";
+		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/SB64.png";
 
 		public StickyBubble()
 		{
+		}
+
+		public override Task AfterApplied(Creature? applier, CardModel? cardSource)
+		{
+			PatchoulibEffectManager.OnPowerApplied(Owner, this);
+			return Task.CompletedTask;
+		}
+
+		public override Task AfterRemoved(Creature oldOwner)
+		{
+			PatchoulibEffectManager.OnPowerRemoved(oldOwner, this);
+			return Task.CompletedTask;
 		}
 
 		public override async Task AfterDamageGiven(PlayerChoiceContext choiceContext, Creature? dealer, DamageResult result, ValueProp props, Creature target, CardModel? cardSource)

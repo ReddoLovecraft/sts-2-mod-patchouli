@@ -114,10 +114,27 @@ namespace TH_Patchouli.Scripts.Main
 	{
 		private const string ModSfxPrefix = "mod_sfx://";
 		private const float DefaultGain = 0.45f;
+		private static readonly HashSet<string> _loggedSfx = new(StringComparer.OrdinalIgnoreCase);
 		private static readonly Dictionary<string, float> GainOverrides = new()
 		{
-			["TH_Patchouli/ArtWorks/SFX/characterselect.wav"] = 2.8f
+			["TH_Patchouli/ArtWorks/SFX/characterselect.wav"] = 0.1f
 		};
+		private static bool TryGetOverrideGain(string localPath, out float overrideGain)
+	{
+		if (GainOverrides.TryGetValue(localPath, out overrideGain))
+		{
+			return true;
+		}
+
+		string fileName = Path.GetFileName(localPath);
+		if (!string.IsNullOrEmpty(fileName) && GainOverrides.TryGetValue(fileName, out overrideGain))
+		{
+			return true;
+		}
+
+		overrideGain = default;
+		return false;
+	}
 
 		static IEnumerable<MethodBase> TargetMethods()
 		{
@@ -180,9 +197,15 @@ namespace TH_Patchouli.Scripts.Main
 			return false;
 		}
 
-		private static void PlayModSfx(string path, float volume)
+		internal static void PlayModSfx(string path, float volume)
 		{
 			string localPath = path.Substring(ModSfxPrefix.Length);
+			localPath = localPath.Replace('\\', '/').TrimStart('/');
+			if (localPath.StartsWith("res://", StringComparison.OrdinalIgnoreCase))
+			{
+				localPath = localPath.Substring("res://".Length).TrimStart('/');
+			}
+
 			string resPath = "res://" + localPath;
 			AudioStream? stream = ResourceLoader.Load<AudioStream>(resPath);
 			if (stream == null)
@@ -195,11 +218,21 @@ namespace TH_Patchouli.Scripts.Main
 			player.Bus = FindSfxBusName();
 
 			float gain = DefaultGain;
-			if (GainOverrides.TryGetValue(localPath, out float overrideGain))
+			if (TryGetOverrideGain(localPath, out float overrideGain))
 			{
 				gain *= overrideGain;
 			}
-			player.VolumeDb = Mathf.LinearToDb(Mathf.Max(0.0001f, volume * gain));
+			float linearVolume = volume * gain;
+			if (linearVolume <= 0f || float.IsNaN(linearVolume) || float.IsInfinity(linearVolume))
+			{
+				player.QueueFree();
+				return;
+			}
+			player.VolumeDb = Mathf.LinearToDb(linearVolume);
+			if (_loggedSfx.Add(localPath))
+			{
+				Log.Debug($"mod_sfx '{localPath}' vol={volume} gain={gain} linear={linearVolume} db={player.VolumeDb} bus='{player.Bus}'");
+			}
 
 			if (NGame.Instance != null)
 			{
@@ -207,7 +240,7 @@ namespace TH_Patchouli.Scripts.Main
 			}
 			else
 			{
-				Log.Error($"TH_Rin mod_sfx can't play because NGame.Instance is null. Path: {path}");
+				Log.Error($"TH_Patchouli mod_sfx can't play because NGame.Instance is null. Path: {path}");
 				player.QueueFree();
 				return;
 			}
@@ -215,7 +248,6 @@ namespace TH_Patchouli.Scripts.Main
 			player.Play();
 			player.Connect("finished", Callable.From(player.QueueFree));
 		}
-
 		private static string FindSfxBusName()
 		{
 			int count = AudioServer.BusCount;

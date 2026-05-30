@@ -16,6 +16,8 @@ namespace TH_Patchouli.Scrpits.Powers
 		public override PowerType Type => PowerType.Buff;
 		public override PowerStackType StackType => PowerStackType.Counter;
 		public override Godot.Color AmountLabelColor => PowerModel._normalAmountLabelColor;
+		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/WWP32.png";
+		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/WWP64.png";
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.ForEnergy(this)];
 
 		public override decimal ModifyMaxEnergy(Player player, decimal amount)

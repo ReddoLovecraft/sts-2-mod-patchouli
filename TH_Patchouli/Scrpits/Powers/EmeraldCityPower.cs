@@ -21,6 +21,10 @@ namespace TH_Patchouli.Scrpits.Powers
 	{
 		public override PowerType Type => PowerType.Buff;
 		public override PowerStackType StackType => PowerStackType.Counter;
+		
+		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/ECP32.png";
+		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/ECP64.png";
+
 		public override async Task BeforeDamageReceived(PlayerChoiceContext choiceContext, Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
 		{
 			if (CombatState == null || target != Owner || amount <= 0 || dealer == null || dealer.Side == Owner.Side)

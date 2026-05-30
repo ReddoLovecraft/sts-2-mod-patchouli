@@ -26,8 +26,8 @@ namespace TH_Patchouli.Scrpits.Powers
 		public override PowerType Type => PowerType.Buff;
 		public override PowerStackType StackType => PowerStackType.Counter;
 		public override Color AmountLabelColor => PowerModel._normalAmountLabelColor;
-		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/GE32.png";
-		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/GE64.png";
+		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/UP32.png";
+		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/UP64.png";
 
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(0)];
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.ForEnergy(this)];

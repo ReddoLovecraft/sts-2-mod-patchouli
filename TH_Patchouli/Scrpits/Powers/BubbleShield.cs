@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TH_Patchouli.Scrpits.Main;
 
 namespace TH_Patchouli.Scrpits.Powers
 {
@@ -29,10 +30,8 @@ namespace TH_Patchouli.Scrpits.Powers
 		public override PowerType Type => PowerType.Buff;
 		public override PowerStackType StackType => PowerStackType.Counter;
 		public override bool IsInstanced => true;
-		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/WE32.png";
-		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/WE64.png";
-
-		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.Static(StaticHoverTip.Block)];
+		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/BS32.png";
+		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/BS64.png";
 
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(0)];
 
@@ -55,6 +54,7 @@ namespace TH_Patchouli.Scrpits.Powers
 				_originalAmount = Amount;
 			}
 			EnsureOriginalAmountVar();
+			PatchoulibEffectManager.OnPowerApplied(Owner, this);
 			return Task.CompletedTask;
 		}
 		
@@ -97,6 +97,7 @@ namespace TH_Patchouli.Scrpits.Powers
 
 		public override async Task AfterRemoved(Creature oldOwner)
 		{
+			PatchoulibEffectManager.OnPowerRemoved(oldOwner, this);
 			if (_suppressExplodeOnRemove || _originalAmount <= 0 || oldOwner.CombatState == null)
 			{
 				return;

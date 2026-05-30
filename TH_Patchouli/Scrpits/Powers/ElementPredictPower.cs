@@ -24,6 +24,10 @@ namespace TH_Patchouli.Scrpits.Powers
 		public override PowerStackType StackType => PowerStackType.Counter;
 		public override Godot.Color AmountLabelColor => PowerModel._normalAmountLabelColor;
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [Tools.GetStaticKeyword("Element"), HoverTipFactory.ForEnergy(this)];
+		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/EPP232.png";
+		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/EPP264.png";
+
+
 
 		public override async Task AfterPlayerTurnStartLate(PlayerChoiceContext choiceContext, Player player)
 		{

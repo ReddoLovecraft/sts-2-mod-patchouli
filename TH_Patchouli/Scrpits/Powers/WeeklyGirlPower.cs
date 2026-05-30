@@ -39,6 +39,9 @@ namespace TH_Patchouli.Scrpits.Powers
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [Tools.GetStaticKeyword("Element")];
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new StringVar("NextElement")];
 
+		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/WGP32.png";
+		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/WGP64.png";
+
 		public override Task AfterApplied(Creature? applier, CardModel? cardSource)
 		{
 			UpdateNextElementVar();

@@ -1,19 +1,19 @@
 {
-  "THE_ARCHITECT.talk.TH_RIN-RIN_CHARACTER.1-0.ancient": "一只猫？这可真是稀奇！不过你的口味还挺“独特”的……",
-  "THE_ARCHITECT.talk.TH_RIN-RIN_CHARACTER.1-0.next": "继续",
-  "THE_ARCHITECT.talk.TH_RIN-RIN_CHARACTER.1-1.char": "我的爱好与你无关。",
-  "THE_ARCHITECT.talk.TH_RIN-RIN_CHARACTER.1-1.next": "爪击",
-  "THE_ARCHITECT.talk.TH_RIN-RIN_CHARACTER.1-2.ancient": "……去去，真是不懂礼貌的猫啊。",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.1-0.char": "[jitter]……咳咳……[/jitter]这座塔可真够高的，不过总算是到塔顶了……",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.1-0.next": "继续",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.1-1.ancient": "……又是你？",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.1-1.next": "继续",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.1-2.ancient": "以你的身体素质来说，还真是惊人的毅力，不过这没有任何意义……",
 
-  "THE_ARCHITECT.talk.TH_RIN-RIN_CHARACTER.2-0r.ancient": "这股尸体的腐臭味……真是令人作呕。",
-  "THE_ARCHITECT.talk.TH_RIN-RIN_CHARACTER.2-0r.next": "哈气",
-  "THE_ARCHITECT.talk.TH_RIN-RIN_CHARACTER.2-1r.char": "你在说些什么？这完全不是臭味好吧，明明很香！",
-  "THE_ARCHITECT.talk.TH_RIN-RIN_CHARACTER.2-1r.next": "爪击",
-  "THE_ARCHITECT.talk.TH_RIN-RIN_CHARACTER.2-2r.ancient": "理解不了你的思维，下次把身体弄干净点再来见我！",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.2-0r.char": "建筑师，我们终于又见面了……",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.2-0r.next": "继续",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.2-1r.char": "你害得我爬了那么久的楼，[jitter][red]给我受死吧！[/red][/jitter]",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.2-1r.next": "继续",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.2-2r.ancient": "对此我深表歉意，不过目前我没有空闲接待客人，所以请回吧。",
 
-  "THE_ARCHITECT.talk.TH_RIN-RIN_CHARACTER.0-0.ancient": "为了对付我而收集尸体的吗，太恶劣了！",
-  "THE_ARCHITECT.talk.TH_RIN-RIN_CHARACTER.0-0.next": "继续",
-  "THE_ARCHITECT.talk.TH_RIN-RIN_CHARACTER.0-1.char": "别想太多了，收集尸体纯粹是我的个人爱好罢了。",
-  "THE_ARCHITECT.talk.TH_RIN-RIN_CHARACTER.0-1.next": "爪击",
-  "THE_ARCHITECT.talk.TH_RIN-RIN_CHARACTER.0-2.ancient": "……下次再来见我吧！"
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.0-0.ancient": "一位擅长使用元素魔法的人类么？这座高塔还真是越来越热闹了……",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.0-0.next": "继续",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.0-1.char": "我需要纠正你一点，我并非人类，而是魔法使。",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.0-1.next": "继续",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.0-2.ancient": "……这点很重要吗？总之这里不是你该来的地方，给我回去吧！"
 }
