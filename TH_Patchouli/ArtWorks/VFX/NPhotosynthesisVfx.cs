@@ -9,6 +9,9 @@ public partial class NPhotosynthesisVfx : Node2D
 	[Export]
 	public float BaseAlpha { get; set; } = 0.55f;
 
+	[Export]
+	public Color LightColor { get; set; } = Colors.White;
+
 	private Sprite2D? _spotlight;
 	private Tween? _pulseTween;
 	private Control? _hitbox;
@@ -24,10 +27,7 @@ public partial class NPhotosynthesisVfx : Node2D
 
 		if (_spotlight != null)
 		{
-			Color m = _spotlight.Modulate;
-			m.R = 1f;
-			m.G = 1f;
-			m.B = 1f;
+			Color m = LightColor;
 			m.A = BaseAlpha;
 			_spotlight.Modulate = m;
 			StartPulseTween();

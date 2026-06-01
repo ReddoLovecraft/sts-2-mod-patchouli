@@ -3,9 +3,12 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.Nodes.Rooms;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 using Patchoulib.Scrpits.Main;
 using System;
 using System.Collections.Generic;
@@ -43,12 +46,14 @@ namespace TH_Patchouli.Scrpits.Cards
 			{
 				return;
 			}
-
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+			NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(cardPlay.Target, VfxColor.Purple));
+			await PowerCmd.Apply<IgnitePower>(cardPlay.Target, DynamicVars.Cards.IntValue, Owner.Creature, this);
 			int debuffs = cardPlay.Target.Powers.Count(p => p.Type == PowerType.Debuff);
-			int ignite = Math.Max(0, debuffs) * Math.Max(0, DynamicVars.Cards.IntValue);
-			if (ignite > 0)
+			for (int i = 0; i < debuffs; i++)
 			{
-				await PowerCmd.Apply<IgnitePower>(cardPlay.Target, ignite, Owner.Creature, this);
+				NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(base.Owner.Creature, VfxColor.Purple));
+				await PowerCmd.Apply<IgnitePower>(cardPlay.Target, DynamicVars.Cards.IntValue, Owner.Creature, this);
 			}
 		}
 

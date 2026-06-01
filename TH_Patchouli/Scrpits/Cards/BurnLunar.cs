@@ -46,7 +46,7 @@ namespace TH_Patchouli.Scrpits.Cards
 			{
 				return;
 			}
-
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);	
 			List<CardModel> selected = (await CardSelectCmd.FromHand(
 				choiceContext,
 				Owner,

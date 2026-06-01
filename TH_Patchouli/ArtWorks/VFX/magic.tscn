@@ -1,0 +1,191 @@
+[gd_scene load_steps=30 format=3 uid="uid://dygcyychssi3b"]
+
+[ext_resource type="Material" uid="uid://c281ff8d6uddt" path="res://TH_Patchouli/ArtWorks/VFX/canvas_item_material_additive_shared.tres" id="1_3dchx"]
+[ext_resource type="Texture2D" uid="uid://bmvxcordxsh8x" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletEe000.png" id="2_i2xh8"]
+[ext_resource type="Texture2D" uid="uid://dv4y2mkovu52j" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletEe001.png" id="3_wn345"]
+[ext_resource type="Texture2D" uid="uid://1peaw0f7fx5m" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletEe002.png" id="4_4gnbj"]
+[ext_resource type="Texture2D" uid="uid://dy0d7fyi08siw" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletEe003.png" id="5_q43s4"]
+[ext_resource type="Texture2D" uid="uid://v3g01rp12jhw" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletEe004.png" id="6_purau"]
+[ext_resource type="Texture2D" uid="uid://bh30dkscva0kt" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletEe005.png" id="7_s0awc"]
+[ext_resource type="Texture2D" uid="uid://dkrj7lojsdnx2" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletEe006.png" id="8_tgwf8"]
+[ext_resource type="Texture2D" uid="uid://dn1tl0ftvi5tv" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletEe007.png" id="9_hnlqv"]
+[ext_resource type="Texture2D" uid="uid://do0f3ngbu7qyu" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletEe008.png" id="10_k5lug"]
+[ext_resource type="Texture2D" uid="uid://dovci1n4tdgfd" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletEe009.png" id="11_cale1"]
+[ext_resource type="Texture2D" uid="uid://bhxnpyowrwtdr" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletEe010.png" id="12_ilvcl"]
+[ext_resource type="Texture2D" uid="uid://d0y4ev0dfdeec" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletEe011.png" id="13_nf4pa"]
+[ext_resource type="Texture2D" uid="uid://c6a8cg1u4dpuf" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletEe012.png" id="14_7c5i7"]
+[ext_resource type="Texture2D" uid="uid://bc88qy4aq2hab" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletEe013.png" id="15_d4xrg"]
+[ext_resource type="Texture2D" uid="uid://baksxukm3emwa" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletEe014.png" id="16_j75y1"]
+[ext_resource type="Texture2D" uid="uid://copn00wta6dg0" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletEe015.png" id="17_pj6tu"]
+[ext_resource type="Texture2D" uid="uid://cc5mm1h6pmiwm" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletEe016.png" id="18_041mg"]
+[ext_resource type="Texture2D" uid="uid://cxalw423ay36h" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletEe017.png" id="19_tcy1t"]
+[ext_resource type="Texture2D" uid="uid://bb1667llkuqf0" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletEe018.png" id="20_s76hp"]
+[ext_resource type="Texture2D" uid="uid://drxdhlbi21mr5" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletEe019.png" id="21_wf2mm"]
+[ext_resource type="Texture2D" uid="uid://bviwowkxr7n5b" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletEe020.png" id="22_elihp"]
+[ext_resource type="Texture2D" uid="uid://bvjgyv1xu0p2t" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletEe021.png" id="23_rb5bg"]
+[ext_resource type="Texture2D" uid="uid://cejfi532jainy" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletEe022.png" id="24_wnl0x"]
+[ext_resource type="Texture2D" uid="uid://cvqw7cks0b3c3" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletEe023.png" id="25_gay4y"]
+[ext_resource type="Texture2D" uid="uid://btm2nrgbasway" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/BulletEe024.png" id="26_rxvpx"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_base"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_i2xh8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wn345")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_4gnbj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_q43s4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_purau")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_s0awc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_tgwf8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_hnlqv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_k5lug")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_cale1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ilvcl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_nf4pa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_7c5i7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_d4xrg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_j75y1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_pj6tu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_041mg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_tcy1t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_s76hp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_wf2mm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_elihp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_rb5bg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_wnl0x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_gay4y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_rxvpx")
+}],
+"loop": false,
+"name": &"default",
+"speed": 24.0
+}]
+
+[sub_resource type="Animation" id="Animation_play"]
+resource_name = "play"
+length = 1.0416666
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.033333335, 0.2, 1.0416666),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visual/Sprite:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [&"default"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visual/Sprite:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visual/Sprite:frame")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.041666668, 0.083333336, 0.125, 0.16666667, 0.20833334, 0.25, 0.29166666, 0.33333334, 0.375, 0.41666666, 0.45833334, 0.5, 0.5416667, 0.5833333, 0.625, 0.6666667, 0.7083333, 0.75, 0.7916667, 0.8333333, 0.875, 0.9166667, 0.9583333, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_base"]
+_data = {
+&"play": SubResource("Animation_play")
+}
+
+[node name="GrabVfx" type="Node2D"]
+
+[node name="Visual" type="Node2D" parent="."]
+scale = Vector2(2.5, 2.5)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Visual"]
+material = ExtResource("1_3dchx")
+sprite_frames = SubResource("SpriteFrames_base")
+frame = 20
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_base")
+}
+autoplay = "play"
+
+[node name="LifeTimer" type="Timer" parent="."]
+wait_time = 1.0416666
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="LifeTimer" to="." method="queue_free"]

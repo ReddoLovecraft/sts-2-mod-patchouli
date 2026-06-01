@@ -1,9 +1,13 @@
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Nodes.Rooms;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 using Patchouib.Scrpits.Main;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -36,19 +40,18 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
-			if (CombatState == null)
+			int alive = CombatState.HittableEnemies.Count+1;
+			NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NFireSmokePuffVfx.Create(base.Owner.Creature));
+			await Cmd.CustomScaledWait(0.2f, 0.4f);
+			foreach(Creature enemy in CombatState.HittableEnemies)
 			{
-				return;
+				for(int i=0;i<alive;i++)
+				{
+					NFireBurstVfx child = NFireBurstVfx.Create(enemy, 0.75f);
+					NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(child);
+					await PowerCmd.Apply<IgnitePower>(enemy, DynamicVars.Cards.IntValue, Owner.Creature, this);
+				}
 			}
-
-			int alive = CombatState.HittableEnemies.Count;
-			int total = DynamicVars.Cards.IntValue * (alive + 1);
-			if (total <= 0)
-			{
-				return;
-			}
-
-			await PowerCmd.Apply<IgnitePower>(CombatState.HittableEnemies, total, Owner.Creature, this);
 		}
 
 		protected override void OnUpgrade()

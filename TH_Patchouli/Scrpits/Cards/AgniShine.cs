@@ -45,12 +45,12 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
-			if (CombatState == null)
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+			foreach (Creature enemy in CombatState.HittableEnemies)
 			{
-				return;
+				VfxCmd.PlayOnCreatureCenter(enemy, PatchouliVfxManager.ToPatchouliVfxPath("fireshine"));
+				await PowerCmd.Apply<IgnitePower>(enemy, DynamicVars.Cards.IntValue, Owner.Creature, this);
 			}
-
-			await PowerCmd.Apply<IgnitePower>(CombatState.HittableEnemies, DynamicVars.Cards.IntValue, Owner.Creature, this);
 			foreach (CardModel c in PileType.Hand.GetPile(Owner).Cards)
 			{
 				CardCmd.Upgrade(c);

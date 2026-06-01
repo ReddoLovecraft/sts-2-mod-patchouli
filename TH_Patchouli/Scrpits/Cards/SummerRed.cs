@@ -1,11 +1,15 @@
 using BaseLib.Utils;
+using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.Nodes.Rooms;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 using Patchouib.Scrpits.Main;
 using System.Collections.Generic;
@@ -40,7 +44,8 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
-			await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
+			//NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(cardPlay.Target, VfxColor.Red));
+			await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).WithHitFx(null, null, "blunt_attack.mp3").WithHitVfxNode(target => PatchouliVfxManager.CreateProjectileToTarget("fireball", Owner.Creature, target, new Vector2(0f, -180f),  new Vector2(0f, -40f))).Targeting(cardPlay.Target).Execute(choiceContext);
 			await PowerCmd.Apply<IgnitePower>(cardPlay.Target, DynamicVars.Cards.IntValue, Owner.Creature, this);
 		}
 

@@ -3,9 +3,12 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.Nodes.Rooms;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 using Patchouib.Scrpits.Main;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -35,11 +38,14 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			int amount = DynamicVars.Cards.IntValue;
 			if (cardPlay.Target.HasPower<IgnitePower>())
 			{
+				NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(cardPlay.Target, VfxColor.Red));
 				await PowerCmd.Apply<IgnitePower>(cardPlay.Target, amount, Owner.Creature, this);
 			}
+			NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(cardPlay.Target, VfxColor.Red));
 			await PowerCmd.Apply<IgnitePower>(cardPlay.Target, amount, Owner.Creature, this);
 		}
 

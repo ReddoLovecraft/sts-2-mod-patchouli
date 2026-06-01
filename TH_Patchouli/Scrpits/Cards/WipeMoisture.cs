@@ -48,7 +48,7 @@ namespace TH_Patchouli.Scrpits.Cards
 		{
 			ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
         	AttackCommand attackCommand = await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
+            .WithHitFx(PatchouliVfxManager.ToPatchouliVfxPath("wipe"), null, "blunt_attack.mp3")
             .Execute(choiceContext);
 			if(cardPlay.Target!=null&&cardPlay.Target.IsAlive)
 			{

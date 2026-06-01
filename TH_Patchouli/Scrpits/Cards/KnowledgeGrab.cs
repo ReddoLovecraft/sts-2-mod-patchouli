@@ -49,7 +49,7 @@ namespace TH_Patchouli.Scrpits.Cards
 		{
 			ArgumentNullException.ThrowIfNull(cardPlay.Target);
 
-			await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
+			await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)   .WithHitFx(PatchouliVfxManager.ToPatchouliVfxPath("grab"), null, "blunt_attack.mp3").Execute(choiceContext);
 
 			int amount = DynamicVars.Cards.IntValue;
 			await PowerCmd.Apply<StrengthPower>(cardPlay.Target, -amount, Owner.Creature, this);

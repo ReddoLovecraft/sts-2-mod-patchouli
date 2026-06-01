@@ -42,7 +42,7 @@ namespace TH_Patchouli.Scrpits.Cards
 				return;
 			}
 
-			await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(CombatState).Execute(choiceContext);
+			await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).WithHitFx(PatchouliVfxManager.ToPatchouliVfxPath("ground"), null, "blunt_attack.mp3").TargetingAllOpponents(CombatState).Execute(choiceContext);
 
 			int strDown = Math.Max(0, DynamicVars.Cards.IntValue);
 			if (strDown > 0)

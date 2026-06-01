@@ -5,6 +5,8 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.Nodes.Rooms;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 using Patchoulib.Scrpits.Main;
 using System;
 using System.Collections.Generic;
@@ -42,21 +44,12 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
-			if (CombatState == null)
-			{
-				return;
-			}
-
-			int amt = Math.Max(0, DynamicVars.Cards.IntValue);
-			if (amt <= 0)
-			{
-				return;
-			}
-
-			await PowerCmd.Apply<SlowPower>(CombatState.HittableEnemies, amt, Owner.Creature, this);
-			await PowerCmd.Apply<WeakPower>(CombatState.HittableEnemies, amt, Owner.Creature, this);
-			await PowerCmd.Apply<VulnerablePower>(CombatState.HittableEnemies, amt, Owner.Creature, this);
-			await PowerCmd.Apply<DebilitatePower>(CombatState.HittableEnemies, amt, Owner.Creature, this);
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+			NCombatRoom.Instance?.RadialBlur(VfxPosition.Right);
+			await PowerCmd.Apply<SlowPower>(CombatState.HittableEnemies, DynamicVars.Cards.IntValue, Owner.Creature, this);
+			await PowerCmd.Apply<WeakPower>(CombatState.HittableEnemies, DynamicVars.Cards.IntValue, Owner.Creature, this);
+			await PowerCmd.Apply<VulnerablePower>(CombatState.HittableEnemies, DynamicVars.Cards.IntValue, Owner.Creature, this);
+			await PowerCmd.Apply<DebilitatePower>(CombatState.HittableEnemies, DynamicVars.Cards.IntValue, Owner.Creature, this);
 		}
 
 		protected override void OnUpgrade()

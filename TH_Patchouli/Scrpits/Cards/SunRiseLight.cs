@@ -1,4 +1,5 @@
 using BaseLib.Utils;
+using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -30,11 +31,9 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
-			if (CombatState == null)
-			{
-				return;
-			}
-			await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(CombatState).Execute(choiceContext);
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+			VfxCmd.PlayOnCreatureCenter(Owner.Creature, PatchouliVfxManager.ToPatchouliVfxPath("sundot"));
+			await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).WithHitVfxNode(target => PatchouliVfxManager.CreateProjectileToTarget("sunlight", Owner.Creature, target, new Vector2(0f, -180f),  new Vector2(0f, 0f))).WithHitFx(null, null, "slash_attack.mp3").TargetingAllOpponents(CombatState).Execute(choiceContext);
 		}
 
 		protected override void OnUpgrade()

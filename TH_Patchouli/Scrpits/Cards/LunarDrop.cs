@@ -31,11 +31,7 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
-			if (CombatState == null)
-			{
-				return;
-			}
-			await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(CombatState).WithHitCount(DynamicVars.Cards.IntValue).Execute(choiceContext);
+			await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).SpawningHitVfxOnEachCreature().TargetingAllOpponents(CombatState) .WithHitFx(PatchouliVfxManager.ToPatchouliVfxPath("lunardrop"), null, "blunt_attack.mp3").WithHitCount(DynamicVars.Cards.IntValue).Execute(choiceContext);
 		}
 
 		protected override void OnUpgrade()

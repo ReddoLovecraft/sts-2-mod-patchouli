@@ -16,6 +16,10 @@ using Patchouib.Scrpits.Main;
 using TH_Patchouli.Scripts.Main;
 using TH_Patchouli.Scrpits.Main;
 using TH_Patchouli.Scrpits.Powers;
+using MegaCrit.Sts2.Core.Nodes;
+using Godot;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
+using MegaCrit.Sts2.Core.Helpers;
 
 namespace TH_Patchouli.Scrpits.Cards
 {
@@ -40,6 +44,9 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			Color color = new Color("00b77380");
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+			NRun.Instance?.GlobalUi.AddChildSafely(NSmokyVignetteVfx.Create(color, color));
 			await PowerCmd.Apply<StaticGreenPower>(Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
 		}
 

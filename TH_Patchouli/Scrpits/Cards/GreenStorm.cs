@@ -54,7 +54,7 @@ namespace TH_Patchouli.Scrpits.Cards
 
 			if (hitCount > 0)
 			{
-				await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(CombatState).WithHitCount(hitCount).Execute(choiceContext);
+				await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).SpawningHitVfxOnEachCreature().TargetingAllOpponents(CombatState) .WithHitFx(PatchouliVfxManager.ToPatchouliVfxPath("greenstorm"), null, "blunt_attack.mp3").WithHitCount(hitCount).Execute(choiceContext);
 				await PowerCmd.Apply<RegenPower>(Owner.Creature, hitCount, Owner.Creature, this);
 			}
 		}

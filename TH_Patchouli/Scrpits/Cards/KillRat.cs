@@ -34,7 +34,7 @@ namespace TH_Patchouli.Scrpits.Cards
 				return;
 			}
 			
-				await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
+				await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).WithHitFx("vfx/vfx_chain").Targeting(cardPlay.Target).Execute(choiceContext);
 			if (cardPlay.Target != null)
 			{
 							await PowerCmd.Apply<KillRatPower>(CombatState.HittableEnemies, DynamicVars.Cards.IntValue, Owner.Creature, this);

@@ -42,20 +42,8 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
-			if (CombatState == null)
-			{
-				return;
-			}
-
-			int multiplier = Math.Max(0, DynamicVars.Cards.IntValue);
-			if (multiplier <= 0)
-			{
-				return;
-			}
-
 			int waterElement = Owner.Creature.GetPower<TH_Patchouli.Scrpits.Powers.WaterElement>()?.Amount ?? 0;
 			int hitCount = 1 + Math.Max(0, waterElement);
-
 			List<Creature> enemies = CombatState.HittableEnemies.ToList();
 			foreach (Creature enemy in enemies)
 			{
@@ -65,14 +53,12 @@ namespace TH_Patchouli.Scrpits.Cards
 				{
 					await PowerCmd.Remove(freeze);
 				}
-
-				int damage = Math.Max(0, freezeAmount) * multiplier;
+				int damage = Math.Max(0, freezeAmount) * DynamicVars.Cards.IntValue;
 				if (damage <= 0)
 				{
 					continue;
 				}
-
-				await DamageCmd.Attack(damage).WithHitCount(hitCount).FromCard(this).Targeting(enemy).Execute(choiceContext);
+				await DamageCmd.Attack(damage).WithHitCount(hitCount).FromCard(this).WithHitFx(PatchouliVfxManager.ToPatchouliVfxPath("chamber"), null, "blunt_attack.mp3").Targeting(enemy).Execute(choiceContext);
 			}
 		}
 

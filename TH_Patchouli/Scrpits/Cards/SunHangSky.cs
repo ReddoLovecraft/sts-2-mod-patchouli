@@ -1,4 +1,5 @@
 using BaseLib.Utils;
+using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -6,6 +7,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.ValueProps;
 using Patchouib.Scrpits.Main;
 using System;
@@ -43,11 +45,8 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
-			if (CombatState == null)
-			{
-				return;
-			}
-
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+			PlaySunHangVfxAtScreenTopCenter();
 			int divisor = Math.Max(1, DynamicVars.Cards.IntValue);
 			int totalIgnite = CombatState.HittableEnemies.Sum(e => Math.Max(0, e.GetPower<IgnitePower>()?.Amount ?? 0));
 			int strength = Math.Max(0, totalIgnite) / divisor;
@@ -55,6 +54,32 @@ namespace TH_Patchouli.Scrpits.Cards
 			{
 				await PowerCmd.Apply<StrengthPower>(Owner.Creature, strength, Owner.Creature, this);
 			}
+		}
+
+		private static void PlaySunHangVfxAtScreenTopCenter()
+		{
+			if (NCombatRoom.Instance == null)
+			{
+				return;
+			}
+
+			Node? container = NCombatRoom.Instance.CombatVfxContainer;
+			if (container == null)
+			{
+				return;
+			}
+
+			PackedScene? scene = ResourceLoader.Load<PackedScene>("res://TH_Patchouli/ArtWorks/VFX/sunhang.tscn");
+			if (scene == null)
+			{
+				return;
+			}
+
+			Node2D vfx = scene.Instantiate<Node2D>(PackedScene.GenEditState.Disabled);
+
+			Vector2 size = container.GetViewport().GetVisibleRect().Size;
+			vfx.GlobalPosition = new Vector2(size.X * 0.5f, size.Y * 0.22f);
+			container.AddChild(vfx);
 		}
 
 		public override async Task AfterCardRetained(CardModel card)

@@ -39,7 +39,6 @@ namespace TH_Patchouli.Scrpits.Cards
 
         public override async Task<PowerModel> OnChosen(int amount)
         {
-           //TODO:完成增强效果逻辑
            return null;
         }
     }

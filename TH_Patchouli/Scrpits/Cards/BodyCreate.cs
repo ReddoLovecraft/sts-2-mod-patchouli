@@ -31,11 +31,8 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
-			if (CombatState == null)
-			{
-				return;
-			}
-
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+			VfxCmd.PlayOnCreatureCenter(base.Owner.Creature, PatchouliVfxManager.ToPatchouliVfxPath("doublemagic"));
 			int maxSelect = DynamicVars.Cards.IntValue;
 			CardSelectorPrefs prefs = new CardSelectorPrefs(SelectionScreenPrompt, 0, maxSelect);
 			List<CardModel> selected = (await CardSelectCmd.FromHand(choiceContext, Owner, prefs, c => c.IsTransformable && c != this, this)).ToList();

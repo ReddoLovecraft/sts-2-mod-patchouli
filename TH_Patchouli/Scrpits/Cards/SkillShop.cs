@@ -28,6 +28,7 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			int gainGold = 0;
 			IEnumerable<Creature> players = from c in base.CombatState.GetTeammatesOf(base.Owner.Creature)
 				where c != null && c.IsAlive && c.IsPlayer&&c.Player!=base.Owner

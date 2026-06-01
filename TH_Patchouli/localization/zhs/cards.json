@@ -257,7 +257,6 @@
 	"TH_PATCHOULI-MAGIC_EXPAND.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n抽{Cards:diff()}张牌。",
 	"TH_PATCHOULI-BLOOD_CIRCLE_MAKE.title": "鲜血回路构筑",
 	"TH_PATCHOULI-BLOOD_CIRCLE_MAKE.description": "你在{Energy:energyIcons()}不足时仍可以打出卡牌，但会失去等同于这张牌基础耗能{Cards:diff()}倍点生命。",
-
 	"TH_PATCHOULI-PHLOGISTIC_RAIN.title": "水火符「燃素之雨」",
 	"TH_PATCHOULI-PHLOGISTIC_RAIN.description": "在你的回合开始时，给予所有敌人{Cards:diff()}层[gold]点燃[/gold]。",
 	"TH_PATCHOULI-LAVA_CROMLECH.title": "火土符「熔岩环石阵」",
@@ -302,7 +301,6 @@
 	"TH_PATCHOULI-FIRE_WIND.description": "将所有敌人的[gold]点燃[/gold]层数翻{Cards:diff()}倍。",
 	"TH_PATCHOULI-ELMO_PILLAR.title": "火金符「圣爱尔摩火柱」",
 	"TH_PATCHOULI-ELMO_PILLAR.description": "对所有敌人造成{Damage:diff()}点伤害，如果敌人的意图为攻击，额外造成{Damage:diff()}点伤害。\n给予所有敌人{Cards:diff()}层[gold]点燃[/gold]，如果敌人的意图不为攻击，额外给予{Cards:diff()}层[gold]点燃[/gold]。",
-	
 	"TH_PATCHOULI-SQUARE_RING_SWORD.title": "日土符「塑方环刃」",
 	"TH_PATCHOULI-SQUARE_RING_SWORD.description": "随机造成{Damage:diff()}点伤害N次。每次造成伤害时将伤害减半，重复造成直到伤害小于1点。",
 	"TH_PATCHOULI-LUNAR_FIRE.title": "月火符「胧月流火」",

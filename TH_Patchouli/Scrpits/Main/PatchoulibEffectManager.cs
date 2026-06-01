@@ -55,6 +55,7 @@ namespace TH_Patchouli.Scrpits.Main
 				}
 			}
 
+			bool preferHitboxControl = power is BubbleShield or StickyBubble;
 			string? scenePath = GetScenePath(power);
 			if (scenePath == null)
 			{
@@ -68,10 +69,12 @@ namespace TH_Patchouli.Scrpits.Main
 
 			bool useCombatVfxContainer = power is CloudFormPower || power is KnowledgeWallPower || power is LavaCromlechPower;
 			bool combatInFront = power is not LavaCromlechPower;
-			Node? parent = useCombatVfxContainer ? TryGetCombatVfxContainer(combatInFront) : FindHitboxAnchorFor(owner);
+			Node? parent = useCombatVfxContainer
+				? TryGetCombatVfxContainer(combatInFront)
+				: (preferHitboxControl ? FindHitboxControlFor(owner) : FindHitboxAnchorFor(owner));
 			if (parent == null)
 			{
-				_pendingByPower[power] = new PendingAttach(owner, scenePath, AttemptsLeft: 240, UseCombatVfxContainer: useCombatVfxContainer, CombatInFront: combatInFront);
+				_pendingByPower[power] = new PendingAttach(owner, scenePath, AttemptsLeft: 240, UseCombatVfxContainer: useCombatVfxContainer, CombatInFront: combatInFront, PreferHitboxControl: preferHitboxControl);
 				EnsureRunner();
 				return;
 			}
@@ -176,7 +179,9 @@ namespace TH_Patchouli.Scrpits.Main
 					continue;
 				}
 
-				Node? parent = p.UseCombatVfxContainer ? TryGetCombatVfxContainer(p.CombatInFront) : FindHitboxAnchorFor(p.Owner);
+				Node? parent = p.UseCombatVfxContainer
+					? TryGetCombatVfxContainer(p.CombatInFront)
+					: (p.PreferHitboxControl ? FindHitboxControlFor(p.Owner) : FindHitboxAnchorFor(p.Owner));
 				if (parent == null)
 				{
 					_pendingByPower[kv.Key] = p with { AttemptsLeft = p.AttemptsLeft - 1 };
@@ -316,6 +321,45 @@ namespace TH_Patchouli.Scrpits.Main
 			return null;
 		}
 
+		private static Control? FindHitboxControlFor(Creature owner)
+		{
+			if (NGame.Instance == null)
+			{
+				return null;
+			}
+
+			Node root = NGame.Instance.GetTree().Root;
+			var stack = new Stack<Node>();
+			stack.Push(root);
+
+			while (stack.Count > 0)
+			{
+				Node n = stack.Pop();
+
+				Type t = n.GetType();
+				string? fullName = t.FullName;
+				if (fullName != null && fullName.EndsWith(".NCreature", StringComparison.Ordinal))
+				{
+					Creature? model = TryExtractCreatureModel(n);
+					if (ReferenceEquals(model, owner))
+					{
+						if (n.FindChild("Hitbox", recursive: true, owned: false) is Control c)
+						{
+							return c;
+						}
+						return null;
+					}
+				}
+
+				foreach (Node child in n.GetChildren())
+				{
+					stack.Push(child);
+				}
+			}
+
+			return null;
+		}
+
 		private static bool IsCreatureNodeFor(Node node, Creature owner, out Node? anchor)
 		{
 			anchor = null;
@@ -380,7 +424,7 @@ namespace TH_Patchouli.Scrpits.Main
 			public int GetHashCode(T obj) => RuntimeHelpers.GetHashCode(obj);
 		}
 
-		private readonly record struct PendingAttach(Creature Owner, string ScenePath, int AttemptsLeft, bool UseCombatVfxContainer, bool CombatInFront);
+		private readonly record struct PendingAttach(Creature Owner, string ScenePath, int AttemptsLeft, bool UseCombatVfxContainer, bool CombatInFront, bool PreferHitboxControl);
 
 		private sealed partial class RunnerNode : Node
 		{

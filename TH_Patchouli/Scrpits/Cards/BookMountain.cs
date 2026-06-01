@@ -46,7 +46,8 @@ namespace TH_Patchouli.Scrpits.Cards
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
 			ArgumentNullException.ThrowIfNull(cardPlay.Target);
-			await DamageCmd.Attack(DynamicVars.CalculatedDamage).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
+			await DamageCmd.Attack(DynamicVars.CalculatedDamage).FromCard(this).WithHitFx(PatchouliVfxManager.ToPatchouliVfxPath("moutain"), null, "blunt_attack.mp3")
+			.WithHitVfxSpawnedAtBase().Targeting(cardPlay.Target).Execute(choiceContext);
 		}
 
 		protected override void OnUpgrade()

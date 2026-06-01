@@ -41,13 +41,13 @@ namespace TH_Patchouli.Scrpits.Cards
 			DynamicVars.Cards.UpgradeValueBy(boostAmount);
 		}
 
-		protected override Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			foreach (CardModel c in PileType.Hand.GetPile(Owner).Cards)
 			{
 				c.BaseReplayCount += DynamicVars.Cards.IntValue;
 			}
-			return Task.CompletedTask;
 		}
 
 		protected override void OnUpgrade()

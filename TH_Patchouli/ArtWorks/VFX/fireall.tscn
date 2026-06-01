@@ -1,0 +1,145 @@
+[gd_scene load_steps=18 format=3 uid="uid://bt2h32wv0hses"]
+
+[ext_resource type="Material" uid="uid://c281ff8d6uddt" path="res://TH_Patchouli/ArtWorks/VFX/canvas_item_material_additive_shared.tres" id="1_c6bw3"]
+[ext_resource type="Texture2D" uid="uid://c4d6mkms5auv4" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletCb000.png" id="2_jc1h0"]
+[ext_resource type="Texture2D" uid="uid://davqmq0cmprsf" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletCb001.png" id="3_lx055"]
+[ext_resource type="Texture2D" uid="uid://cw7shkcim386a" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletCb002.png" id="4_gle64"]
+[ext_resource type="Texture2D" uid="uid://hdohpmbjlynl" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletCb003.png" id="5_tnh1p"]
+[ext_resource type="Texture2D" uid="uid://b4ewgvekn5et3" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletCb004.png" id="6_oe7ie"]
+[ext_resource type="Texture2D" uid="uid://cpa3muho5ctcg" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletJa000.png" id="7_po01i"]
+[ext_resource type="Texture2D" uid="uid://dmdrrtbuh4oaw" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletJa001.png" id="8_v4j50"]
+[ext_resource type="Texture2D" uid="uid://cc47itg3quyjv" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletJa002.png" id="9_mafre"]
+[ext_resource type="Texture2D" uid="uid://coj4a7ycbw7mt" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletJa003.png" id="10_xlpxw"]
+[ext_resource type="Texture2D" uid="uid://kgnw4vl873vl" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletJa004.png" id="11_v732r"]
+[ext_resource type="Texture2D" uid="uid://b550xj378bljo" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletJa005.png" id="12_8ty5b"]
+[ext_resource type="Texture2D" uid="uid://y7dv51ym0vhq" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletJa006.png" id="13_am1s0"]
+[ext_resource type="Texture2D" uid="uid://bsnmjux386jtk" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletJa007.png" id="14_34q8i"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_base"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jc1h0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_lx055")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_gle64")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_tnh1p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_oe7ie")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_po01i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_v4j50")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_mafre")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_xlpxw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_v732r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_8ty5b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_am1s0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_34q8i")
+}],
+"loop": false,
+"name": &"default",
+"speed": 24.0
+}]
+
+[sub_resource type="Animation" id="Animation_play"]
+resource_name = "play"
+length = 0.5416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visual/Sprite:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [&"default"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visual/Sprite:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visual/Sprite:frame")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.041666668, 0.083333336, 0.125, 0.16666667, 0.20833334, 0.25, 0.29166666, 0.33333334, 0.375, 0.41666666, 0.45833334, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_base"]
+_data = {
+&"play": SubResource("Animation_play")
+}
+
+[node name="FireAllVfx" type="Node2D"]
+position = Vector2(0, 0)
+
+[node name="Visual" type="Node2D" parent="."]
+scale = Vector2(2.5, 2.5)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Visual"]
+material = ExtResource("1_c6bw3")
+sprite_frames = SubResource("SpriteFrames_base")
+frame = 0
+frame_progress = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_base")
+}
+autoplay = "play"
+
+[node name="LifeTimer" type="Timer" parent="."]
+wait_time = 0.5416667
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="LifeTimer" to="." method="queue_free"]

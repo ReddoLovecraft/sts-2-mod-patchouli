@@ -51,6 +51,7 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			int goldElement = Owner.Creature.GetPower<TH_Patchouli.Scrpits.Powers.GoldElement>()?.Amount ?? 0;
 			if (goldElement > 0)
 			{

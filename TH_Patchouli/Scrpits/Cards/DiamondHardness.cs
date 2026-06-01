@@ -45,8 +45,8 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			await PowerCmd.Apply<DiamondHardnessPower>(Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
-
 			if (IsUpgraded)
 			{
 				await PowerCmd.Apply<PlatingPower>(Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);

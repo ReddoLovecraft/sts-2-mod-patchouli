@@ -25,6 +25,15 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			if(Owner.Character is PatchouliCharacter)
+			{
+					await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+			}
+			else
+			{
+				await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+			}
+			VfxCmd.PlayOnCreatureCenter(Owner.Creature, PatchouliVfxManager.ToPatchouliVfxPath("root"));
 			foreach (CardModel card in PileType.Hand.GetPile(Owner).Cards)
 			{
 				if (!card.EnergyCost.CostsX)

@@ -50,6 +50,8 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+			VfxCmd.PlayOnCreatureCenter(cardPlay.Target, PatchouliVfxManager.ToPatchouliVfxPath("firesign"));
 			await PowerCmd.Apply<IgniteMark>(cardPlay.Target, DynamicVars["Power"].IntValue, Owner.Creature, this);
 			await PowerCmd.Apply<IgnitePower>(cardPlay.Target, DynamicVars.Cards.IntValue, Owner.Creature, this);
 		}

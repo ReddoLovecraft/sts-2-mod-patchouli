@@ -51,6 +51,7 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			int energy = Math.Max(0, (int)((CalculatedVar)DynamicVars["CalculatedEnergy"]).Calculate(cardPlay.Target));
 			if (energy > 0)
 			{

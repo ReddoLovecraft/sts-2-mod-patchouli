@@ -1,0 +1,132 @@
+[gd_scene load_steps=15 format=3 uid="uid://c2exxerfphdai"]
+
+[ext_resource type="Material" uid="uid://c281ff8d6uddt" path="res://TH_Patchouli/ArtWorks/VFX/canvas_item_material_additive_shared.tres" id="1_pr8re"]
+[ext_resource type="Texture2D" uid="uid://xtjr4wiuyvka" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletFe000.png" id="2_064r4"]
+[ext_resource type="Texture2D" uid="uid://caj513lc4ydmu" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletFe001.png" id="3_pr8re"]
+[ext_resource type="Texture2D" uid="uid://b28lnrcwljgej" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletFe002.png" id="4_d54us"]
+[ext_resource type="Texture2D" uid="uid://jjhwbwjngb7c" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletFe003.png" id="5_wmtgj"]
+[ext_resource type="Texture2D" uid="uid://c5hcryaq3eldb" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletFe004.png" id="6_7i462"]
+[ext_resource type="Texture2D" uid="uid://cj7w53pcm7n6x" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletFe005.png" id="7_kfd1c"]
+[ext_resource type="Texture2D" uid="uid://bfucc4etsmw8" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletFe006.png" id="8_840dr"]
+[ext_resource type="Texture2D" uid="uid://bclm148jvvb8y" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletFe007.png" id="9_hsd76"]
+[ext_resource type="Texture2D" uid="uid://c2ibwulytilwm" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletFe008.png" id="10_ukj0f"]
+[ext_resource type="Texture2D" uid="uid://c2lh5ygl6upvs" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletFe009.png" id="11_xw166"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_base"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_064r4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_pr8re")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_d54us")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_wmtgj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_7i462")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_kfd1c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_840dr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_hsd76")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ukj0f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_xw166")
+}],
+"loop": false,
+"name": &"default",
+"speed": 24.0
+}]
+
+[sub_resource type="Animation" id="Animation_play"]
+resource_name = "play"
+length = 0.41666666
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.41666666),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visual/Sprite:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [&"default"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visual/Sprite:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visual/Sprite:frame")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.041666668, 0.083333336, 0.125, 0.16666667, 0.20833334, 0.25, 0.29166666, 0.33333334, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_base"]
+_data = {
+&"play": SubResource("Animation_play")
+}
+
+[node name="WaterElfVfx" type="Node2D"]
+
+[node name="Visual" type="Node2D" parent="."]
+scale = Vector2(2.5, 2.5)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Visual"]
+material = ExtResource("1_pr8re")
+sprite_frames = SubResource("SpriteFrames_base")
+frame = 0
+frame_progress = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_base")
+}
+autoplay = "play"
+
+[node name="LifeTimer" type="Timer" parent="."]
+wait_time = 0.41666666
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="LifeTimer" to="." method="queue_free"]

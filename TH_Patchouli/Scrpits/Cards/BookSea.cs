@@ -27,6 +27,7 @@ namespace TH_Patchouli.Scrpits.Cards
 		protected override bool ShouldGlowGoldInternal =>PileType.Draw.GetPile(Owner).Cards.Count > PileType.Discard.GetPile(Owner).Cards.Count;
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			List<CardModel> discardCards = PileType.Discard.GetPile(Owner).Cards.ToList();
 			if (discardCards.Count == 0)
 			{

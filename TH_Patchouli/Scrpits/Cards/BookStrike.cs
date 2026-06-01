@@ -42,7 +42,7 @@ namespace TH_Patchouli.Scrpits.Cards
 		{
 			ArgumentNullException.ThrowIfNull(cardPlay.Target);
 
-			await DamageCmd.Attack(DynamicVars.CalculatedDamage).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
+			await DamageCmd.Attack(DynamicVars.CalculatedDamage).FromCard(this).Targeting(cardPlay.Target).WithHitFx(PatchouliVfxManager.ToPatchouliVfxPath("bookstrike"), null, "blunt_attack.mp3").Execute(choiceContext);
 		}
 
 		protected override void OnUpgrade()

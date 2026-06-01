@@ -1,9 +1,14 @@
 using BaseLib.Utils;
+using Godot;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.Nodes;
+using MegaCrit.Sts2.Core.Nodes.Rooms;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 using Patchoulib.Scrpits.Main;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -37,11 +42,11 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
-			if (CombatState == null)
-			{
-				return;
-			}
-
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+			Color color = new Color("ce11ec76");
+			NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NHorizontalLinesVfx.Create(color, 4.8f));
+			SfxCmd.Play("event:/sfx/characters/ironclad/ironclad_whirlwind");
+			NRun.Instance?.GlobalUi.AddChildSafely(NSmokyVignetteVfx.Create(color, color));
 			await PowerCmd.Apply<WeakPower>(CombatState.HittableEnemies, DynamicVars.Cards.IntValue, Owner.Creature, this);
 			await PowerCmd.Apply<VulnerablePower>(CombatState.HittableEnemies, DynamicVars.Cards.IntValue, Owner.Creature, this);
 		}

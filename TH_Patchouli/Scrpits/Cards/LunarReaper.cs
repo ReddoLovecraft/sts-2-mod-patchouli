@@ -52,24 +52,15 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
-			if (CombatState == null)
-			{
-				return;
-			}
-
 			Player? player = Owner;
-			if (player == null)
-			{
-				return;
-			}
-			AttackCommand attack = await DamageCmd.Attack(DynamicVars.CalculatedDamage).FromCard(this).TargetingAllOpponents(CombatState).Execute(choiceContext);
+			SfxCmd.Play("event:/sfx/characters/ironclad/ironclad_whirlwind");
+			AttackCommand attack = await DamageCmd.Attack(DynamicVars.CalculatedDamage)	.WithHitFx("vfx/vfx_giant_horizontal_slash").FromCard(this).TargetingAllOpponents(CombatState).Execute(choiceContext);
 			int killCount = attack.Results.Count(r => r.WasTargetKilled);
 			for (int i = 0; i < killCount; i++)
 			{
 				await PlayerCmd.GainEnergy(DynamicVars.Energy.IntValue, player);
 				await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, player);
 			}
-
 			LunarReaperRelic? relic = player.GetRelic<LunarReaperRelic>();
 			if (relic == null)
 			{

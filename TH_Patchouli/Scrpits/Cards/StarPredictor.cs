@@ -31,6 +31,8 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+			VfxCmd.PlayOnCreatureCenter(Owner.Creature, "vfx/vfx_starry_impact");
 			int draw = DynamicVars.Cards.IntValue;
 			await CardPileCmd.Draw(choiceContext, draw, Owner);
 			if (draw > 0)

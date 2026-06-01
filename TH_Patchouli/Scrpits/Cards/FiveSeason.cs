@@ -34,6 +34,7 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			int kinds = ToolBox.GetElementKinds(Owner.Creature);
 			await CardPileCmd.Draw(choiceContext, kinds * DynamicVars.Cards.IntValue, Owner);
 			await PlayerCmd.GainEnergy(kinds * DynamicVars.Energy.IntValue, Owner);

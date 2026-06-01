@@ -20,8 +20,9 @@ namespace TH_Patchouli.Scrpits.Cards
 		{
 		}
 
-		protected override Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			if (Owner.PlayerCombatState != null)
 			{
 				foreach (CardModel card in Owner.PlayerCombatState.AllCards)
@@ -29,10 +30,11 @@ namespace TH_Patchouli.Scrpits.Cards
 					if (card != this && card.IsUpgradable)
 					{
 						CardCmd.Upgrade(card);
+						CardCmd.Preview(card);
 					}
 				}
 			}
-			return PowerCmd.Apply<RoyalDiamondRingPower>(Owner.Creature, 1, Owner.Creature, this);
+			await PowerCmd.Apply<RoyalDiamondRingPower>(Owner.Creature, 1, Owner.Creature, this);
 		}
 
 		protected override void OnUpgrade()

@@ -27,6 +27,8 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+			VfxCmd.PlayOnCreatureCenter(base.Owner.Creature, PatchouliVfxManager.ToPatchouliVfxPath("magic"));
 			await PowerCmd.Apply<DoubleMagicPower>(Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
 		}
 

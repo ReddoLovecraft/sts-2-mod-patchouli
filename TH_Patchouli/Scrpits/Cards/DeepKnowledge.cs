@@ -58,6 +58,7 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			int total = Math.Max(0, (int)((CalculatedVar)DynamicVars["CalculatedPower"]).Calculate(cardPlay.Target));
 			await PowerCmd.Apply<StrengthPower>(Owner.Creature, total, Owner.Creature, this);
 			await PowerCmd.Apply<DexterityPower>(Owner.Creature, total, Owner.Creature, this);

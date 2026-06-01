@@ -31,8 +31,8 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
-
 			List<CardModel> discardCards = PileType.Discard.GetPile(Owner).Cards.ToList();
 			if (discardCards.Count == 0)
 			{

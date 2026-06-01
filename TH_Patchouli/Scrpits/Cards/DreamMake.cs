@@ -28,9 +28,10 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			Player player = Owner;
 			player.PopulateRelicGrabBagIfNecessary(player.RunState.Rng.UpFront);
-
+			VfxCmd.PlayOnCreatureCenter(base.Owner.Creature, PatchouliVfxManager.ToPatchouliVfxPath("dream"));
 			for (int i = 0; i < DynamicVars.Cards.IntValue; i++)
 			{
 				var relic = RelicFactory.PullNextRelicFromFront(player, player.RunState.Rng.Niche).ToMutable();

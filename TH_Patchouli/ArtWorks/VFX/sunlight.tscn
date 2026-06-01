@@ -1,0 +1,173 @@
+[gd_scene load_steps=25 format=3 uid="uid://csxfqxl54rbvp"]
+
+[ext_resource type="Material" uid="uid://c281ff8d6uddt" path="res://TH_Patchouli/ArtWorks/VFX/canvas_item_material_additive_shared.tres" id="1_x26k7"]
+[ext_resource type="Texture2D" uid="uid://d0dhfhsst25om" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/kong/bulletEa000.png" id="2_4xkfp"]
+[ext_resource type="Texture2D" uid="uid://bompm12oimkj2" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/kong/bulletEa001.png" id="3_umcjl"]
+[ext_resource type="Texture2D" uid="uid://skcujxhgvbaw" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/kong/bulletEa002.png" id="4_sbygr"]
+[ext_resource type="Texture2D" uid="uid://deay2vanmy1t2" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/kong/bulletEa003.png" id="5_ht4tb"]
+[ext_resource type="Texture2D" uid="uid://cgjua24d140a1" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/kong/bulletEa004.png" id="6_gvi3v"]
+[ext_resource type="Texture2D" uid="uid://byj77s1ve4xhl" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/kong/bulletEa005.png" id="7_uir2b"]
+[ext_resource type="Texture2D" uid="uid://b2yrm7x2ox6j5" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/kong/bulletEa006.png" id="8_h6wsh"]
+[ext_resource type="Texture2D" uid="uid://c2y5ult0aw7h6" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/kong/bulletEa007.png" id="9_bxvql"]
+[ext_resource type="Texture2D" uid="uid://b30i3k4ohytd4" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/kong/bulletEa008.png" id="10_sggwl"]
+[ext_resource type="Texture2D" uid="uid://cnktix3klvwkv" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/kong/bulletEa009.png" id="11_e10px"]
+[ext_resource type="Texture2D" uid="uid://cnxldvorf6xeh" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/kong/bulletEa010.png" id="12_ngs84"]
+[ext_resource type="Texture2D" uid="uid://dbeqr0hi4mvlu" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/kong/bulletEa011.png" id="13_2gb1l"]
+[ext_resource type="Texture2D" uid="uid://bb3rm8846hm7" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/kong/bulletEa012.png" id="14_ykj1o"]
+[ext_resource type="Texture2D" uid="uid://csuiu23f7krae" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/kong/bulletEa013.png" id="15_q3fd8"]
+[ext_resource type="Texture2D" uid="uid://db6jxqpxiyjgi" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/kong/bulletEa014.png" id="16_xtk7j"]
+[ext_resource type="Texture2D" uid="uid://dbwlb5ifgg720" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/kong/bulletEa015.png" id="17_gy5pm"]
+[ext_resource type="Texture2D" uid="uid://b0ywvj55htapn" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/kong/bulletEa016.png" id="18_4wwti"]
+[ext_resource type="Texture2D" uid="uid://doiclxhinkg0h" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/kong/bulletEa017.png" id="19_actig"]
+[ext_resource type="Texture2D" uid="uid://xdifvbhdg7sg" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/kong/bulletEa018.png" id="20_t20ci"]
+[ext_resource type="Texture2D" uid="uid://d18vu5qaoftiq" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/kong/bulletEa019.png" id="21_kha21"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_base"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_4xkfp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_umcjl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_sbygr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ht4tb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_gvi3v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_uir2b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_h6wsh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_bxvql")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_sggwl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_e10px")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ngs84")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_2gb1l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_ykj1o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_q3fd8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_xtk7j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_gy5pm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_4wwti")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_actig")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_t20ci")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_kha21")
+}],
+"loop": false,
+"name": &"default",
+"speed": 24.0
+}]
+
+[sub_resource type="Animation" id="Animation_play"]
+resource_name = "play"
+length = 0.8333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.8333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visual/Sprite:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [&"default"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visual/Sprite:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visual/Sprite:frame")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.041666668, 0.083333336, 0.125, 0.16666667, 0.20833334, 0.25, 0.29166666, 0.33333334, 0.375, 0.41666666, 0.45833334, 0.5, 0.5416667, 0.5833333, 0.625, 0.6666667, 0.7083333, 0.75, 0.7916667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_base"]
+_data = {
+&"play": SubResource("Animation_play")
+}
+
+[node name="SunburstVfx" type="Node2D"]
+
+[node name="Visual" type="Node2D" parent="."]
+position = Vector2(0, 0)
+scale = Vector2(2.5, 2.5)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Visual"]
+material = ExtResource("1_x26k7")
+sprite_frames = SubResource("SpriteFrames_base")
+frame = 0
+frame_progress = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_base")
+}
+autoplay = "play"
+
+[node name="LifeTimer" type="Timer" parent="."]
+wait_time = 0.8333333
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="LifeTimer" to="." method="queue_free"]

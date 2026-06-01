@@ -44,7 +44,7 @@ namespace TH_Patchouli.Scrpits.Cards
 			{
 				return;
 			}
-			AttackCommand attack = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
+			AttackCommand attack = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).WithHitFx(PatchouliVfxManager.ToPatchouliVfxPath("sunburst"), null, "blunt_attack.mp3").Targeting(cardPlay.Target).Execute(choiceContext);
 			var result = attack.Results.FirstOrDefault();
 			await PowerCmd.Apply<VulnerablePower>(cardPlay.Target, DynamicVars.Cards.IntValue, Owner.Creature, this);
 			await PowerCmd.Apply<WeakPower>(cardPlay.Target, DynamicVars.Cards.IntValue, Owner.Creature, this);

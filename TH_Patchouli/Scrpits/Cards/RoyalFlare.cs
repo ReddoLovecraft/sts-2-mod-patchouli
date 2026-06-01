@@ -21,6 +21,9 @@ using Patchouib.Scrpits.Main;
 using TH_Patchouli.Scripts.Main;
 using TH_Patchouli.Scrpits.Main;
 using TH_Patchouli.Scrpits.Powers;
+using MegaCrit.Sts2.Core.Nodes.Rooms;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
+using MegaCrit.Sts2.Core.Helpers;
 
 namespace TH_Patchouli.Scrpits.Cards
 {
@@ -49,9 +52,13 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
-			if (CombatState == null)
+			if(Owner.Character is PatchouliCharacter)
 			{
-				return;
+				await CreatureCmd.TriggerAnim(base.Owner.Creature, "Summon", base.Owner.Character.CastAnimDelay);
+			}
+			else
+			{
+				await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			}
 
 			List<CardModel> toExhaust =
@@ -66,10 +73,13 @@ namespace TH_Patchouli.Scrpits.Cards
 			{
 				await CardCmd.Exhaust(choiceContext, toExhaust[i]);
 			}
-
 			if (count > 0)
 			{
-				await PowerCmd.Apply<IgnitePower>(CombatState.HittableEnemies, count * DynamicVars.Cards.IntValue, Owner.Creature, this);
+			foreach(Creature enemy in CombatState.HittableEnemies.ToList())
+			{
+				VfxCmd.PlayOnCreatureCenter(enemy, PatchouliVfxManager.ToPatchouliVfxPath("royalfire"));
+				await PowerCmd.Apply<IgnitePower>(enemy, count * DynamicVars.Cards.IntValue, Owner.Creature, this);
+			}
 			}
 		}
 

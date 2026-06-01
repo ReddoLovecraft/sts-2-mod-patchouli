@@ -44,7 +44,7 @@ namespace TH_Patchouli.Scrpits.Cards
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
 			int dmg = Owner.Creature.Block * DynamicVars.Cards.IntValue;
-			await DamageCmd.Attack(dmg).FromCard(this).TargetingAllOpponents(CombatState).Execute(choiceContext);
+			await DamageCmd.Attack(dmg).FromCard(this).TargetingAllOpponents(CombatState) .WithHitFx(PatchouliVfxManager.ToPatchouliVfxPath("rock"), null, "blunt_attack.mp3").Execute(choiceContext);
 			await CreatureCmd.LoseBlock(Owner.Creature, Owner.Creature.Block);
 		}
 

@@ -43,6 +43,7 @@ namespace TH_Patchouli.Scrpits.Cards
 			}
 
 			int amt = DynamicVars.Cards.IntValue;
+			 VfxCmd.PlayOnCreatureCenter(Owner.Creature, PatchouliVfxManager.ToPatchouliVfxPath("sundot"));
 			await PowerCmd.Apply<SunflareTempStrengthPower>(Owner.Creature, amt, Owner.Creature, this);
 			await PowerCmd.Apply<SunflareTempStrengthDownPower>(CombatState.HittableEnemies, amt, Owner.Creature, this);
 		}

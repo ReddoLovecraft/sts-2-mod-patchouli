@@ -47,7 +47,7 @@ namespace TH_Patchouli.Scrpits.Cards
 			{
 				return;
 			}
-			await DamageCmd.Attack(DynamicVars.CalculatedDamage).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
+			await DamageCmd.Attack(DynamicVars.CalculatedDamage).FromCard(this)	.WithHitFx("vfx/vfx_attack_slash").Targeting(cardPlay.Target).Execute(choiceContext);
 		}
 
 		protected override void OnUpgrade()

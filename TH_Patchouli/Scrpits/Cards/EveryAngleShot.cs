@@ -34,7 +34,7 @@ namespace TH_Patchouli.Scrpits.Cards
 		{
 			int kinds = ToolBox.GetElementKinds(Owner.Creature);
 			int hitCount = Math.Max(1, 1 + kinds);
-			await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(CombatState).WithHitCount(hitCount).Execute(choiceContext);
+			await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).WithHitFx("vfx/vfx_attack_blunt", null, "blunt_attack.mp3").TargetingAllOpponents(CombatState).WithHitCount(hitCount).Execute(choiceContext);
 		}
 
 		protected override void OnUpgrade()

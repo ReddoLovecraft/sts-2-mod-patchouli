@@ -51,8 +51,7 @@ namespace TH_Patchouli.Scrpits.Cards
 			{
 				bool isAttack = enemy.Monster?.NextMove?.Intents.Any(i => i.IntentType == IntentType.Attack || i.IntentType == IntentType.DeathBlow) ?? false;
 				int hitCount = isAttack ? 2 : 1;
-				await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(enemy).WithHitCount(hitCount).Execute(choiceContext);
-
+				await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).WithHitFx(PatchouliVfxManager.ToPatchouliVfxPath("royalfire"), null, "blunt_attack.mp3").Targeting(enemy).WithHitCount(hitCount).Execute(choiceContext);
 				int stacks = DynamicVars.Cards.IntValue * (isAttack ? 1 : 2);
 				if (stacks > 0)
 				{

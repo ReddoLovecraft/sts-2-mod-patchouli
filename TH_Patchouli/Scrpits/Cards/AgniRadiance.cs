@@ -50,11 +50,7 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
-			if (CombatState == null)
-			{
-				return;
-			}
-			await DamageCmd.Attack(DynamicVars.CalculatedDamage).FromCard(this).TargetingAllOpponents(CombatState).Execute(choiceContext);
+			await DamageCmd.Attack(DynamicVars.CalculatedDamage).FromCard(this).SpawningHitVfxOnEachCreature().TargetingAllOpponents(CombatState) .WithHitFx(PatchouliVfxManager.ToPatchouliVfxPath("fireall"), null, "blunt_attack.mp3").Execute(choiceContext);
 		}
 
 		protected override void OnUpgrade()

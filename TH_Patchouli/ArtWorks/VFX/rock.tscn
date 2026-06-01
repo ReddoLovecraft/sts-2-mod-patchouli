@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccyymoqp28vw0"]
+
+[ext_resource type="Script" path="res://TH_Patchouli/ArtWorks/VFX/NRockShatterVfx.cs" id="1_shatter"]
+[ext_resource type="Material" uid="uid://c281ff8d6uddt" path="res://TH_Patchouli/ArtWorks/VFX/canvas_item_material_additive_shared.tres" id="1_j03i6"]
+[ext_resource type="Texture2D" uid="uid://e4jmyqspix3g" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletPb000.png" id="2_x0l7n"]
+
+[node name="RockVfx" type="Node2D"]
+script = ExtResource("1_shatter")
+position = Vector2(0, -128)
+ShatterSeconds = 0.35
+Columns = 5
+Rows = 2
+
+[node name="Visual" type="Node2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(2.5, 2.5)
+
+[node name="Intact" type="Sprite2D" parent="Visual"]
+unique_name_in_owner = true
+material = ExtResource("1_j03i6")
+texture = ExtResource("2_x0l7n")
+
+[node name="Pieces" type="Node2D" parent="Visual"]
+unique_name_in_owner = true

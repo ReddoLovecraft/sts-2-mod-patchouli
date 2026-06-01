@@ -38,13 +38,14 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			List<CardModel> selected = (await CardSelectCmd.FromHand(choiceContext, Owner, new CardSelectorPrefs(SelectionScreenPrompt, 1), c => c != this, this)).ToList();
 			CardModel card = selected.FirstOrDefault();
 			if (card != null)
 			{
 				await CardCmd.Exhaust(choiceContext, card);
 			}
-
+			VfxCmd.PlayOnCreatureCenter(Owner.Creature, "vfx/vfx_bite");
 			int amt = DynamicVars["Power"].IntValue;
 			await PowerCmd.Apply<StrengthPower>(Owner.Creature, amt, Owner.Creature, this);
 			await PowerCmd.Apply<DexterityPower>(Owner.Creature, amt, Owner.Creature, this);

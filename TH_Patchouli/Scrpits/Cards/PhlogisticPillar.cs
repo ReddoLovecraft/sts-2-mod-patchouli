@@ -42,15 +42,10 @@ namespace TH_Patchouli.Scrpits.Cards
 			{
 				return;
 			}
-
-			int amount = Math.Max(0, DynamicVars.Cards.IntValue);
-			if (amount <= 0)
-			{
-				return;
-			}
-
-			await PowerCmd.Apply<IgnitePower>(cardPlay.Target, amount, Owner.Creature, this);
-			await PowerCmd.Apply<FreezePower>(cardPlay.Target, amount, Owner.Creature, this);
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+			VfxCmd.PlayOnCreatureCenter(cardPlay.Target, PatchouliVfxManager.ToPatchouliVfxPath("pillar"));
+			await PowerCmd.Apply<IgnitePower>(cardPlay.Target, DynamicVars.Cards.IntValue, Owner.Creature, this);
+			await PowerCmd.Apply<FreezePower>(cardPlay.Target, DynamicVars.Cards.IntValue, Owner.Creature, this);
 		}
 
 		protected override void OnUpgrade()

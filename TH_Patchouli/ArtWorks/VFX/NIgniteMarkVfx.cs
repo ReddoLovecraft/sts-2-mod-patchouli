@@ -65,9 +65,9 @@ public partial class NIgniteMarkVfx : Node2D
 			float sy = (hitbox.Size.Y * 1.06f) / Mathf.Max(1f, tex.Y);
 			float lightScale = Mathf.Max(sx, sy);
 			float scaledLightHeight = tex.Y * lightScale;
-			float desiredBottomY = hitbox.Size.Y * 0.60f;
-			float lightPosY = desiredBottomY - scaledLightHeight * 0.5f;
-			lightPosY = Mathf.Clamp(lightPosY, -hitbox.Size.Y * 0.85f, -hitbox.Size.Y * 0.05f);
+			float hitboxBottomGlobalY = hitbox.GlobalPosition.Y + hitbox.Size.Y;
+			float bottomLocalY = hitboxBottomGlobalY - GlobalPosition.Y;
+			float lightPosY = bottomLocalY - scaledLightHeight * 0.45f;
 
 			_spotlight.Scale = Vector2.One * lightScale;
 			_spotlight.Position = new Vector2(0f, lightPosY);

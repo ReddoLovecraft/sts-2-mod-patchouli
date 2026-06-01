@@ -40,7 +40,7 @@ namespace TH_Patchouli.Scrpits.Cards
 			}
 			await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).WithHitCount(base.DynamicVars.Cards.IntValue).FromCard(this)
 			.TargetingRandomOpponents(base.CombatState)
-			.WithHitVfxNode((Creature t) => NScratchVfx.Create(t, goingRight: true))
+			.WithHitFx(PatchouliVfxManager.ToPatchouliVfxPath("lighting"), null, "lightning_orb_evoke.mp3")
 			.Execute(choiceContext);
 		}
 

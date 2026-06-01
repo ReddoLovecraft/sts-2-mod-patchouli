@@ -1,6 +1,8 @@
 using Godot;
+using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Nodes;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using System;
@@ -10,6 +12,65 @@ namespace TH_Patchouli.Scrpits.Main
 {
 	public static class PatchouliVfxManager
 	{
+		public const string PatchouliVfxPrefix = "th_patchouli_vfx://";
+		public const string PatchouliVfxBaseResPath = "res://TH_Patchouli/ArtWorks/VFX/";
+
+		public static string ToPatchouliVfxPath(string relativePath)
+		{
+			string p = (relativePath ?? string.Empty).Trim();
+			if (p.StartsWith('/'))
+			{
+				p = p.Substring(1);
+			}
+			if (p.EndsWith(".tscn"))
+			{
+				p = p.Substring(0, p.Length - ".tscn".Length);
+			}
+			return PatchouliVfxPrefix + p;
+		}
+		public static Node2D? CreateProjectileToTarget(string effectName, Creature from, Creature to, float speed = 1200f)
+	{
+		return CreateProjectileToTarget(effectName, from, to, Vector2.Zero, Vector2.Zero, speed);
+	}
+
+	public static Node2D? CreateProjectileToTarget(string effectName, Creature from, Creature to, Vector2 fromOffset, Vector2 toOffset, float speed = 1200f)
+	{
+		if (NCombatRoom.Instance == null)
+		{
+			return null;
+		}
+
+		var fromNode = NCombatRoom.Instance.GetCreatureNode(from);
+		var toNode = NCombatRoom.Instance.GetCreatureNode(to);
+		if (fromNode == null || toNode == null)
+		{
+			return null;
+		}
+
+		string scenePath = SceneHelper.GetScenePath(ToPatchouliVfxPath(effectName));
+		PackedScene scene = PreloadManager.Cache.GetScene(scenePath);
+		Node2D vfx = scene.Instantiate<Node2D>(PackedScene.GenEditState.Disabled);
+
+		Vector2 start = fromNode.VfxSpawnPosition + fromOffset;
+		Vector2 end = toNode.VfxSpawnPosition + toOffset;
+
+		Node2D wrapper = new Node2D();
+		wrapper.GlobalPosition = start;
+		wrapper.AddChild(vfx);
+
+		float dist = start.DistanceTo(end);
+		float seconds = dist / Mathf.Max(0.001f, speed);
+		seconds = Mathf.Max(0.05f, seconds);
+
+		Tween tween = wrapper.CreateTween();
+		tween.TweenProperty(wrapper, "global_position", end, seconds)
+			.SetTrans(Tween.TransitionType.Sine)
+			.SetEase(Tween.EaseType.Out);
+		tween.TweenCallback(Callable.From(wrapper.QueueFree));
+
+		return wrapper;
+	}
+
 		public static Node? GetCombatVfxContainer(bool inFront = true)
 		{
 			if (inFront)

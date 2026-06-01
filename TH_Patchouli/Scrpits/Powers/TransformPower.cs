@@ -53,10 +53,7 @@ namespace TH_Patchouli.Scrpits.Powers
 				return;
 			}
 			this.Flash();
-			for (int i = 0; i < total; i++)
-			{
-				ToolBox.GainElementRandomly(1,Owner);
-			}
+			await ToolBox.GainElementRandomly(total, Owner);
 		}
 	}
 }

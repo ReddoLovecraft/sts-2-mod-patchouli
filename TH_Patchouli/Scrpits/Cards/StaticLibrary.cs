@@ -42,6 +42,7 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			await PowerCmd.Apply<StaticLibraryPower>(Owner.Creature, (int)DynamicVars.Block.IntValue, Owner.Creature, this);
 		}
 

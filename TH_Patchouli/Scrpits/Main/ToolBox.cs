@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.CardSelection;
@@ -210,11 +211,16 @@ namespace TH_Patchouli.Scrpits.Main
                 }
             }
         }
-        public static void GainElementRandomly(int amount,Creature owner)
+        public static async Task<List<ElementEnum>> GainElementRandomly(int amount,Creature owner)
         {
-            List<ElementEnum> randomElement = new List<ElementEnum>();
+            var randomElement = new List<ElementEnum>();
+            if (amount <= 0 || owner.Player?.RunState?.Rng == null)
+            {
+                return randomElement;
+            }
+
             Rng rng = owner.Player.RunState.Rng.CombatCardGeneration;
-            for(int i=0;i<amount;i++)
+            for (int i = 0; i < amount; i++)
             {
                 int randomNumber = rng.NextInt(1, 8);
                 switch(randomNumber)
@@ -244,8 +250,11 @@ namespace TH_Patchouli.Scrpits.Main
                         break;
                 }
             }
-            if(randomElement.Count>0)
-            GainElement(randomElement,1,owner);
+            if (randomElement.Count > 0)
+            {
+                await GainElement(randomElement, 1, owner);
+            }
+            return randomElement;
         }
     }
     
