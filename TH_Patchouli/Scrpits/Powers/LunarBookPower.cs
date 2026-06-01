@@ -17,6 +17,8 @@ namespace TH_Patchouli.Scrpits.Powers
 		public override PowerType Type => PowerType.Buff;
 		public override PowerStackType StackType => PowerStackType.Counter;
 		public override Godot.Color AmountLabelColor => PowerModel._normalAmountLabelColor;
+		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/LBP32.png";
+		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/LBP64.png";
 
 		public override async Task AfterCombatEnd(CombatRoom room)
 		{
@@ -38,7 +40,7 @@ namespace TH_Patchouli.Scrpits.Powers
 				return;
 			}
 
-			CardSelectorPrefs prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, count);
+			CardSelectorPrefs prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, 0,count);
 			List<CardModel> selected = (await CardSelectCmd.FromSimpleGrid(new BlockingPlayerChoiceContext(), cards, player, prefs)).ToList();
 			if (selected.Count <= 0)
 			{

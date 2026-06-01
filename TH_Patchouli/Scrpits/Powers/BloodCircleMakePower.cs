@@ -21,7 +21,6 @@ namespace TH_Patchouli.Scrpits.Powers
 
 		public override PowerType Type => PowerType.Buff;
 		public override PowerStackType StackType => PowerStackType.Single;
-		public override bool IsInstanced => true;
 		public override Color AmountLabelColor => PowerModel._normalAmountLabelColor;
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(5)];
 		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/BCMP32.png";
@@ -79,9 +78,9 @@ namespace TH_Patchouli.Scrpits.Powers
 			{
 				return;
 			}
-
 			Flash();
-			await CreatureCmd.Damage(context, Owner, hpLoss, ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move, dealer: null, cardSource: null);
+			VfxCmd.PlayOnCreatureCenter(base.Owner, "vfx/vfx_bloody_impact");
+			await CreatureCmd.Damage(context, Owner, hpLoss, ValueProp.Unblockable | ValueProp.Unpowered,null,null);
 		}
 	}
 }

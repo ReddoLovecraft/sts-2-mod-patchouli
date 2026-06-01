@@ -18,6 +18,7 @@ namespace TH_Patchouli.Scrpits.Main
 		private static readonly Dictionary<PowerModel, Node> _vfxByPower = new Dictionary<PowerModel, Node>(_powerComparer);
 		private static readonly Dictionary<PowerModel, PendingAttach> _pendingByPower = new Dictionary<PowerModel, PendingAttach>(_powerComparer);
 		private static readonly Dictionary<Creature, Node> _bubbleShieldByOwner = new Dictionary<Creature, Node>(new ReferenceEqualityComparer<Creature>());
+		private static readonly Dictionary<Creature, Node> _lavaCromlechByOwner = new Dictionary<Creature, Node>(new ReferenceEqualityComparer<Creature>());
 		private static RunnerNode? _runner;
 
 		public static void OnPowerApplied(Creature owner, PowerModel power)
@@ -38,6 +39,22 @@ namespace TH_Patchouli.Scrpits.Main
 				}
 			}
 
+			if (power is LavaCromlechPower)
+			{
+				if (_lavaCromlechByOwner.TryGetValue(owner, out Node? existingLava) && existingLava != null && GodotObject.IsInstanceValid(existingLava))
+				{
+					return;
+				}
+
+				foreach (PendingAttach pending in _pendingByPower.Values)
+				{
+					if (ReferenceEquals(pending.Owner, owner) && string.Equals(pending.ScenePath, "res://TH_Patchouli/ArtWorks/VFX/lava_cromlech_orbit.tscn", StringComparison.Ordinal))
+					{
+						return;
+					}
+				}
+			}
+
 			string? scenePath = GetScenePath(power);
 			if (scenePath == null)
 			{
@@ -49,11 +66,12 @@ namespace TH_Patchouli.Scrpits.Main
 				return;
 			}
 
-			bool useCombatVfxContainer = power is CloudFormPower || power is KnowledgeWallPower;
-			Node? parent = useCombatVfxContainer ? TryGetCombatVfxContainer() : FindHitboxAnchorFor(owner);
+			bool useCombatVfxContainer = power is CloudFormPower || power is KnowledgeWallPower || power is LavaCromlechPower;
+			bool combatInFront = power is not LavaCromlechPower;
+			Node? parent = useCombatVfxContainer ? TryGetCombatVfxContainer(combatInFront) : FindHitboxAnchorFor(owner);
 			if (parent == null)
 			{
-				_pendingByPower[power] = new PendingAttach(owner, scenePath, AttemptsLeft: 240, UseCombatVfxContainer: useCombatVfxContainer);
+				_pendingByPower[power] = new PendingAttach(owner, scenePath, AttemptsLeft: 240, UseCombatVfxContainer: useCombatVfxContainer, CombatInFront: combatInFront);
 				EnsureRunner();
 				return;
 			}
@@ -61,6 +79,12 @@ namespace TH_Patchouli.Scrpits.Main
 			Node? instance = InstantiateAndAttach(parent, owner, power, scenePath);
 			if (instance == null)
 			{
+				return;
+			}
+
+			if (power is LavaCromlechPower)
+			{
+				_lavaCromlechByOwner[owner] = instance;
 				return;
 			}
 
@@ -87,6 +111,23 @@ namespace TH_Patchouli.Scrpits.Main
 					if (GodotObject.IsInstanceValid(bubble))
 					{
 						bubble.QueueFree();
+					}
+				}
+			}
+
+			if (power is LavaCromlechPower)
+			{
+				if (owner.HasPower<LavaCromlechPower>())
+				{
+					return;
+				}
+
+				if (_lavaCromlechByOwner.TryGetValue(owner, out Node? lava) && lava != null)
+				{
+					_lavaCromlechByOwner.Remove(owner);
+					if (GodotObject.IsInstanceValid(lava))
+					{
+						lava.QueueFree();
 					}
 				}
 			}
@@ -135,7 +176,7 @@ namespace TH_Patchouli.Scrpits.Main
 					continue;
 				}
 
-				Node? parent = p.UseCombatVfxContainer ? TryGetCombatVfxContainer() : FindHitboxAnchorFor(p.Owner);
+				Node? parent = p.UseCombatVfxContainer ? TryGetCombatVfxContainer(p.CombatInFront) : FindHitboxAnchorFor(p.Owner);
 				if (parent == null)
 				{
 					_pendingByPower[kv.Key] = p with { AttemptsLeft = p.AttemptsLeft - 1 };
@@ -159,9 +200,9 @@ namespace TH_Patchouli.Scrpits.Main
 			}
 		}
 
-		private static Node? TryGetCombatVfxContainer()
+		private static Node? TryGetCombatVfxContainer(bool inFront)
 		{
-			return NCombatRoom.Instance?.CombatVfxContainer;
+			return inFront ? NCombatRoom.Instance?.CombatVfxContainer : NCombatRoom.Instance?.BackCombatVfxContainer;
 		}
 
 		private static Node? InstantiateAndAttach(Node parent, Creature owner, PowerModel power, string scenePath)
@@ -180,7 +221,14 @@ namespace TH_Patchouli.Scrpits.Main
 				var creatureNode = NCombatRoom.Instance.GetCreatureNode(owner);
 				if (creatureNode != null)
 				{
-					n2d.GlobalPosition = creatureNode.VfxSpawnPosition;
+					if (power is CloudFormPower or KnowledgeWallPower or LavaCromlechPower)
+					{
+						n2d.GlobalPosition = creatureNode.Hitbox.GlobalPosition + new Vector2(creatureNode.Hitbox.Size.X/2f, creatureNode.Hitbox.Size.Y);
+					}
+					else
+					{
+						n2d.GlobalPosition = creatureNode.VfxSpawnPosition;
+					}
 				}
 			}
 
@@ -219,6 +267,10 @@ namespace TH_Patchouli.Scrpits.Main
 			{
 				return "res://TH_Patchouli/ArtWorks/VFX/knowledge_wall_orbit.tscn";
 			}
+			if (power is LavaCromlechPower)
+			{
+				return "res://TH_Patchouli/ArtWorks/VFX/lava_cromlech_orbit.tscn";
+			}
 			if (power is BubbleShield)
 			{
 				return "res://TH_Patchouli/ArtWorks/VFX/bubble_shield.tscn";
@@ -226,6 +278,10 @@ namespace TH_Patchouli.Scrpits.Main
 			if (power is StickyBubble)
 			{
 				return "res://TH_Patchouli/ArtWorks/VFX/sticky_bubble.tscn";
+			}
+			if (power is PhotosynthesisPower)
+			{
+				return "res://TH_Patchouli/ArtWorks/VFX/photosynthesis_light.tscn";
 			}
 
 			return null;
@@ -324,7 +380,7 @@ namespace TH_Patchouli.Scrpits.Main
 			public int GetHashCode(T obj) => RuntimeHelpers.GetHashCode(obj);
 		}
 
-		private readonly record struct PendingAttach(Creature Owner, string ScenePath, int AttemptsLeft, bool UseCombatVfxContainer);
+		private readonly record struct PendingAttach(Creature Owner, string ScenePath, int AttemptsLeft, bool UseCombatVfxContainer, bool CombatInFront);
 
 		private sealed partial class RunnerNode : Node
 		{

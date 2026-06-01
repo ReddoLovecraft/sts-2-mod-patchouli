@@ -11,6 +11,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TH_Patchouli.Scrpits.Main;
 
 namespace TH_Patchouli.Scrpits.Powers
 {
@@ -23,6 +24,21 @@ namespace TH_Patchouli.Scrpits.Powers
 		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/LCP64.png";
 
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<IgnitePower>(),HoverTipFactory.Static(StaticHoverTip.Block)];
+
+		public override Task AfterApplied(Creature? applier, CardModel? cardSource)
+		{
+			if (CombatState != null)
+			{
+				PatchoulibEffectManager.OnPowerApplied(Owner, this);
+			}
+			return Task.CompletedTask;
+		}
+
+		public override Task AfterRemoved(Creature oldOwner)
+		{
+			PatchoulibEffectManager.OnPowerRemoved(oldOwner, this);
+			return Task.CompletedTask;
+		}
 
 		public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
 		{

@@ -13,7 +13,8 @@ namespace TH_Patchouli.Scrpits.Powers
 		public override PowerType Type => PowerType.Buff;
 		public override PowerStackType StackType => PowerStackType.Single;
 		public override Godot.Color AmountLabelColor => PowerModel._normalAmountLabelColor;
-
+		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/RDRP32.png";
+		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/RDRP64.png";
 		public override Task AfterCardChangedPiles(CardModel card, PileType oldPileType, AbstractModel? source)
 		{
 			if (Owner.Player == null || card.Owner != Owner.Player || card.Pile?.Type != PileType.Hand || !card.IsUpgradable)

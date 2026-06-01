@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://TH_Patchouli/ArtWorks/VFX/NDamoclesSwordProjectileVfx.cs" id="1_script"]
+[ext_resource type="Material" path="res://TH_Patchouli/ArtWorks/VFX/canvas_item_material_additive_shared.tres" id="2_mat"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletHa000.png" id="3_body"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/touhoueffect/patchouli/bulletHb000.png" id="4_ghost"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/trail.png" id="5_trail"]
+
+[node name="DamoclesSwordProjectileVfx" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="OuterTrail" type="Line2D" parent="."]
+unique_name_in_owner = true
+z_index = -2
+modulate = Color(0.9764706, 0.9647059, 0.9411765, 0.82)
+material = ExtResource("2_mat")
+width = 72.0
+default_color = Color(1, 1, 1, 0.8)
+texture = ExtResource("5_trail")
+texture_mode = 2
+joint_mode = 2
+
+[node name="InnerTrail" type="Line2D" parent="."]
+unique_name_in_owner = true
+z_index = -1
+modulate = Color(1, 1, 1, 0.55)
+material = ExtResource("2_mat")
+width = 40.0
+default_color = Color(1, 1, 1, 0.75)
+texture = ExtResource("5_trail")
+texture_mode = 2
+joint_mode = 2
+
+[node name="ProjectileRoot" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="GhostSprite" type="Sprite2D" parent="ProjectileRoot"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.68)
+material = ExtResource("2_mat")
+texture = ExtResource("4_ghost")
+
+[node name="BodySprite" type="Sprite2D" parent="ProjectileRoot"]
+unique_name_in_owner = true
+texture = ExtResource("3_body")

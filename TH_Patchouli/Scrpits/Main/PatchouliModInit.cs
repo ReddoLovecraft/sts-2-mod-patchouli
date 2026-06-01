@@ -117,7 +117,8 @@ namespace TH_Patchouli.Scripts.Main
 		private static readonly HashSet<string> _loggedSfx = new(StringComparer.OrdinalIgnoreCase);
 		private static readonly Dictionary<string, float> GainOverrides = new()
 		{
-			["TH_Patchouli/ArtWorks/SFX/characterselect.wav"] = 0.1f
+			["TH_Patchouli/ArtWorks/SFX/characterselect.wav"] = 0.1f,
+			["TH_Patchouli/ArtWorks/SFX/spell.wav"] = 0.1f,
 		};
 		private static bool TryGetOverrideGain(string localPath, out float overrideGain)
 	{

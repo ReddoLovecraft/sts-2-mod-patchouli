@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://TH_Patchouli/ArtWorks/VFX/NWaterMoonFlipVfx.cs" id="1_script"]
+
+[sub_resource type="Shader" id="Shader_1"]
+code = "shader_type canvas_item;\nrender_mode unshaded;\n\nuniform sampler2D screen_texture : hint_screen_texture, filter_linear_mipmap;\nuniform float strength : hint_range(0.0, 1.0) = 0.0;\nuniform float zoom : hint_range(0.8, 1.2) = 0.78;\n\nvoid fragment() {\n\tvec4 mod = COLOR;\n\tvec2 uv = SCREEN_UV;\n\tuv = (uv - vec2(0.5)) / max(0.001, zoom) + vec2(0.5);\n\tuv.y = mix(uv.y, 1.0 - uv.y, strength);\n\tuv = clamp(uv, vec2(0.0), vec2(1.0));\n\tvec4 s = texture(screen_texture, uv);\n\ts.rgb *= mod.rgb;\n\ts.a *= mod.a * strength;\n\tCOLOR = s;\n}\n"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1"]
+shader = SubResource("Shader_1")
+
+[node name="WaterMoonFlipVfx" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="Layer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="Rect" type="ColorRect" parent="Layer"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+mouse_filter = 2
+material = SubResource("ShaderMaterial_1")
+color = Color(0.78, 0.88, 1, 0.58)

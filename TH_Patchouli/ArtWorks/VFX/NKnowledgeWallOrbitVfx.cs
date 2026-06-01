@@ -10,6 +10,7 @@ using TH_Patchouli.Scrpits.Powers;
 
 public partial class NKnowledgeWallOrbitVfx : Node2D
 {
+	[Export]
 	public int CardCount { get; set; }
 
 	public PowerModel? Power { get; set; }
@@ -19,6 +20,15 @@ public partial class NKnowledgeWallOrbitVfx : Node2D
 
 	[Export]
 	public int RootZIndex { get; set; } = 0;
+
+	[Export]
+	public bool CardsZAsRelative { get; set; } = false;
+
+	[Export]
+	public bool EnableDepthSort { get; set; } = true;
+
+	[Export]
+	public bool EnableBackHide { get; set; } = true;
 
 	[Export]
 	public float DurationSeconds { get; set; } = 1.6f;
@@ -82,9 +92,9 @@ public partial class NKnowledgeWallOrbitVfx : Node2D
 			return;
 		}
 
-		if (Power is KnowledgeWallPower bound)
+		if (Power?.Owner != null)
 		{
-			_ownerCreature = bound.Owner;
+			_ownerCreature = Power.Owner;
 		}
 		_ownerCreature ??= TryResolveOwnerCreature();
 
@@ -100,7 +110,7 @@ public partial class NKnowledgeWallOrbitVfx : Node2D
 			Visible = false;
 			return;
 		}
-		GlobalPosition = creatureNode.VfxSpawnPosition;
+		GlobalPosition = creatureNode.Hitbox.GlobalPosition + new Vector2(creatureNode.Hitbox.Size.X/2f, creatureNode.Hitbox.Size.Y);
 
 		if (LoopForever)
 		{
@@ -136,14 +146,14 @@ public partial class NKnowledgeWallOrbitVfx : Node2D
 			item.Sprite.Position = baseOffset + new Vector2(x, y);
 
 			float depth = Mathf.Sin(ang);
-			if (depth < BackHideThreshold)
+			if (EnableBackHide && depth < BackHideThreshold)
 			{
 				item.Sprite.Visible = false;
 				continue;
 			}
 
 			item.Sprite.Visible = true;
-			item.Sprite.ZIndex = -2 + (int)Mathf.Round(depth * 4f);
+			item.Sprite.ZIndex = EnableDepthSort ? (-2 + (int)Mathf.Round(depth * 4f)) : 0;
 
 			Color m = item.Sprite.Modulate;
 			m.A = alpha;
@@ -231,7 +241,7 @@ public partial class NKnowledgeWallOrbitVfx : Node2D
 				var sprite = (AnimatedSprite2D)_template.Duplicate();
 				sprite.Visible = true;
 				sprite.Position = Vector2.Zero;
-				sprite.ZAsRelative = false;
+				sprite.ZAsRelative = CardsZAsRelative;
 				AddChild(sprite);
 
 				if (!sprite.IsPlaying())

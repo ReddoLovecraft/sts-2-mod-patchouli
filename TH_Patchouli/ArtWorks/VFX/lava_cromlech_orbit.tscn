@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfj7dmubanqmc"]
+
+[ext_resource type="Script" uid="uid://bpkcqmfcqgpok" path="res://TH_Patchouli/ArtWorks/VFX/NKnowledgeWallOrbitVfx.cs" id="1_script"]
+[ext_resource type="Material" uid="uid://c281ff8d6uddt" path="res://TH_Patchouli/ArtWorks/VFX/canvas_item_material_additive_shared.tres" id="2_mat"]
+[ext_resource type="Texture2D" uid="uid://b45vg2e5nnwj8" path="res://TH_Patchouli/ArtWorks/Powers/LCP32.png" id="3_tex"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_base"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_tex")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[node name="LavaCromlechOrbitVfx" type="Node2D"]
+script = ExtResource("1_script")
+CardCount = 5
+RootZIndex = 0
+CardsZAsRelative = false
+EnableDepthSort = false
+EnableBackHide = false
+
+[node name="CardTemplate" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+material = ExtResource("2_mat")
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_base")
+autoplay = "default"

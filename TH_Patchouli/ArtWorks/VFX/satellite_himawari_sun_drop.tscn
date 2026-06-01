@@ -1,0 +1,142 @@
+[gd_scene load_steps=33 format=3]
+
+[ext_resource type="Script" path="res://TH_Patchouli/ArtWorks/VFX/NSatelliteHimawariSunVfx.cs" id="1_script"]
+[ext_resource type="Material" path="res://TH_Patchouli/ArtWorks/VFX/canvas_item_material_additive_shared.tres" id="2_mat"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/sun_frames/sun_000.png" id="3_f0"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/sun_frames/sun_001.png" id="4_f1"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/sun_frames/sun_002.png" id="5_f2"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/sun_frames/sun_003.png" id="6_f3"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/sun_frames/sun_004.png" id="7_f4"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/sun_frames/sun_005.png" id="8_f5"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/sun_frames/sun_006.png" id="9_f6"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/sun_frames/sun_007.png" id="10_f7"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/sun_frames/sun_008.png" id="11_f8"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/sun_frames/sun_009.png" id="12_f9"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/sun_frames/sun_010.png" id="13_f10"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/sun_frames/sun_011.png" id="14_f11"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/sun_frames/sun_012.png" id="15_f12"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/sun_frames/sun_013.png" id="16_f13"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/sun_frames/sun_014.png" id="17_f14"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/sun_frames/sun_015.png" id="18_f15"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/sun_frames/sun_016.png" id="19_f16"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/sun_frames/sun_017.png" id="20_f17"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/sun_frames/sun_018.png" id="21_f18"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/sun_frames/sun_019.png" id="22_f19"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/sun_frames/sun_020.png" id="23_f20"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/sun_frames/sun_021.png" id="24_f21"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/sun_frames/sun_022.png" id="25_f22"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/sun_frames/sun_023.png" id="26_f23"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/sun_frames/sun_024.png" id="27_f24"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/sun_frames/sun_025.png" id="28_f25"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/sun_frames/sun_026.png" id="29_f26"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/sun_frames/sun_027.png" id="30_f27"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/sun_frames/sun_028.png" id="31_f28"]
+[ext_resource type="Texture2D" path="res://TH_Patchouli/ArtWorks/VFX/sun_frames/sun_029.png" id="32_f29"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_f0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_f1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_f2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_f3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_f4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_f5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_f6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_f7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_f8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_f9")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_f10")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_f11")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_f12")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_f13")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_f14")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_f15")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_f16")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_f17")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_f18")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_f19")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_f20")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_f21")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_f22")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_f23")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_f24")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_f25")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_f26")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_f27")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_f28")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_f29")
+}],
+"loop": true,
+"name": &"default",
+"speed": 30.0
+}]
+
+[node name="SatelliteHimawariSunDropVfx" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+material = ExtResource("2_mat")
+sprite_frames = SubResource("SpriteFrames_1")
+animation = &"default"
+autoplay = "default"

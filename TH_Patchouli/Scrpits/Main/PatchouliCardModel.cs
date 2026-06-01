@@ -410,7 +410,7 @@ namespace TH_Patchouli.Scripts.Main
 			{
 				return;
 			}
-
+			
 			if (selectedOption is Enhancement)
 			{
 				if (enhanceConsume <= 0 || !canEnhance)
@@ -420,6 +420,15 @@ namespace TH_Patchouli.Scripts.Main
 				if (isMultiplayer)
 				{
 					await PatchouliEnhancementRightClickSync.DoLocalAndSync(Owner, this, enhanceConsume);
+					if(Owner.Character is PatchouliCharacter pc)
+					{
+						await CreatureCmd.TriggerAnim(base.Owner.Creature, "Spell", base.Owner.Character.CastAnimDelay);
+					}
+					else
+					{
+						await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+					}
+					SfxCmd.Play(PatchouliInit.ToModSfxPath("TH_Patchouli/ArtWorks/SFX/spell.wav"));
 					return;
 				}
 
@@ -436,7 +445,6 @@ namespace TH_Patchouli.Scripts.Main
 				{
 					return;
 				}
-
 				CardSelectorPrefs prefs = new CardSelectorPrefs(ToolBox.GetCustomText("static_hover_tips", "transform", ".selectionScreenPrompt"), 0, 1);
 				CardModel chosen;
 				if (isMultiplayer)
@@ -473,6 +481,15 @@ namespace TH_Patchouli.Scripts.Main
 					return;
 				}
 				List<(ElementEnum element, int amount)> toConsume = CalculateTransformElementConsumption(this, replacement, originalElementsSet);
+				if(Owner.Character is PatchouliCharacter pc)
+				{
+						await CreatureCmd.TriggerAnim(base.Owner.Creature, "Spell", base.Owner.Character.CastAnimDelay);
+				}
+				else
+				{
+						await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+				}
+				SfxCmd.Play(PatchouliInit.ToModSfxPath("TH_Patchouli/ArtWorks/SFX/spell.wav"));
 				await CardCmd.Transform(this, replacement);
 				CardCmd.Preview(replacement);
 				for (int i = 0; i < toConsume.Count; i++)

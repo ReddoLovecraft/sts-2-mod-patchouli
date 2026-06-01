@@ -36,7 +36,28 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
-			await PowerCmd.Apply<PhilosopherStonePower>(Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+			List<PowerModel> bounsPowers = new();
+			foreach(PowerModel buff in Owner.Creature.Powers)
+			{
+				if(buff.Type!=PowerType.Buff)
+				{
+					continue;
+				}
+				if(buff.StackType!=PowerStackType.Counter)
+				{
+					continue;
+				}
+				if(buff.IsInstanced)
+				{
+					continue;
+				}
+				bounsPowers.Add(buff);
+			}
+			foreach(PowerModel buff in bounsPowers)
+			{
+				await PowerCmd.Apply(buff, Owner.Creature, buff.Amount, Owner.Creature, null);
+			}
 		}
 
 		protected override void OnUpgrade()

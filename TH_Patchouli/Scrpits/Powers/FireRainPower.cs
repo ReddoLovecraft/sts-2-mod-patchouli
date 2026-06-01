@@ -54,7 +54,7 @@ namespace TH_Patchouli.Scrpits.Powers
 			{
 				return;
 			}
-
+			await CreatureCmd.TriggerAnim(base.Owner, "Cast", base.Owner.Player.Character.CastAnimDelay);
 			TryPlayVfx();
 
 			for (int i = 0; i < Amount; i++)

@@ -4,9 +4,12 @@ using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.Nodes.Rooms;
+using MegaCrit.Sts2.Core.Nodes.Vfx;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -41,8 +44,8 @@ namespace TH_Patchouli.Scrpits.Powers
 			{
 				cards.Add(combatState.CreateCard(ModelDb.Card<BasicBody>(), player));
 			}
-
 			Flash();
+			NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(base.Owner, VfxColor.Red));
 			await CardPileCmd.AddGeneratedCardsToCombat(cards, PileType.Hand, addedByPlayer: true);
 		}
 	}

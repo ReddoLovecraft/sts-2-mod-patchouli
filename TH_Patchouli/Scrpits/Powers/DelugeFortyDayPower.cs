@@ -32,7 +32,7 @@ namespace TH_Patchouli.Scrpits.Powers
 			{
 				return;
 			}
-
+			await CreatureCmd.TriggerAnim(base.Owner, "Cast", base.Owner.Player.Character.CastAnimDelay);
 			foreach (Creature enemy in CombatState.HittableEnemies)
 			{
 				TryPlayVfx(enemy);

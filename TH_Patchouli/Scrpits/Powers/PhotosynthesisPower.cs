@@ -9,6 +9,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using System.Linq;
 using System.Threading.Tasks;
+using TH_Patchouli.Scrpits.Main;
 
 namespace TH_Patchouli.Scrpits.Powers
 {
@@ -17,7 +18,26 @@ namespace TH_Patchouli.Scrpits.Powers
 		public override PowerType Type => PowerType.Buff;
 		public override PowerStackType StackType => PowerStackType.Single;
 		public override Godot.Color AmountLabelColor => PowerModel._normalAmountLabelColor;
+		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/PP32.png";
+		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/PP64.png";
+
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.ForEnergy(this),HoverTipFactory.FromPower<RegenPower>()];
+
+		public override Task AfterApplied(Creature? applier, CardModel? cardSource)
+		{
+			if (CombatState != null)
+			{
+				PatchoulibEffectManager.OnPowerApplied(Owner, this);
+			}
+			return Task.CompletedTask;
+		}
+
+		public override Task AfterRemoved(Creature oldOwner)
+		{
+			PatchoulibEffectManager.OnPowerRemoved(oldOwner, this);
+			return Task.CompletedTask;
+		}
+
 		public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
 		{
 			if (side != Owner.Side || Owner.Player?.PlayerCombatState == null)
@@ -41,18 +61,14 @@ namespace TH_Patchouli.Scrpits.Powers
 			{
 				return;
 			}
-
 			var regens = Owner.GetPowerInstances<RegenPower>().ToList();
-			if (regens.Count == 0)
-			{
-				return;
-			}
-
 			Flash();
+			if(regens.Count > 0)
 			foreach (var regen in regens)
 			{
 				await PowerCmd.Remove(regen);
 			}
+			await PowerCmd.Remove(this);
 		}
 	}
 }

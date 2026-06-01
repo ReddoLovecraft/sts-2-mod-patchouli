@@ -151,7 +151,7 @@ public partial class NCloudFormWeatherVfx : Node2D
 			return;
 		}
 
-		GlobalPosition = creatureNode.VfxSpawnPosition;
+		GlobalPosition = creatureNode.Hitbox.GlobalPosition + new Vector2(creatureNode.Hitbox.Size.X/2f, creatureNode.Hitbox.Size.Y);
 		_baseCenter = new Vector2(0f, -HeightOffsetPixels);
 
 		float rx = Math.Max(10f, RadiusX);
