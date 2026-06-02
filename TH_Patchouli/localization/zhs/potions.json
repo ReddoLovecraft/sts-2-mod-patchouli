@@ -1,12 +1,16 @@
 { 
-  "TH_RIN-PREVENTING_ROT_POTION.title": "永远亭秘制防腐剂",
-  "TH_RIN-PREVENTING_ROT_POTION.description": "所有敌人掉落的[gold]尸体[/gold]不会[green]腐烂[/green]。",
-  "TH_RIN-BOTTLE_OF_WRAITH.title": "瓶中怨灵",
-  "TH_RIN-BOTTLE_OF_WRAITH.description": "生成[blue]3[/blue]个[gold]怨灵[/gold]。", 
-  "TH_RIN-TRUE_FIRE_POTION.title": "真·火焰药水",
-  "TH_RIN-TRUE_FIRE_POTION.description": "给予[blue]10[/blue]层[gold]点燃[/gold]。",
-  "TH_RIN-NUCLEAR_FUEL.title": "核能燃料",
-  "TH_RIN-NUCLEAR_FUEL.description": "获得{Energy:energyIcons()}。获得[blue]6[/blue]层[gold]消亡[/gold]。",
-  "TH_RIN-CORPSE_BAR.title": "木天蓼酒",
-  "TH_RIN-CORPSE_BAR.description": "获得[blue]5[/blue]层[gold]活力[/gold]。在你的下[blue]3[/blue]个回合开始时，获得[blue]5[/blue]层[gold]活力[/gold]。"
+  "TH_PATCHOULI-MAGIC_ELEMENT_POTION.title": "魔素瓶",
+  "TH_PATCHOULI-MAGIC_ELEMENT_POTION.description": "随机获得[blue]3[/blue]点[gold]元素[/gold]。",
+  "TH_PATCHOULI-FOUR_MAGIC_BOMB.title": "四尺魔法炸弹",
+  "TH_PATCHOULI-FOUR_MAGIC_BOMB.description": "对所有敌人造成[blue]4[/blue]点伤害。\n给予所有敌人[blue]4[/blue]层[gold]点燃[/gold]和[gold]冻结[/gold]。", 
+  "TH_PATCHOULI-KNOWLEDGE_INK.title": "知识之墨",
+  "TH_PATCHOULI-KNOWLEDGE_INK.description": "选择任意张[gold]手牌[/gold]添加[gold]保留[/gold]。",
+  "TH_PATCHOULI-KNOWLEDGE_INK.selectionScreenPrompt": "选择任意张[gold]手牌[/gold]。",
+  "TH_PATCHOULI-MAGIC_POTION.title": "灵力药水",
+  "TH_PATCHOULI-MAGIC_POTION.description": "将你的{Energy:energyIcons()}恢复到上限。",
+  "TH_PATCHOULI-BOTTLE_OF_DEMON.title": "瓶装使魔",
+  "TH_PATCHOULI-BOTTLE_OF_DEMON.description": "从你的[gold]抽牌堆[/gold]中选择一张牌，将其打出[blue]2[/blue]次并[gold]消耗[/gold]。",
+  "TH_PATCHOULI-BOTTLE_OF_DEMON.selectionScreenPrompt": "选择一张牌。",
+  "TH_PATCHOULI-COUGH_SUPPRESSANT_POTION.title": "止咳药",
+  "TH_PATCHOULI-COUGH_SUPPRESSANT_POTION.description": "移除你身上的所有负面效果。"
 }
