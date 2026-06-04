@@ -51,7 +51,7 @@ namespace TH_Patchouli.Scrpits.Cards
 				choiceContext,
 				Owner,
 				new CardSelectorPrefs(SelectionScreenPrompt, 1),
-				c => c != this && !c.Keywords.Contains(CardKeyword.Unplayable),
+				c => c != this,
 				this)).ToList();
 
 			CardModel toExhaust = selected.FirstOrDefault();

@@ -178,7 +178,7 @@
   "TH_PATCHOULI-WATER_MOON_POWER.title": "镜花水月",
   "TH_PATCHOULI-WATER_MOON_POWER.description": "本回合内打出卡牌时，将其的层数张带有[gold]虚无[/gold]的复制品放入你的手中。",
   "TH_PATCHOULI-WATER_MOON_POWER.smartDescription": "本回合内打出卡牌时，将其的[blue]{Amount}[/blue]张带有[gold]虚无[/gold]的复制品放入你的手中。",
-  "TH_PATCHOULI-MOON_DIRT_POWER.title": "月壤",
+  "TH_PATCHOULI-MOON_DIRT_POWER.title": "滞月",
   "TH_PATCHOULI-MOON_DIRT_POWER.description": "每当卡牌被[gold]保留[/gold]时，将其在本场战斗中的耗能减少层数点。",
   "TH_PATCHOULI-MOON_DIRT_POWER.smartDescription": "每当卡牌被[gold]保留[/gold]时，将其在本场战斗中的耗能减少[blue]{Amount}[/blue]点。",
   "TH_PATCHOULI-PHILOSOPHER_STONE_POWER.title": "贤者之石",

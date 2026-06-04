@@ -26,11 +26,10 @@ namespace TH_Patchouli.Scripts.Cards
 [Pool(typeof(ColorlessCardPool))]
 public sealed class ElementTransmutation : PatchouliCardModel
 {
-	public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain,CardKeyword.Exhaust];
+	public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
 	protected override IEnumerable<IHoverTip> ExtraHoverTips =>
 	[
 		HoverTipFactory.FromKeyword(CardKeyword.Retain),
-		HoverTipFactory.FromKeyword(CardKeyword.Exhaust),
 		Tools.GetStaticKeyword("Element")
 	];
 	protected override IEnumerable<DynamicVar> CanonicalVars => new List<DynamicVar> { new CardsVar(1),new DynamicVar("Power",3m) };
