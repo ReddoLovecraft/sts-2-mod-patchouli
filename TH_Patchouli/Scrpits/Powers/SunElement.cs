@@ -15,6 +15,7 @@ using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 using Patchouib.Scrpits.Main;
+using TH_Patchouli.Relics;
 
 
 namespace TH_Patchouli.Scrpits.Powers
@@ -39,6 +40,7 @@ namespace TH_Patchouli.Scrpits.Powers
             }
             this.Flash();
             await PlayerCmd.GainEnergy(Amount/2,Owner.Player);
+			 if(Owner.Player.GetRelic<EmeraldTablet>()==null)
 			await PowerCmd.Decrement(this);
         }
     }

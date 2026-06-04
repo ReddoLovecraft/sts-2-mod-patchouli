@@ -1,12 +1,19 @@
 using HarmonyLib;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Context;
+using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Localization.Formatters;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Cards;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using TH_Patchouli.Relics;
 
 namespace TH_Patchouli.Scripts.Main
 {
@@ -111,6 +118,52 @@ namespace TH_Patchouli.Scripts.Main
 				return;
 			}
 			__result = string.IsNullOrEmpty(__result) ? suffix : __result.TrimEnd('\n') + "\n" + suffix;
+		}
+	}
+
+	[HarmonyPatch(typeof(NCreature), nameof(NCreature.ShowHoverTips))]
+	public static class DeepDarkFantasyHideIntentHoverTipsPatch
+	{
+		static void Prefix(NCreature __instance, ref IEnumerable<IHoverTip> hoverTips)
+		{
+			if (__instance?.Entity?.Monster == null)
+			{
+				return;
+			}
+
+			CombatState? combatState = __instance.Entity.CombatState;
+			if (combatState == null)
+			{
+				return;
+			}
+
+			Player? me = LocalContext.GetMe(combatState);
+			if (me == null)
+			{
+				return;
+			}
+
+			if (me.GetRelic<DeepDarkFantasy>() == null)
+			{
+				return;
+			}
+
+			if (hoverTips == null)
+			{
+				return;
+			}
+
+			hoverTips = hoverTips.Where(t => !IsIntentHoverTip(t)).ToList();
+		}
+
+		private static bool IsIntentHoverTip(IHoverTip tip)
+		{
+			if (tip is not HoverTip ht || string.IsNullOrEmpty(ht.Id))
+			{
+				return false;
+			}
+
+			return ht.Id.Contains("Title=intents.", StringComparison.Ordinal);
 		}
 	}
 }

@@ -12,6 +12,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Models.RelicPools;
+using MegaCrit.Sts2.Core.Models.Relics;
 using MegaCrit.Sts2.Core.Random;
 using MegaCrit.Sts2.Core.Rewards;
 using MegaCrit.Sts2.Core.Rooms;
@@ -38,35 +39,7 @@ public class UnstablePhilosophersStone : CustomRelicModel
 		if (side == base.Owner.Creature.Side)
 		{
 		    Flash();
-		    Rng rng = Owner.RunState.Rng.CombatCardGeneration;
-            int num = rng.NextInt(7);
-			switch(num)
-			{
-				case 0:
-					await PowerCmd.Apply<GoldElement>(Owner.Creature,1,Owner.Creature,null);
-					break;
-				case 1:
-					await PowerCmd.Apply<WoodElement>(Owner.Creature,1,Owner.Creature,null);
-					break;
-				case 2:
-					await PowerCmd.Apply<DirtElement>(Owner.Creature,1,Owner.Creature,null);
-					break;
-				case 3:
-					await PowerCmd.Apply<SunElement>(Owner.Creature,1,Owner.Creature,null);
-					break;
-				case 4:
-					await PowerCmd.Apply<LunarElement>(Owner.Creature,1,Owner.Creature,null);
-					break;
-				case 5:
-					await PowerCmd.Apply<FireElement>(Owner.Creature,1,Owner.Creature,null);
-					break;
-				case 6:
-					await PowerCmd.Apply<WaterElement>(Owner.Creature,1,Owner.Creature,null);
-					break;
-				default:
-					break;
-			}
-            
+		    await ToolBox.GainElementRandomly(1,Owner.Creature);
 		}
 	}
 

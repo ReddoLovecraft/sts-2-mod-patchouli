@@ -29,7 +29,10 @@ namespace TH_Patchouli.Scrpits.Cards
 		{
 			DynamicVars.Cards.UpgradeValueBy(boostAmount);
 		}
-
+		protected override void OnUpgrade()
+		{
+			this.DynamicVars.Cards.UpgradeValueBy(2);
+		}
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
 			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);

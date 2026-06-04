@@ -15,6 +15,7 @@ using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 using Patchouib.Scrpits.Main;
+using TH_Patchouli.Relics;
 
 
 namespace TH_Patchouli.Scrpits.Powers
@@ -37,6 +38,7 @@ namespace TH_Patchouli.Scrpits.Powers
             {
                 return;
             }
+            if(Owner.Player.GetRelic<EmeraldTablet>()==null)
 			await PowerCmd.Decrement(this);
         }
          public override async Task BeforeTurnEndEarly(PlayerChoiceContext choiceContext, CombatSide side)

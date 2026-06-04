@@ -37,13 +37,7 @@ public class PhilosophersStone : CustomRelicModel
 		if (side == base.Owner.Creature.Side)
 		{
 		  Flash();
-		  await PowerCmd.Apply<FireElement>(Owner.Creature,1,Owner.Creature,null);
-		  await PowerCmd.Apply<WaterElement>(Owner.Creature,1,Owner.Creature,null);
-		  await PowerCmd.Apply<GoldElement>(Owner.Creature,1,Owner.Creature,null);
-		  await PowerCmd.Apply<WoodElement>(Owner.Creature,1,Owner.Creature,null);
-		  await PowerCmd.Apply<DirtElement>(Owner.Creature,1,Owner.Creature,null);
-		  await PowerCmd.Apply<SunElement>(Owner.Creature,1,Owner.Creature,null);
-		  await PowerCmd.Apply<LunarElement>(Owner.Creature,1,Owner.Creature,null);
+		  await ToolBox.GainElement(new List<ElementEnum>{ElementEnum.Fire,ElementEnum.Water,ElementEnum.Gold,ElementEnum.Wood,ElementEnum.Dirt,ElementEnum.Sun,ElementEnum.Lunar},1,Owner.Creature);
 		}
 	}
 

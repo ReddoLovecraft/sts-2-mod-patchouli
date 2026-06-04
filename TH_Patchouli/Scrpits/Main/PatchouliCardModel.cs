@@ -28,6 +28,7 @@ using TH_Patchouli.Scrpits.Cards;
 using TH_Patchouli.Scrpits.Main;
 using TH_Patchouli.Scrpits.Multiplayer;
 using ElementPowers = TH_Patchouli.Scrpits.Powers;
+using TH_Patchouli.Relics;
 
 
 namespace TH_Patchouli.Scripts.Main
@@ -83,7 +84,7 @@ namespace TH_Patchouli.Scripts.Main
 		public virtual List<ElementEnum> ElementTypes => _ElementTypes;
 		public virtual bool isSingleElement=>true;
 		private const long ElementCycleMs = 1800;
-		//public override string PortraitPath => $"res://TH_Patchouli/ArtWorks/Cards/{Id.Entry}.png";
+		public override string PortraitPath => $"res://TH_Patchouli/ArtWorks/Cards/{Id.Entry}.png";
 		public PatchouliCardModel(int baseCost, CardType type, CardRarity rarity, TargetType target, bool showInCardLibrary = true, bool autoAdd = true)
 	 : base(baseCost, type, rarity, target, showInCardLibrary)
 		{
@@ -431,7 +432,10 @@ namespace TH_Patchouli.Scripts.Main
 					SfxCmd.Play(PatchouliInit.ToModSfxPath("TH_Patchouli/ArtWorks/SFX/spell.wav"));
 					return;
 				}
-
+				if(Owner.GetRelic<ElementBook>()!=null)
+				{
+					CardCmd.Upgrade(this);
+				}
 				await ConsumeElements(Owner.Creature, originalElements, enhanceConsume, this);
 				BoostWhenElementEnhanced(enhanceConsume);
 				if (Pile != null)
@@ -491,6 +495,10 @@ namespace TH_Patchouli.Scripts.Main
 				}
 				SfxCmd.Play(PatchouliInit.ToModSfxPath("TH_Patchouli/ArtWorks/SFX/spell.wav"));
 				await CardCmd.Transform(this, replacement);
+				if(Owner.GetRelic<ElementBook>()!=null)
+				{
+					CardCmd.Upgrade(replacement);
+				}
 				CardCmd.Preview(replacement);
 				for (int i = 0; i < toConsume.Count; i++)
 				{
