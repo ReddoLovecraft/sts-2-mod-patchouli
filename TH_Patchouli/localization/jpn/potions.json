@@ -1,0 +1,16 @@
+{ 
+  "TH_PATCHOULI-MAGIC_ELEMENT_POTION.title": "魔素瓶",
+  "TH_PATCHOULI-MAGIC_ELEMENT_POTION.description": "ランダムな[gold]元素[/gold]を[blue]3[/blue]点獲得する。",
+  "TH_PATCHOULI-FOUR_MAGIC_BOMB.title": "四尺魔法爆弾",
+  "TH_PATCHOULI-FOUR_MAGIC_BOMB.description": "全ての敵に[blue]4[/blue]ダメージを与える。\n全ての敵に[blue]4[/blue]層の[gold]点火[/gold]と[gold]凍結[/gold]を与える。", 
+  "TH_PATCHOULI-KNOWLEDGE_INK.title": "知識の墨",
+  "TH_PATCHOULI-KNOWLEDGE_INK.description": "任意の枚数の[gold]手札[/gold]を選んで[gold]保留[/gold]を付与する。",
+  "TH_PATCHOULI-KNOWLEDGE_INK.selectionScreenPrompt": "任意の枚数の[gold]手札[/gold]を選択する。",
+  "TH_PATCHOULI-MAGIC_POTION.title": "霊力薬水",
+  "TH_PATCHOULI-MAGIC_POTION.description": "自分の{Energy:energyIcons()}を上限まで回復する。",
+  "TH_PATCHOULI-BOTTLE_OF_DEMON.title": "瓶詰め使い魔",
+  "TH_PATCHOULI-BOTTLE_OF_DEMON.description": "[gold]ドロー山札[/gold]からカードを1枚選び、それを[blue]2[/blue]回プレイして[gold]消費[/gold]する。",
+  "TH_PATCHOULI-BOTTLE_OF_DEMON.selectionScreenPrompt": "カードを1枚選択する。",
+  "TH_PATCHOULI-COUGH_SUPPRESSANT_POTION.title": "鎮咳薬",
+  "TH_PATCHOULI-COUGH_SUPPRESSANT_POTION.description": "自分にかかっている全てのデバフを除去する。"
+}

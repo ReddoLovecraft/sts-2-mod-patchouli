@@ -1,0 +1,13 @@
+{
+  "TRANSFORM.selectionScreenPrompt": "Select cards to [gold]Transform[/gold] (only transformable cards are shown).",
+  "ELEMENT.title": "Element",
+  "ELEMENT.description": "Divided into: Gold, Wood, Water, Fire, Earth, Sun, Lunar.\nPlaying a card with a corresponding [gold]Element[/gold] grants that many [gold]Elements[/gold] equal to its Energy cost (minimum 1). At the end of your turn, decrease by [blue]1[/blue].\n[gold]Right-click[/gold] a Patchouli card to [gold]Exhaust[/gold] the same [gold]Element[/gold] to [red]Enhance[/red] it (each point increases all numbers by [blue]1[/blue]), or [gold]Exhaust[/gold] different [gold]Elements[/gold] to [purple]Transform[/purple] the card into a Spell Card.",
+  "ELEMENT.selectionScreenPrompt": "Choose an [gold]Element[/gold].",
+  "GOLD.title": "[gold]Gold[/gold]",
+  "WOOD.title": "[green]Wood[/green]",
+  "WATER.title": "[blue]Water[/blue]",
+  "FIRE.title": "[red]Fire[/red]",
+  "DIRT.title": "[brown]Earth[/brown]",
+  "SUN.title": "[orange]Sun[/orange]",
+  "LUNAR.title": "[purple]Lunar[/purple]"
+}

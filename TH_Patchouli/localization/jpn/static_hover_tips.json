@@ -1,0 +1,13 @@
+{
+	"TRANSFORM.selectionScreenPrompt": "[gold]変化[/gold]させるカードを選択（現在のページには[gold]変化[/gold]可能なカードのみ表示されています）。",
+	"ELEMENT.title": "元素",
+	"ELEMENT.description": "分類：金、木、水、火、土、日、月。\n対応する[gold]元素[/gold]を持つカードをプレイすると、そのカードのコストと同じ数の[gold]元素[/gold]を獲得する（最低1点）。ターン終了時に[blue]1[/blue]減少する。\nパチュリーのカードを[gold]右クリック[/gold]すると、同じ種類の[gold]元素[/gold]を[gold]消費[/gold]して[red]強化[/red]（1点につき全数値が[blue]1[/blue]上昇）したり、異なる[gold]元素[/gold]を[gold]消費[/gold]してカードを[purple]変化[/purple]させコンボカードにできる。",
+	"ELEMENT.selectionScreenPrompt": "[gold]元素[/gold]を1つ選択してください。",
+	"GOLD.title": "[gold]金[/gold]",
+	"WOOD.title": "[green]木[/green]",
+	"WATER.title": "[blue]水[/blue]",
+	"FIRE.title": "[red]火[/red]",
+	"DIRT.title": "[brown]土[/brown]",
+	"SUN.title": "[orange]日[/orange]",
+	"LUNAR.title": "[purple]月[/purple]"
+}

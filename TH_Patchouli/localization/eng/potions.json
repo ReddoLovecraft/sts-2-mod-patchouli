@@ -1,0 +1,16 @@
+{
+  "TH_PATCHOULI-MAGIC_ELEMENT_POTION.title": "Magic Element Potion",
+  "TH_PATCHOULI-MAGIC_ELEMENT_POTION.description": "Gain [blue]3[/blue] random [gold]Elements[/gold].",
+  "TH_PATCHOULI-FOUR_MAGIC_BOMB.title": "Four-Magic Bomb",
+  "TH_PATCHOULI-FOUR_MAGIC_BOMB.description": "Deal [blue]4[/blue] damage to ALL enemies.\nApply [blue]4[/blue] [gold]Ignite[/gold] and [gold]Freeze[/gold] to ALL enemies.",
+  "TH_PATCHOULI-KNOWLEDGE_INK.title": "Knowledge Ink",
+  "TH_PATCHOULI-KNOWLEDGE_INK.description": "Add [gold]Retain[/gold] to any number of [gold]cards in hand[/gold].",
+  "TH_PATCHOULI-KNOWLEDGE_INK.selectionScreenPrompt": "Select any number of [gold]cards in hand[/gold].",
+  "TH_PATCHOULI-MAGIC_POTION.title": "Spirit Energy Potion",
+  "TH_PATCHOULI-MAGIC_POTION.description": "Restore your {Energy:energyIcons()} to its maximum.",
+  "TH_PATCHOULI-BOTTLE_OF_DEMON.title": "Bottled Familiar",
+  "TH_PATCHOULI-BOTTLE_OF_DEMON.description": "Choose a card from your [gold]draw pile[/gold], play it [blue]2[/blue] times and [gold]Exhaust[/gold] it.",
+  "TH_PATCHOULI-BOTTLE_OF_DEMON.selectionScreenPrompt": "Select a card.",
+  "TH_PATCHOULI-COUGH_SUPPRESSANT_POTION.title": "Cough Suppressant",
+  "TH_PATCHOULI-COUGH_SUPPRESSANT_POTION.description": "Remove all debuffs from yourself."
+}

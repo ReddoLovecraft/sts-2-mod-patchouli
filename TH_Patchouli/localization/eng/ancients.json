@@ -1,0 +1,19 @@
+{
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.1-0.char": "[jitter]... *cough* ...[/jitter] This tower sure is tall, but I've finally reached the top...",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.1-0.next": "Continue",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.1-1.ancient": "... You again?",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.1-1.next": "Continue",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.1-2.ancient": "For someone of your physique, that's impressive perseverance. But it's meaningless...",
+
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.2-0r.char": "Architect, we meet again...",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.2-0r.next": "Continue",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.2-1r.char": "You made me climb all those stairs, [jitter][red]now prepare to die![/red][/jitter]",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.2-1r.next": "Continue",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.2-2r.ancient": "I deeply apologize, but I have no time for guests right now. Please leave.",
+
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.0-0.ancient": "A human skilled in elemental magic? This tower is getting livelier...",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.0-0.next": "Continue",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.0-1.char": "Let me correct you: I am not human, but a magician.",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.0-1.next": "Continue",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.0-2.ancient": "... Does that matter? In any case, this is no place for you. Go back!"
+}

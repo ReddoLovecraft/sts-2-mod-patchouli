@@ -1,0 +1,17 @@
+{
+  "TH_PATCHOULI-PATCHOULI_CHARACTER.aromaPrinciple": "[sine][blue]... Waiting ...[/blue][/sine]",
+  "TH_PATCHOULI-PATCHOULI_CHARACTER.banter.alive.endTurnPing": "...",
+  "TH_PATCHOULI-PATCHOULI_CHARACTER.banter.dead.endTurnPing": "...",
+  "TH_PATCHOULI-PATCHOULI_CHARACTER.cardsModifierDescription": "Patchouli's cards now appear in rewards and shops.",
+  "TH_PATCHOULI-PATCHOULI_CHARACTER.cardsModifierTitle": "Patchouli Cards",
+  "TH_PATCHOULI-PATCHOULI_CHARACTER.description": "The Witch of the Seven Stars,\nskilled at combining elements and using magic to defeat enemies.",
+  "TH_PATCHOULI-PATCHOULI_CHARACTER.eventDeathPrevention": "Mukyu...",
+  "TH_PATCHOULI-PATCHOULI_CHARACTER.goldMonologue": "[sine]This gold... might come in handy...[/sine]",
+  "TH_PATCHOULI-PATCHOULI_CHARACTER.possessiveAdjective": "her",
+  "TH_PATCHOULI-PATCHOULI_CHARACTER.pronounObject": "her",
+  "TH_PATCHOULI-PATCHOULI_CHARACTER.pronounPossessive": "her",
+  "TH_PATCHOULI-PATCHOULI_CHARACTER.pronounSubject": "she",
+  "TH_PATCHOULI-PATCHOULI_CHARACTER.title": "Patchouli Knowledge",
+  "TH_PATCHOULI-PATCHOULI_CHARACTER.titleObject": "Patchouli",
+  "TH_PATCHOULI-PATCHOULI_CHARACTER.unlockText": "Play a game with [pink]{Prerequisite}[/pink] to unlock this character."
+}

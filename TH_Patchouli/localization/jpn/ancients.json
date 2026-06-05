@@ -1,0 +1,19 @@
+{
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.1-0.char": "[jitter]……ゴホッゴホッ……[/jitter]この塔はなかなか高いが、ようやく頂上に着いた……",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.1-0.next": "次へ",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.1-1.ancient": "……またお前か？",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.1-1.next": "次へ",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.1-2.ancient": "お前の身体能力にしては驚くべき根性だが、それに意味はない……",
+
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.2-0r.char": "建築士、やっと会えたわね……",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.2-0r.next": "次へ",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.2-1r.char": "あなたのせいでこんなに階段を登らされたわ、[jitter][red]覚悟しなさい！[/red][/jitter]",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.2-1r.next": "次へ",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.2-2r.ancient": "申し訳ないが、今は客を迎えている暇はない。戻ってくれ。",
+
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.0-0.ancient": "元素魔法を得意とする人間か？この塔もますます賑やかになるな……",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.0-0.next": "次へ",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.0-1.char": "一つ訂正させて。私は人間ではなく、魔法使いよ。",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.0-1.next": "次へ",
+  "THE_ARCHITECT.talk.TH_PATCHOULI-PATCHOULI_CHARACTER.0-2.ancient": "……それが重要か？とにかくここはお前の来る場所ではない。引き返せ！"
+}

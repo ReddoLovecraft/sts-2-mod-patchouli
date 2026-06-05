@@ -1,0 +1,17 @@
+{
+  "TH_PATCHOULI-PATCHOULI_CHARACTER.aromaPrinciple": "[sine][blue]……待つ……[/blue][/sine]",
+  "TH_PATCHOULI-PATCHOULI_CHARACTER.banter.alive.endTurnPing": "……",
+  "TH_PATCHOULI-PATCHOULI_CHARACTER.banter.dead.endTurnPing": "……",
+  "TH_PATCHOULI-PATCHOULI_CHARACTER.cardsModifierDescription": "パチュリーのカードが報酬やショップに出現するようになる。",
+  "TH_PATCHOULI-PATCHOULI_CHARACTER.cardsModifierTitle": "パチュリーカード",
+  "TH_PATCHOULI-PATCHOULI_CHARACTER.description": "七曜の魔女。\n元素の組み合わせや魔法を駆使して敵を圧倒する。",
+  "TH_PATCHOULI-PATCHOULI_CHARACTER.eventDeathPrevention": "むきゅ……",
+  "TH_PATCHOULI-PATCHOULI_CHARACTER.goldMonologue": "[sine]この金貨……役に立つかもしれない……[/sine]",
+  "TH_PATCHOULI-PATCHOULI_CHARACTER.possessiveAdjective": "彼女の",
+  "TH_PATCHOULI-PATCHOULI_CHARACTER.pronounObject": "彼女",
+  "TH_PATCHOULI-PATCHOULI_CHARACTER.pronounPossessive": "彼女の",
+  "TH_PATCHOULI-PATCHOULI_CHARACTER.pronounSubject": "彼女",
+  "TH_PATCHOULI-PATCHOULI_CHARACTER.title": "パチュリー・ノーレッジ",
+  "TH_PATCHOULI-PATCHOULI_CHARACTER.titleObject": "パチュリー",
+  "TH_PATCHOULI-PATCHOULI_CHARACTER.unlockText": "[pink]{Prerequisite}[/pink]でゲームをプレイしてこのキャラをアンロックする。"
+}
