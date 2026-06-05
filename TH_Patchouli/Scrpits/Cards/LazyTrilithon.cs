@@ -33,6 +33,7 @@ namespace TH_Patchouli.Scrpits.Cards
 	[Pool(typeof(PatchouliCardPool))]
 	public sealed class LazyTrilithon : PatchouliCardModel
 	{
+		public override bool GainsBlock => true;
 		private static readonly List<ElementEnum> _elementTypes = new() { ElementEnum.Dirt };
 		public override List<ElementEnum> ElementTypes => _elementTypes;
 

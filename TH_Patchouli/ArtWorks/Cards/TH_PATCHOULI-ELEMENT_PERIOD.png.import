@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8iywshhpcock"
-path="res://.godot/imported/TH_PATCHOULI-COUGH_SUPPRESSANT_POTION.png-79caab23d127bee41d1466bb677ac288.ctex"
+uid="uid://oq72u0s8wxs6"
+path="res://.godot/imported/TH_PATCHOULI-ELEMENT_PERIOD.png-ff4938f235a2365db9004b99d7fdd68d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TH_Patchouli/ArtWorks/Potions/TH_PATCHOULI-COUGH_SUPPRESSANT_POTION.png"
-dest_files=["res://.godot/imported/TH_PATCHOULI-COUGH_SUPPRESSANT_POTION.png-79caab23d127bee41d1466bb677ac288.ctex"]
+source_file="res://TH_Patchouli/ArtWorks/Cards/TH_PATCHOULI-ELEMENT_PERIOD.png"
+dest_files=["res://.godot/imported/TH_PATCHOULI-ELEMENT_PERIOD.png-ff4938f235a2365db9004b99d7fdd68d.ctex"]
 
 [params]
 

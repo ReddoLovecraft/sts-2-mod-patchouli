@@ -8,7 +8,6 @@
   "TH_PATCHOULI-LUNAR_REAPER_RELIC.title": "收割计数器",
   "TH_PATCHOULI-LUNAR_REAPER_RELIC.description": "你的[gold]残月收割[/gold]造成的伤害增加计数点。",
   "TH_PATCHOULI-LUNAR_REAPER_RELIC.flavor": "[red]这件遗物的细节将在未来也不揭晓。[/red]",
-
   "TH_PATCHOULI-INSTRUMENT.title": "实验器械",
   "TH_PATCHOULI-INSTRUMENT.description": "你每在同一回合内打出[gold]能力牌[/gold]、[gold]攻击牌[/gold]和[gold]技能牌[/gold]各一张，就获得[blue]1[/blue]层[gold]人工制品[/gold]。",
   "TH_PATCHOULI-INSTRUMENT.flavor": "包含锥形瓶、烧杯和量筒等一系列实验用品的集合。",
@@ -44,7 +43,7 @@
   "TH_PATCHOULI-SAGE_STAFF.flavor": "顶端镶嵌着贤者之石的魔杖，有着点石成金的权能。",
   "TH_PATCHOULI-DEEP_DARK_FANTASY.title": "暗黑♂游戏",
   "TH_PATCHOULI-DEEP_DARK_FANTASY.description": "在你的回合开始时额外获得{Energy:energyIcons()}。\n你不能再看见敌人的意图。",
-  "TH_PATCHOULI-DEEP_DARK_FANTASY.flavor": "帕秋莉♂GO！",
+  "TH_PATCHOULI-DEEP_DARK_FANTASY.flavor": "Deep Dark Fantasy",
   "TH_PATCHOULI-DESTINY_STONE.title": "命运之石",
   "TH_PATCHOULI-DESTINY_STONE.description": "每当你抽牌时，[gold]预见[/gold][blue]1[/blue]。",
   "TH_PATCHOULI-DESTINY_STONE.flavor": "透过宝石能看到未来的残像。",
@@ -64,6 +63,6 @@
   "TH_PATCHOULI-MOON_STONE.description": "拥有[purple]月元素[/purple]时，你受到的伤害减少[blue]50%[/blue]。",
   "TH_PATCHOULI-MOON_STONE.flavor": "蕴含着来自月亮的力量，月光照耀下属性提升。",
   "TH_PATCHOULI-SUN_STONE.title": "太阳石",
-  "TH_PATCHOULI-SUN_STONE.description": "拥有[orange]日元素[/orange]时，你受到的伤害减少[blue]50%[/blue]。",
+  "TH_PATCHOULI-SUN_STONE.description": "拥有[orange]日元素[/orange]时，你造成的伤害增加[blue]50%[/blue]。",
   "TH_PATCHOULI-SUN_STONE.flavor": "蕴含着来自太阳的力量，日光照耀下属性提升。"
 }

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bw1lgv5qcoane"
-path="res://.godot/imported/TH_PATCHOULI-COUGH_SUPPRESSANT_POTION.png-e4fc089133a106592f345742c5f3e7e7.ctex"
+uid="uid://cq4nfdic6j6l7"
+path="res://.godot/imported/TH_PATCHOULI-MANA_STORE.png-946733cddf060e49a4289f82a7b6c6ad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TH_Patchouli/ArtWorks/Potions/Outlines/TH_PATCHOULI-COUGH_SUPPRESSANT_POTION.png"
-dest_files=["res://.godot/imported/TH_PATCHOULI-COUGH_SUPPRESSANT_POTION.png-e4fc089133a106592f345742c5f3e7e7.ctex"]
+source_file="res://TH_Patchouli/ArtWorks/Cards/TH_PATCHOULI-MANA_STORE.png"
+dest_files=["res://.godot/imported/TH_PATCHOULI-MANA_STORE.png-946733cddf060e49a4289f82a7b6c6ad.ctex"]
 
 [params]
 

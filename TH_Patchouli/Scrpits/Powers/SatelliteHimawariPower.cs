@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -35,9 +36,23 @@ namespace TH_Patchouli.Scrpits.Powers
 
 			Flash();
 			TryPlaySunDropVfx();
-			await PlayerCmd.GainEnergy(Amount, Owner.Player);
-			await CardPileCmd.Draw(new ThrowingPlayerChoiceContext(), Amount, Owner.Player);
 		}
+		 public override decimal ModifyMaxEnergy(Player player, decimal amount)
+    {
+        if (player != base.Owner.Player)
+        {
+            return amount;
+        }
+        return amount + (decimal)base.Amount;
+    }
+	public override decimal ModifyHandDraw(Player player, decimal count)
+	{
+		if (player != base.Owner.Player)
+		{
+			return count;
+		}
+		return count + (decimal)base.Amount;
+	}
 
 		private void TryPlaySunDropVfx()
 		{

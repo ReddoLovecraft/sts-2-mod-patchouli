@@ -35,10 +35,12 @@ public class DestinyStone : CustomRelicModel
 	protected override IEnumerable<IHoverTip> ExtraHoverTips => [Tools.GetStaticKeyword("Forseen")];
  	public override async Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
 	{
-		if (card.Owner == base.Owner)
+		if (card.Owner!=null&&card.Owner != base.Owner)
 		{
-				await Tools.Forseen(choiceContext,Owner,1);
+			return;
 		}
+		Flash();
+		await Tools.Forseen(choiceContext, Owner, 1);
 	}
 
 }

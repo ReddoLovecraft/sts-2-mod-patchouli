@@ -122,6 +122,9 @@ namespace TH_Patchouli.Scripts.Main
 无法逃脱。
 保留。
 
+//新增卡牌 姆q 帕秋莉♂GO！西方的东方魔法师 幻想乡电台
+
+
 事件：
 三重伟大者
 阅读玉石板 获得《翠玉录》。

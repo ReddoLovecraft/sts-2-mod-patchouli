@@ -8,6 +8,8 @@ namespace TH_Patchouli.Scrpits.Powers
 	public sealed class SunflareTempStrengthDownPower : CustomTempStrengthPower
 	{
 		public override AbstractModel OriginModel => ModelDb.Card<Sunflare>();
+		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/SF32.png";  
+        public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/SF64.png";
 		protected override bool IsPositive => false;
 	}
 }

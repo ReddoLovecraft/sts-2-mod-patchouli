@@ -33,7 +33,7 @@ namespace TH_Patchouli.Scrpits.Cards
 			HoverTipFactory.FromPower<WeakPower>(),
 			HoverTipFactory.FromPower<RegenPower>()
 		];
-		protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("Power", 1m), new CardsVar(5)];
+		protected override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("Power", 1m), new CardsVar(3)];
 
 		public SpringWind() : base(0, CardType.Skill, CardRarity.Uncommon, TargetType.AllEnemies)
 		{
