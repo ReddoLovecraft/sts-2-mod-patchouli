@@ -68,7 +68,8 @@ namespace TH_Patchouli.Scripts.Main
 			 ModelDb.Card<DefendSun>(),
 			 ModelDb.Card<DefendLunar>(),
 			 ModelDb.Card<DefendLunar>(),
-			 ModelDb.Card<ElementRefinement>()
+			 ModelDb.Card<ElementRefinement>(),
+			 ..(PatchouliModConfig.Frailty ? new[] { ModelDb.Card<Tired>() } : System.Array.Empty<CardModel>())
 		
 	];
 

@@ -18,7 +18,7 @@ using TH_Patchouli.Scrpits.Powers;
 namespace TH_Patchouli.Scrpits.Cards
 {
 	[Pool(typeof(CurseCardPool))]
-	public sealed class Tired : PatchouliCardModel,ITransformListener
+	public sealed class Tired : PatchouliCardModel
 	{
 		public override int MaxUpgradeLevel => 0;
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [this.EnergyHoverTip,HoverTipFactory.FromKeyword(CardKeyword.Exhaust)];
@@ -59,13 +59,10 @@ namespace TH_Patchouli.Scrpits.Cards
 			CardModel copy = this.CreateClone();
 			await CardPileCmd.AddGeneratedCardToCombat(copy, PileType.Hand, addedByPlayer: true);
 		}
-        public async Task AfterCardTransformed(PlayerChoiceContext choiceContext, CardModel transformedCard, CardModel resultCard, Creature player)
+        public override void AfterTransformedFrom()
         {
-            if(transformedCard.Owner==this.Owner&&transformedCard==this)
-			{
-				CardModel card = this.CreateClone();
-				await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, addedByPlayer: true);
-			}
+			CardModel card = this.CreateClone();
+			CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, addedByPlayer: true);
         }
     }
 }

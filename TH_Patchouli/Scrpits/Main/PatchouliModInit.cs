@@ -22,6 +22,7 @@ using System.Runtime.CompilerServices;
 using System.Reflection;
 using MegaCrit.Sts2.Core.Commands;
 using TH_Patchouli.Scripts.Main;
+using BaseLib.Config;
 
 namespace TH_Patchouli.Scripts.Main
 {
@@ -38,6 +39,7 @@ namespace TH_Patchouli.Scripts.Main
 	public static void Init()
 	{
 		 TryRegisterGodotScriptAssembly();
+		ModConfigRegistry.Register("TH_Patchouli", new PatchouliModConfig());
 		_harmony = new Harmony("TH_Patchouli");
 		_harmony.PatchAll();
 		Log.Debug("Patchouli mod has been loaded successfully");
