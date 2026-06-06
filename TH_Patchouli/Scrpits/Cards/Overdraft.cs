@@ -28,6 +28,7 @@ namespace TH_Patchouli.Scrpits.Cards
 	[Pool(typeof(StatusCardPool))]
 	public sealed class Overdraft : PatchouliCardModel
 	{
+		 public override int MaxUpgradeLevel => 0;
 		public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 		protected override IEnumerable<IHoverTip> ExtraHoverTips =>
 		[

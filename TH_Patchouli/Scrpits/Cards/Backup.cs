@@ -49,7 +49,7 @@ namespace TH_Patchouli.Scrpits.Cards
 			List<CardModel> dupes = new();
 			for (int i = 0; i < DynamicVars.Cards.IntValue; i++)
 			{
-				dupes.Add(selected.CreateDupe());
+				dupes.Add(selected.CreateClone());
 			}
 
 			await CardPileCmd.AddGeneratedCardsToCombat(dupes, PileType.Draw, addedByPlayer: true, position: CardPilePosition.Top);

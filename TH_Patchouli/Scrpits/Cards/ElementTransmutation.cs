@@ -26,7 +26,7 @@ namespace TH_Patchouli.Scripts.Cards
 [Pool(typeof(ColorlessCardPool))]
 public sealed class ElementTransmutation : PatchouliCardModel
 {
-	public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
+	public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain,CardKeyword.Exhaust];
 	protected override IEnumerable<IHoverTip> ExtraHoverTips =>
 	[
 		HoverTipFactory.FromKeyword(CardKeyword.Retain),
@@ -39,7 +39,7 @@ public sealed class ElementTransmutation : PatchouliCardModel
 		this.DynamicVars["Power"].UpgradeValueBy(boostAmount);
 		this.DynamicVars.Cards.UpgradeValueBy(boostAmount);
 	}
-	public ElementTransmutation() : base(0, CardType.Skill, CardRarity.Common, TargetType.Self)
+	public ElementTransmutation() : base(0, CardType.Skill, CardRarity.Rare, TargetType.Self)
 	{
 	}
 	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

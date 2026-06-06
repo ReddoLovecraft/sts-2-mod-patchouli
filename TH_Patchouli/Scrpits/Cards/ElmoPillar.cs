@@ -42,11 +42,6 @@ namespace TH_Patchouli.Scrpits.Cards
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
-			if (CombatState == null)
-			{
-				return;
-			}
-
 			foreach (Creature enemy in CombatState.HittableEnemies)
 			{
 				bool isAttack = enemy.Monster?.NextMove?.Intents.Any(i => i.IntentType == IntentType.Attack || i.IntentType == IntentType.DeathBlow) ?? false;

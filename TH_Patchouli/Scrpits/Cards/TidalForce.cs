@@ -47,7 +47,7 @@ namespace TH_Patchouli.Scrpits.Cards
 				{
 					dmg *= 2m;
 				}
-				await DamageCmd.Attack(dmg).FromCard(this).WithHitFx("vfx/vfx_heavy_blunt", null, "blunt_attack.mp3").Targeting(cardPlay.Target).Execute(choiceContext);
+				await DamageCmd.Attack(dmg).FromCard(this).WithHitFx("vfx/vfx_heavy_blunt", null, "blunt_attack.mp3").Targeting(enemy).Execute(choiceContext);
 			}
 		}
 

@@ -29,8 +29,6 @@ namespace TH_Patchouli.Scrpits.Cards
 	{
 		public override bool GainsBlock => true;
 		public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
-		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CardKeyword.Retain)];
-
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(7m, ValueProp.Move), new CardsVar(7)];
 
 		public BookBite() : base(2, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)

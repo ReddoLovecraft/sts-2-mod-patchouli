@@ -25,7 +25,7 @@ namespace TH_Patchouli.Scripts.Cards
 [Pool(typeof(PatchouliCardPool))]
 public sealed class SupermeAlchemy : PatchouliCardModel
 {
-	 public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain,CardKeyword.Exhaust];
+	 public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
 	protected override IEnumerable<IHoverTip> ExtraHoverTips =>
 	[
 		HoverTipFactory.FromKeyword(CardKeyword.Retain),

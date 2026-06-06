@@ -1,0 +1,41 @@
+using BaseLib.Utils;
+using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Powers;
+using Patchoulib.Scrpits.Main;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using TH_Patchouli.Scripts.Main;
+using TH_Patchouli.Scrpits.Powers;
+
+namespace TH_Patchouli.Scrpits.Cards
+{
+	[Pool(typeof(PatchouliCardPool))]
+	public sealed class WesternTouhou : PatchouliCardModel
+	{
+		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<DexterityPower>(),HoverTipFactory.FromPower<StrengthPower>()];
+		protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(1)];
+
+		public WesternTouhou() : base(0, CardType.Power, CardRarity.Rare, TargetType.Self)
+		{
+		}
+
+		public override void BoostWhenElementEnhanced(int boostAmount)
+		{
+			DynamicVars.Cards.UpgradeValueBy(boostAmount);
+		}
+
+		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+		{
+			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+			await PowerCmd.Apply<WesternTouhouPower>(Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
+		}
+
+		protected override void OnUpgrade()
+		{
+			this.AddKeyword(CardKeyword.Innate);
+		}
+	}
+}
