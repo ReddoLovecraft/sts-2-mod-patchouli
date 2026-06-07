@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dd3tyu50rcn3s"
-valid=false
+uid="uid://bndmnfoxjxe4j"
+path="res://.godot/imported/meetremi.png-3115e58c6cb89e5f90558c878a2ecfba.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://TH_Patchouli/ArtWorks/Events/meetremi.png"
+dest_files=["res://.godot/imported/meetremi.png-3115e58c6cb89e5f90558c878a2ecfba.ctex"]
 
 [params]
 

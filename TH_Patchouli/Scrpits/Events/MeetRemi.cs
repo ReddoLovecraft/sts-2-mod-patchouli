@@ -23,7 +23,7 @@ namespace TH_Patchouli.Scripts.Events;
 public sealed class MeetRemi : CustomEventModel
 {
 	private readonly HpLossVar _hpLossVar = new HpLossVar(4);
-	 public override string? CustomInitialPortraitPath => "res://TH_Patchouli/ArtWorks/Events/meetremi.png";
+	public override string? CustomInitialPortraitPath => "res://TH_Patchouli/ArtWorks/Events/rm.png";
 	protected override IEnumerable<DynamicVar> CanonicalVars => new[] { _hpLossVar };
 
 	public override bool IsAllowed(IRunState runState)
