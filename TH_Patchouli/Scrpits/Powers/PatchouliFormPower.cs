@@ -40,10 +40,10 @@ namespace TH_Patchouli.Scrpits.Powers
 				return res;
 			}
 			if(dealer==Owner&&cardSource!=null&&props.IsPoweredAttack_()){
-				decimal res=1m+this.Amount/100m;
+				decimal res=1m-this.Amount/100m;
 				return res;
 			}
-			return base.Amount;
+			return 1m;
 		}
 		public override async Task BeforeDamageReceived(PlayerChoiceContext choiceContext, Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
     {

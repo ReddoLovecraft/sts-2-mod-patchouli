@@ -351,7 +351,7 @@
 	"TH_PATCHOULI-MOON_DIRT.description": "每当卡牌被[gold]保留[/gold]时，将其在本场战斗中的耗能减少{Cards:diff()}点。",
 	"TH_PATCHOULI-TIRED.title": "疲劳",
 	"TH_PATCHOULI-TIRED.description": "将这张牌放到你的[gold]抽牌堆[/gold]顶部。\n当这张牌在你的手中时，每当你在一回合内打出超过5张牌时，将那张牌[gold]消耗[/gold]，超过9张牌时，每回合少获得{Energy:energyIcons()}并少抽1张牌。",
-	"TH_PATCHOULI-CRAZY.title": "疯狂",
+	"TH_PATCHOULI-CRAZY.title": "狂乱",
 	"TH_PATCHOULI-CRAZY.description": "每当你抽到这张牌时，随机打出你的所有[gold]手牌[/gold]并将其在本场战斗中的耗能增加1点。",
 	"TH_PATCHOULI-PATCHOULI_FORM.title": "姆Q形态",
 	"TH_PATCHOULI-PATCHOULI_FORM.description": "你造成和受到的伤害减少{Cards:diff()}%。",

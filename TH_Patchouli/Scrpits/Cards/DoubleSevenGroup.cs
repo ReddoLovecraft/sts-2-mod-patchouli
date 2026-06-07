@@ -17,7 +17,7 @@ namespace TH_Patchouli.Scrpits.Cards
 		public override bool GainsBlock => true;
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new DamageVar(7, ValueProp.Move),new BlockVar(7,ValueProp.Move)];
 
-		public DoubleSevenGroup() : base(1, CardType.Attack, CardRarity.Event, TargetType.AnyEnemy)
+		public DoubleSevenGroup() : base(0, CardType.Attack, CardRarity.Event, TargetType.AnyEnemy)
 		{
 		}
 
@@ -48,7 +48,7 @@ namespace TH_Patchouli.Scrpits.Cards
 			
 		protected override void OnUpgrade()
 		{
-			this.EnergyCost.UpgradeBy(-1);
+			this.AddKeyword(CardKeyword.Innate);
 		}
 	}
 }
