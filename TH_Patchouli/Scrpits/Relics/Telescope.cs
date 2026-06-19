@@ -1,4 +1,4 @@
-using BaseLib.Abstracts;
+﻿using BaseLib.Abstracts;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
@@ -33,7 +33,7 @@ public class Telescope : CustomRelicModel
     protected override string BigIconPath => $"res://TH_Patchouli/ArtWorks/Relics/{Id.Entry}.png";
     public override RelicRarity Rarity => RelicRarity.Common;
 	protected override IEnumerable<IHoverTip> ExtraHoverTips => [Tools.GetStaticKeyword("Forseen")];
-	public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
+	public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
 	{
 		if (side == CombatSide.Player && combatState.RoundNumber <= 1)
 		{
@@ -45,3 +45,4 @@ public class Telescope : CustomRelicModel
 
 }
 }
+

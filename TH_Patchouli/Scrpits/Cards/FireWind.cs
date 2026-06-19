@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -69,7 +69,7 @@ namespace TH_Patchouli.Scrpits.Cards
 				{
 					NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(enemy));
         			SfxCmd.Play("event:/sfx/characters/attack_fire");
-					await PowerCmd.Apply<IgnitePower>(enemy, add, Owner.Creature, this);
+					await PowerCmd.Apply<IgnitePower>(choiceContext, enemy, add, Owner.Creature, this);
 				}
 			}
 		}
@@ -80,3 +80,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

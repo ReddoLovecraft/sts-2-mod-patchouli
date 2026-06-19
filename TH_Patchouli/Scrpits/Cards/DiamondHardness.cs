@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Combat;
@@ -46,11 +46,12 @@ namespace TH_Patchouli.Scrpits.Cards
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
 			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-			await PowerCmd.Apply<DiamondHardnessPower>(Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
+			await PowerCmd.Apply<DiamondHardnessPower>(choiceContext, Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
 			if (IsUpgraded)
 			{
-				await PowerCmd.Apply<PlatingPower>(Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
+				await PowerCmd.Apply<PlatingPower>(choiceContext, Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
 			}
 		}
 	}
 }
+

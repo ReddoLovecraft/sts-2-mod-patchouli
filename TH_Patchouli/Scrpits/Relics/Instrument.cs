@@ -77,7 +77,7 @@ public class Instrument : CustomRelicModel
 		}
 	}
 
-    public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
+    public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
 	{
 		if (side == base.Owner.Creature.Side)
 		{
@@ -96,7 +96,7 @@ public class Instrument : CustomRelicModel
 			if (AttacksPlayedThisTurn > 0 && SkillsPlayedThisTurn > 0 && PowersPlayedThisTurn > 0)
 			{
 				Flash();
-			    await PowerCmd.Apply<ArtifactPower>(Owner.Creature,1,Owner.Creature,null);
+			    await PowerCmd.Apply<ArtifactPower>(context, Owner.Creature, 1, Owner.Creature, null);
 				AttacksPlayedThisTurn --;
 				SkillsPlayedThisTurn --;
 				PowersPlayedThisTurn --;
@@ -106,3 +106,5 @@ public class Instrument : CustomRelicModel
 
 }
 }
+
+

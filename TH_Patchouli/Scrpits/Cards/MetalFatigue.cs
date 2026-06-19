@@ -1,4 +1,4 @@
-using BaseLib.Extensions;
+﻿using BaseLib.Extensions;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
@@ -55,9 +55,9 @@ namespace TH_Patchouli.Scrpits.Cards
 			int goldElement = Owner.Creature.GetPower<TH_Patchouli.Scrpits.Powers.GoldElement>()?.Amount ?? 0;
 			if (goldElement > 0)
 			{
-				await PowerCmd.Apply<StrengthPower>(Owner.Creature, goldElement, Owner.Creature, this);
+				await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, goldElement, Owner.Creature, this);
 			}
-			await PowerCmd.Apply<WeakPower>(Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
+			await PowerCmd.Apply<WeakPower>(choiceContext, Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
 		}
 
 		protected override void OnUpgrade()
@@ -66,3 +66,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

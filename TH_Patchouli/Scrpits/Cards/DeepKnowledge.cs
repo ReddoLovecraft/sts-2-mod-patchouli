@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -60,8 +60,8 @@ namespace TH_Patchouli.Scrpits.Cards
 		{
 			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			int total = Math.Max(0, (int)((CalculatedVar)DynamicVars["CalculatedPower"]).Calculate(cardPlay.Target));
-			await PowerCmd.Apply<StrengthPower>(Owner.Creature, total, Owner.Creature, this);
-			await PowerCmd.Apply<DexterityPower>(Owner.Creature, total, Owner.Creature, this);
+			await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, total, Owner.Creature, this);
+			await PowerCmd.Apply<DexterityPower>(choiceContext, Owner.Creature, total, Owner.Creature, this);
 		}
 
 		protected override void OnUpgrade()
@@ -101,3 +101,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

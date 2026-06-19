@@ -1,4 +1,4 @@
-using BaseLib.Abstracts;
+﻿using BaseLib.Abstracts;
 using Godot;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Combat.History.Entries;
@@ -27,7 +27,7 @@ namespace TH_Patchouli.Scrpits.Powers
 
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<DexterityPower>()];
 
-		public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+		public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
 		{
 			if (side != Owner.Side || CombatState == null)
 			{
@@ -39,8 +39,10 @@ namespace TH_Patchouli.Scrpits.Powers
 			if (played <= 5)
 			{
 				this.Flash();
-				await PowerCmd.Apply<DexterityPower>(Owner, Amount, Owner, null);
+				await PowerCmd.Apply<DexterityPower>(choiceContext, Owner, Amount, Owner, null);
 			}
 		}
 	}
 }
+
+

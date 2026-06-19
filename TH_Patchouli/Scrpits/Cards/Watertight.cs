@@ -48,7 +48,7 @@ namespace TH_Patchouli.Scrpits.Cards
 			ArgumentNullException.ThrowIfNull(cardPlay.Target);
 
 			AttackCommand attack = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)   .WithHitFx(PatchouliVfxManager.ToPatchouliVfxPath("careful"), null, "blunt_attack.mp3").Targeting(cardPlay.Target).Execute(choiceContext);
-			int unblocked = attack.Results.Sum(r => r.UnblockedDamage);
+			int unblocked = attack.Results.SelectMany(r => r).Sum(r => r.UnblockedDamage);
 			int maxRetain = unblocked / 3;
 			if (maxRetain <= 0)
 			{

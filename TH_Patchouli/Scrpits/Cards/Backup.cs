@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -52,7 +52,7 @@ namespace TH_Patchouli.Scrpits.Cards
 				dupes.Add(selected.CreateClone());
 			}
 
-			await CardPileCmd.AddGeneratedCardsToCombat(dupes, PileType.Draw, addedByPlayer: true, position: CardPilePosition.Top);
+			await CardPileCmd.AddGeneratedCardsToCombat(dupes, PileType.Draw, creator: Owner, position: CardPilePosition.Top);
 		}
 
 		protected override void OnUpgrade()
@@ -61,3 +61,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

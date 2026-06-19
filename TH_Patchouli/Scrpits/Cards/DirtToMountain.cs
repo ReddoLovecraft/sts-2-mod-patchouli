@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -47,7 +47,7 @@ namespace TH_Patchouli.Scrpits.Cards
 			int platingEach = Math.Max(0, DynamicVars["Power"].IntValue);
 			if (triggers > 0 && platingEach > 0)
 			{
-				await PowerCmd.Apply<PlatingPower>(Owner.Creature, triggers * platingEach, Owner.Creature, this);
+				await PowerCmd.Apply<PlatingPower>(choiceContext, Owner.Creature, triggers * platingEach, Owner.Creature, this);
 			}
 		}
 
@@ -58,4 +58,5 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+
 

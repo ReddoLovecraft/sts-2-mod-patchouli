@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -47,7 +47,7 @@ namespace TH_Patchouli.Scrpits.Cards
 				CardModel? selected = (await CardSelectCmd.FromSimpleGrid(choiceContext, selectableCards, creature.Player, prefs)).FirstOrDefault();
 				if (selected != null)
 				{
-					await CardPileCmd.AddGeneratedCardToCombat(selected, PileType.Hand, addedByPlayer: true);
+					await CardPileCmd.AddGeneratedCardToCombat(selected, PileType.Hand, creator: Owner);
 				}
 			}
 			await PlayerCmd.GainGold(gainGold,base.Owner);
@@ -58,3 +58,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

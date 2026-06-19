@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -44,8 +44,8 @@ namespace TH_Patchouli.Scrpits.Cards
 
 			int amt = DynamicVars.Cards.IntValue;
 			 VfxCmd.PlayOnCreatureCenter(Owner.Creature, PatchouliVfxManager.ToPatchouliVfxPath("sundot"));
-			await PowerCmd.Apply<SunflareTempStrengthPower>(Owner.Creature, amt, Owner.Creature, this);
-			await PowerCmd.Apply<SunflareTempStrengthDownPower>(CombatState.HittableEnemies, amt, Owner.Creature, this);
+			await PowerCmd.Apply<SunflareTempStrengthPower>(choiceContext, Owner.Creature, amt, Owner.Creature, this);
+			await PowerCmd.Apply<SunflareTempStrengthDownPower>(choiceContext, CombatState.HittableEnemies, amt, Owner.Creature, this);
 		}
 
 		protected override void OnUpgrade()
@@ -54,3 +54,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -53,7 +53,7 @@ namespace TH_Patchouli.Scrpits.Cards
 
 			CardModel a = CombatState.CreateCard(ModelDb.Card<Overdraft>(), Owner);
 			CardModel b = CombatState.CreateCard(ModelDb.Card<Overdraft>(), Owner);
-			await CardPileCmd.AddGeneratedCardsToCombat([a, b], PileType.Hand, addedByPlayer: true, position: CardPilePosition.Top);
+			await CardPileCmd.AddGeneratedCardsToCombat([a, b], PileType.Hand, creator: Owner, position: CardPilePosition.Top);
 		}
 
 		protected override void OnUpgrade()
@@ -62,3 +62,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

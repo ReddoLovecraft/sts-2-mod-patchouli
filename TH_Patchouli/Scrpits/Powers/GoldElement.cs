@@ -1,4 +1,4 @@
-using BaseLib.Abstracts;
+﻿using BaseLib.Abstracts;
 using BaseLib.Extensions;
 using Godot;
 using MegaCrit.Sts2.Core.Combat;
@@ -41,9 +41,10 @@ namespace TH_Patchouli.Scrpits.Powers
                 return;
             }
             this.Flash();
-            await PowerCmd.Apply<FlexPotionPower>(Owner,Amount,Owner,null);
+            await PowerCmd.Apply<FlexPotionPower>(choiceContext, Owner,Amount,Owner,null);
 			 if(Owner.Player.GetRelic<EmeraldTablet>()==null)
 			await PowerCmd.Decrement(this);
         }
     }
 }
+

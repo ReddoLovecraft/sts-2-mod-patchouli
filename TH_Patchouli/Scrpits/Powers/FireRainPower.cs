@@ -1,4 +1,4 @@
-using BaseLib.Abstracts;
+﻿using BaseLib.Abstracts;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -60,7 +60,7 @@ namespace TH_Patchouli.Scrpits.Powers
 			for (int i = 0; i < Amount; i++)
 			{
 				Flash();
-				await PowerCmd.Apply<IgnitePower>(CombatState.HittableEnemies, ignite, Owner, null);
+				await PowerCmd.Apply<IgnitePower>(choiceContext, CombatState.HittableEnemies, ignite, Owner, null);
 			}
 		}
 
@@ -89,3 +89,4 @@ namespace TH_Patchouli.Scrpits.Powers
 		}
 	}
 }
+

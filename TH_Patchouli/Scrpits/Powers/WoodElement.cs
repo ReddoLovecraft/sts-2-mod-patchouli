@@ -1,4 +1,4 @@
-using BaseLib.Abstracts;
+﻿using BaseLib.Abstracts;
 using BaseLib.Extensions;
 using Godot;
 using MegaCrit.Sts2.Core.Combat;
@@ -41,7 +41,7 @@ namespace TH_Patchouli.Scrpits.Powers
 			 if(Owner.Player.GetRelic<EmeraldTablet>()==null)
 			await PowerCmd.Decrement(this);
         }
-         public override async Task BeforeTurnEndEarly(PlayerChoiceContext choiceContext, CombatSide side)
+         public override async Task BeforeSideTurnEndEarly(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
         {
             if (side == base.Owner.Side)
             {
@@ -51,3 +51,4 @@ namespace TH_Patchouli.Scrpits.Powers
         }
     }
 }
+

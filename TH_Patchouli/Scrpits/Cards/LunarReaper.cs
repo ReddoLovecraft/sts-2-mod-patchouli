@@ -55,7 +55,7 @@ namespace TH_Patchouli.Scrpits.Cards
 			Player? player = Owner;
 			SfxCmd.Play("event:/sfx/characters/ironclad/ironclad_whirlwind");
 			AttackCommand attack = await DamageCmd.Attack(DynamicVars.CalculatedDamage)	.WithHitFx("vfx/vfx_giant_horizontal_slash").FromCard(this).TargetingAllOpponents(CombatState).Execute(choiceContext);
-			int killCount = attack.Results.Count(r => r.WasTargetKilled);
+			int killCount = attack.Results.SelectMany(r => r).Count(r => r.WasTargetKilled);
 			for (int i = 0; i < killCount; i++)
 			{
 				await PlayerCmd.GainEnergy(DynamicVars.Energy.IntValue, player);

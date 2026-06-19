@@ -41,9 +41,9 @@ namespace TH_Patchouli.Scrpits.Cards
 			DynamicVars.Cards.UpgradeValueBy(boostAmount);
 		}
 
-		public override Task AfterCardRetained(CardModel card)
+		public override Task AfterFlush(PlayerChoiceContext choiceContext, Player player, IReadOnlyCollection<CardModel> flushedCards, IReadOnlyCollection<CardModel> retainedCards)
 		{
-			if (card == this)
+			if (player == Owner && retainedCards.Contains(this))
 			{
 				DynamicVars.Damage.BaseValue = Math.Max(0m, DynamicVars.Damage.BaseValue + DynamicVars.Cards.IntValue);
 			}
@@ -55,7 +55,7 @@ namespace TH_Patchouli.Scrpits.Cards
 			ArgumentNullException.ThrowIfNull(cardPlay.Target);
 
 			AttackCommand attack = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)  .WithHitFx("vfx/vfx_bite", null, "blunt_attack.mp3").Targeting(cardPlay.Target).Execute(choiceContext);
-			int unblocked = attack.Results.Sum(r => r.UnblockedDamage);
+			int unblocked = attack.Results.SelectMany(r => r).Sum(r => r.UnblockedDamage);
 			if (unblocked > 0)
 			{
 				await CreatureCmd.LoseMaxHp(choiceContext, cardPlay.Target, unblocked, isFromCard: true);

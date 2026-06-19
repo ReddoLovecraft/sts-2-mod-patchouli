@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Combat;
@@ -47,13 +47,19 @@ namespace TH_Patchouli.Scrpits.Cards
 			DynamicVars["Power"].UpgradeValueBy(boostAmount);
 			DynamicVars.Cards.UpgradeValueBy(boostAmount);
 		}
+		protected override void OnUpgrade()
+		{
+			DynamicVars["Power"].UpgradeValueBy(1);
+			DynamicVars.Cards.UpgradeValueBy(3);
+		}
 
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
 			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			VfxCmd.PlayOnCreatureCenter(cardPlay.Target, PatchouliVfxManager.ToPatchouliVfxPath("firesign"));
-			await PowerCmd.Apply<IgniteMark>(cardPlay.Target, DynamicVars["Power"].IntValue, Owner.Creature, this);
-			await PowerCmd.Apply<IgnitePower>(cardPlay.Target, DynamicVars.Cards.IntValue, Owner.Creature, this);
+			await PowerCmd.Apply<IgniteMark>(choiceContext, cardPlay.Target, DynamicVars["Power"].IntValue, Owner.Creature, this);
+			await PowerCmd.Apply<IgnitePower>(choiceContext, cardPlay.Target, DynamicVars.Cards.IntValue, Owner.Creature, this);
 		}
 	}
 }
+

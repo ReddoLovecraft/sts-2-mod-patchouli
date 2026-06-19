@@ -1,4 +1,4 @@
-using BaseLib.Abstracts;
+﻿using BaseLib.Abstracts;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -30,7 +30,8 @@ namespace TH_Patchouli.Scrpits.Powers
 				return;
 			}
 			this.Flash();
-			await PowerCmd.Apply<PlatingPower>(Owner, Amount, Owner, null);
+			await PowerCmd.Apply<PlatingPower>(choiceContext, Owner, Amount, Owner, null);
 		}
 	}
 }
+

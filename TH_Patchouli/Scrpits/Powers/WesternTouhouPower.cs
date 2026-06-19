@@ -35,14 +35,15 @@ namespace TH_Patchouli.Scrpits.Powers
 		   if(cardPlay.Card.Type==CardType.Attack)
 		   {
 			this.Flash();
-			await PowerCmd.Apply<SpeedPotionPower>(base.Owner, Amount, base.Owner, null);
+			await PowerCmd.Apply<SpeedPotionPower>(context, base.Owner, Amount, base.Owner, null);
 		   }
 		   if(cardPlay.Card.Type==CardType.Skill)
 		   {
 			this.Flash();
-			await PowerCmd.Apply<FlexPotionPower>(base.Owner, Amount, base.Owner, null);
+			await PowerCmd.Apply<FlexPotionPower>(context, base.Owner, Amount, base.Owner, null);
 		   }
 		}
 	}
 	}
 }
+

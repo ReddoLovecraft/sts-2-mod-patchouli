@@ -65,7 +65,7 @@ namespace TH_Patchouli.Scrpits.Main
         }
        public static async Task OpenElementSelectGirdForGain(PlayerChoiceContext choiceContext,Creature owner,int GainedAmount)
     {
-            CombatState combatState = owner.CombatState;
+            ICombatState combatState = owner.CombatState;
             Player player = owner.Player;
             CardSelectorPrefs prefs = new CardSelectorPrefs(GetCustomText("static_hover_tips","element",".selectionScreenPrompt"), 1);
             List<CardModel> cards =
@@ -87,7 +87,7 @@ namespace TH_Patchouli.Scrpits.Main
     }
          public static async Task OpenElementSelectGirdForCard(PlayerChoiceContext choiceContext,Creature owner,PatchouliCardModel toGainElementCard)
     {
-            CombatState combatState = owner.CombatState;
+            ICombatState combatState = owner.CombatState;
             Player player = owner.Player;
             CardSelectorPrefs prefs = new CardSelectorPrefs(GetCustomText("static_hover_tips","element",".selectionScreenPrompt"), 1);
             List<CardModel> cards =
@@ -151,25 +151,25 @@ namespace TH_Patchouli.Scrpits.Main
                switch(e)
                {
                     case ElementEnum.Gold:
-                        await PowerCmd.Apply<GoldElement>(owner,amount,owner,null);
+                        await PowerCmd.Apply<GoldElement>(new ThrowingPlayerChoiceContext(), owner, amount, owner, null);
                         break;
                     case ElementEnum.Lunar:
-                        await PowerCmd.Apply<LunarElement>(owner,amount,owner,null);
+                        await PowerCmd.Apply<LunarElement>(new ThrowingPlayerChoiceContext(), owner, amount, owner, null);
                         break;
                     case ElementEnum.Sun:
-                        await PowerCmd.Apply<SunElement>(owner,amount,owner,null);
+                        await PowerCmd.Apply<SunElement>(new ThrowingPlayerChoiceContext(), owner, amount, owner, null);
                         break;
                     case ElementEnum.Fire:
-                        await PowerCmd.Apply<FireElement>(owner,amount,owner,null);
+                        await PowerCmd.Apply<FireElement>(new ThrowingPlayerChoiceContext(), owner, amount, owner, null);
                         break;
                     case ElementEnum.Water:
-                        await PowerCmd.Apply<WaterElement>(owner,amount,owner,null);
+                        await PowerCmd.Apply<WaterElement>(new ThrowingPlayerChoiceContext(), owner, amount, owner, null);
                         break;
                     case ElementEnum.Wood:
-                        await PowerCmd.Apply<WoodElement>(owner,amount,owner,null);
+                        await PowerCmd.Apply<WoodElement>(new ThrowingPlayerChoiceContext(), owner, amount, owner, null);
                         break;
                     case ElementEnum.Dirt:
-                        await PowerCmd.Apply<DirtElement>(owner,amount,owner,null);
+                        await PowerCmd.Apply<DirtElement>(new ThrowingPlayerChoiceContext(), owner, amount, owner, null);
                         break;
                     default:
                         break;
@@ -259,3 +259,4 @@ namespace TH_Patchouli.Scrpits.Main
     }
     
 }
+

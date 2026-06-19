@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -52,11 +52,11 @@ namespace TH_Patchouli.Scrpits.Cards
 			await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)   .WithHitFx(PatchouliVfxManager.ToPatchouliVfxPath("grab"), null, "blunt_attack.mp3").Execute(choiceContext);
 
 			int amount = DynamicVars.Cards.IntValue;
-			await PowerCmd.Apply<StrengthPower>(cardPlay.Target, -amount, Owner.Creature, this);
-			await PowerCmd.Apply<DexterityPower>(cardPlay.Target, -amount, Owner.Creature, this);
+			await PowerCmd.Apply<StrengthPower>(choiceContext, cardPlay.Target, -amount, Owner.Creature, this);
+			await PowerCmd.Apply<DexterityPower>(choiceContext, cardPlay.Target, -amount, Owner.Creature, this);
 
-			await PowerCmd.Apply<StrengthPower>(Owner.Creature, amount, Owner.Creature, this);
-			await PowerCmd.Apply<DexterityPower>(Owner.Creature, amount, Owner.Creature, this);
+			await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, amount, Owner.Creature, this);
+			await PowerCmd.Apply<DexterityPower>(choiceContext, Owner.Creature, amount, Owner.Creature, this);
 		}
 
 		protected override void OnUpgrade()
@@ -66,3 +66,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

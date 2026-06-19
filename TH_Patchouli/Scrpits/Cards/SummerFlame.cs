@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -43,10 +43,10 @@ namespace TH_Patchouli.Scrpits.Cards
 			if (cardPlay.Target.HasPower<IgnitePower>())
 			{
 				NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(cardPlay.Target, VfxColor.Red));
-				await PowerCmd.Apply<IgnitePower>(cardPlay.Target, amount, Owner.Creature, this);
+				await PowerCmd.Apply<IgnitePower>(choiceContext, cardPlay.Target, amount, Owner.Creature, this);
 			}
 			NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(cardPlay.Target, VfxColor.Red));
-			await PowerCmd.Apply<IgnitePower>(cardPlay.Target, amount, Owner.Creature, this);
+			await PowerCmd.Apply<IgnitePower>(choiceContext, cardPlay.Target, amount, Owner.Creature, this);
 		}
 
 		protected override void OnUpgrade()
@@ -55,3 +55,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

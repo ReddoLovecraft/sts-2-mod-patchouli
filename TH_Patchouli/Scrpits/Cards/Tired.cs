@@ -45,8 +45,8 @@ namespace TH_Patchouli.Scrpits.Cards
 			}
 			if(num > 9)
 			{
-				await PowerCmd.Apply<MindRotPower>(Owner.Creature,1,Owner.Creature,this);
-				await PowerCmd.Apply<WasteAwayPower>(Owner.Creature,1,Owner.Creature,this);
+				await PowerCmd.Apply<MindRotPower>(context, Owner.Creature, 1, Owner.Creature, this);
+				await PowerCmd.Apply<WasteAwayPower>(context, Owner.Creature, 1, Owner.Creature, this);
 			}
 		}
 	}
@@ -57,12 +57,12 @@ namespace TH_Patchouli.Scrpits.Cards
 				return;
 			}
 			CardModel copy = this.CreateClone();
-			await CardPileCmd.AddGeneratedCardToCombat(copy, PileType.Hand, addedByPlayer: true);
+			await CardPileCmd.AddGeneratedCardToCombat(copy, PileType.Hand, Owner);
 		}
         public override void AfterTransformedFrom()
         {
 			CardModel card = this.CreateClone();
-			CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, addedByPlayer: true);
+			_ = CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, Owner);
         }
     }
 }

@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -47,8 +47,8 @@ namespace TH_Patchouli.Scrpits.Cards
 			}
 			VfxCmd.PlayOnCreatureCenter(Owner.Creature, "vfx/vfx_bite");
 			int amt = DynamicVars["Power"].IntValue;
-			await PowerCmd.Apply<StrengthPower>(Owner.Creature, amt, Owner.Creature, this);
-			await PowerCmd.Apply<DexterityPower>(Owner.Creature, amt, Owner.Creature, this);
+			await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, amt, Owner.Creature, this);
+			await PowerCmd.Apply<DexterityPower>(choiceContext, Owner.Creature, amt, Owner.Creature, this);
 			await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);
 		}
 
@@ -58,3 +58,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -37,7 +37,7 @@ namespace TH_Patchouli.Scrpits.Cards
 			await CardPileCmd.Draw(choiceContext, draw, Owner);
 			if (draw > 0)
 			{
-				await PowerCmd.Apply<DrawCardsNextTurnPower>(Owner.Creature, draw, Owner.Creature, this);
+				await PowerCmd.Apply<DrawCardsNextTurnPower>(choiceContext, Owner.Creature, draw, Owner.Creature, this);
 			}
 		}
 
@@ -47,3 +47,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

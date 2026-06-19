@@ -41,17 +41,17 @@ namespace TH_Patchouli.Scrpits.Powers
 		 if(Owner.Player.GetRelic<EmeraldTablet>()==null)
 			await PowerCmd.Decrement(this);
         }
-       public override decimal ModifyPowerAmountGiven(PowerModel power, Creature giver, decimal amount, Creature? target, CardModel? cardSource)
+       public override decimal ModifyPowerAmountGivenAdditive(PowerModel power, Creature giver, decimal amount, Creature? target, CardModel? cardSource)
 	    {
-            if (giver ==null||giver != base.Owner)
+            if (giver == null || giver != base.Owner)
             {
-                return amount;
+                return 0m;
             }
-            if(power is not IgnitePower)
+            if (power is not IgnitePower)
             {
-                return amount;
+                return 0m;
             }
-            return amount+this.Amount;
+            return this.Amount;
         }
     }
 }

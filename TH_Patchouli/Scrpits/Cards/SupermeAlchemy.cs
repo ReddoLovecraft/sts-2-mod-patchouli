@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using BaseLib.Extensions;
 using BaseLib.Utils;
 using Godot;
@@ -45,7 +45,7 @@ public sealed class SupermeAlchemy : PatchouliCardModel
 			CardModel element = base.CombatState.CreateCard(ModelDb.Card<ElementTransmutation>(), base.Owner);
 			if(IsUpgraded)
 				CardCmd.Upgrade(element);
-			CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardsToCombat(new[] { element }, PileType.Hand, addedByPlayer: true));
+			CardCmd.PreviewCardPileAdd(await CardPileCmd.AddGeneratedCardsToCombat(new[] { element }, PileType.Hand, creator: Owner));
 		}
 	}
 	protected override void OnUpgrade()
@@ -55,3 +55,4 @@ public sealed class SupermeAlchemy : PatchouliCardModel
 }
 
 }
+

@@ -55,7 +55,7 @@ namespace TH_Patchouli.Scrpits.Cards
 			}
 
 			AttackCommand attack = await DamageCmd.Attack(DynamicVars.CalculatedDamage).FromCard(this)  .WithHitFx(PatchouliVfxManager.ToPatchouliVfxPath("sundot"), null, "blunt_attack.mp3").Targeting(cardPlay.Target).Execute(choiceContext);
-			int totalDamage = attack.Results.Sum(r => r.TotalDamage);
+			int totalDamage = attack.Results.SelectMany(r => r).Sum(r => r.TotalDamage);
 			if (totalDamage > 0)
 			{
 				PlayTreasureGoldVfx(cardPlay.Target, totalDamage);

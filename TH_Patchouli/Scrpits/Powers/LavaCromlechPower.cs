@@ -1,4 +1,4 @@
-using BaseLib.Abstracts;
+﻿using BaseLib.Abstracts;
 using BaseLib.Extensions;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -48,10 +48,10 @@ namespace TH_Patchouli.Scrpits.Powers
 			}
 
 			Flash();
-			await PowerCmd.Apply<IgnitePower>(dealer, result.BlockedDamage, Owner, null);
+			await PowerCmd.Apply<IgnitePower>(choiceContext, dealer, result.BlockedDamage, Owner, null);
 		}
 
-		public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
+		public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
 		{
 			if (side == Owner.Side)
 			{
@@ -60,3 +60,5 @@ namespace TH_Patchouli.Scrpits.Powers
 		}
 	}
 }
+
+

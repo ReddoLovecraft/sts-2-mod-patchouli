@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -47,16 +47,16 @@ namespace TH_Patchouli.Scrpits.Cards
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
 			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-			await PowerCmd.Apply<GigantificationPower>(Owner.Creature, 1, Owner.Creature, this);
+			await PowerCmd.Apply<GigantificationPower>(choiceContext, Owner.Creature, 1, Owner.Creature, this);
 		}
 
-		public override async Task AfterCardRetained(CardModel card)
+		public override async Task AfterFlush(PlayerChoiceContext choiceContext, Player player, IReadOnlyCollection<CardModel> flushedCards, IReadOnlyCollection<CardModel> retainedCards)
 		{
-			if (card != this)
+			if (player != Owner || !retainedCards.Contains(this))
 			{
 				return;
 			}
-			await PowerCmd.Apply<VigorPower>(Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
+			await PowerCmd.Apply<VigorPower>(choiceContext, Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
 		}
 
 		protected override void OnUpgrade()
@@ -66,3 +66,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

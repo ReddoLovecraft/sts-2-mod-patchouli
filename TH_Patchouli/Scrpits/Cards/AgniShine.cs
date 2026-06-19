@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Combat.History.Entries;
@@ -49,7 +49,7 @@ namespace TH_Patchouli.Scrpits.Cards
 			foreach (Creature enemy in CombatState.HittableEnemies)
 			{
 				VfxCmd.PlayOnCreatureCenter(enemy, PatchouliVfxManager.ToPatchouliVfxPath("fireshine"));
-				await PowerCmd.Apply<IgnitePower>(enemy, DynamicVars.Cards.IntValue, Owner.Creature, this);
+				await PowerCmd.Apply<IgnitePower>(choiceContext, enemy, DynamicVars.Cards.IntValue, Owner.Creature, this);
 			}
 			foreach (CardModel c in PileType.Hand.GetPile(Owner).Cards)
 			{
@@ -63,3 +63,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

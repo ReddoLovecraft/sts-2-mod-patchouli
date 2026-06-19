@@ -1,4 +1,4 @@
-using BaseLib.Abstracts;
+﻿using BaseLib.Abstracts;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -29,7 +29,7 @@ namespace TH_Patchouli.Scrpits.Powers
 
 
 
-		public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, CombatState combatState)
+		public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
 		{
 			if (player != Owner.Player)
 			{
@@ -51,8 +51,10 @@ namespace TH_Patchouli.Scrpits.Powers
 				}
 
 				generated.EnergyCost.SetThisTurnOrUntilPlayed(0, reduceOnly: true);
-				await CardPileCmd.AddGeneratedCardToCombat(generated, PileType.Hand, addedByPlayer: true);
+				await CardPileCmd.AddGeneratedCardToCombat(generated, PileType.Hand, creator: Owner.Player);
 			}
 		}
 	}
 }
+
+

@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -31,7 +31,7 @@ namespace TH_Patchouli.Scrpits.Cards
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
 			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-			await PowerCmd.Apply<BloodCircleMakePower>(Owner.Creature, 1, Owner.Creature, this);
+			await PowerCmd.Apply<BloodCircleMakePower>(choiceContext, Owner.Creature, 1, Owner.Creature, this);
 		}
 
 		protected override void OnUpgrade()
@@ -40,3 +40,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

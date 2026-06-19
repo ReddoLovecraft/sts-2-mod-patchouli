@@ -1,4 +1,4 @@
-using BaseLib.Abstracts;
+﻿using BaseLib.Abstracts;
 using Godot;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -26,7 +26,7 @@ namespace TH_Patchouli.Scrpits.Powers
 		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/EMP532.png";
 		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/EMP564.png";
 
-		public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, CombatState combatState)
+		public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
 		{
 			if (player != Owner.Player)
 			{
@@ -46,7 +46,9 @@ namespace TH_Patchouli.Scrpits.Powers
 			}
 			Flash();
 			NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(base.Owner, VfxColor.Red));
-			await CardPileCmd.AddGeneratedCardsToCombat(cards, PileType.Hand, addedByPlayer: true);
+			await CardPileCmd.AddGeneratedCardsToCombat(cards, PileType.Hand, creator: Owner.Player);
 		}
 	}
 }
+
+

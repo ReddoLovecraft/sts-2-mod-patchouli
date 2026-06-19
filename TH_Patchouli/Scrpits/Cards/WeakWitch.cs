@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -40,9 +40,9 @@ namespace TH_Patchouli.Scrpits.Cards
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
 			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-			await PowerCmd.Apply<WeakPower>(Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
-			await PowerCmd.Apply<FrailPower>(Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
-			await PowerCmd.Apply<WeakWitchPower>(Owner.Creature, DynamicVars.Energy.IntValue, Owner.Creature, this);
+			await PowerCmd.Apply<WeakPower>(choiceContext, Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
+			await PowerCmd.Apply<FrailPower>(choiceContext, Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
+			await PowerCmd.Apply<WeakWitchPower>(choiceContext, Owner.Creature, DynamicVars.Energy.IntValue, Owner.Creature, this);
 		}
 
 		protected override void OnUpgrade()
@@ -51,3 +51,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

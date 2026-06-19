@@ -1,4 +1,5 @@
 global using MegaCrit.Sts2.Core.Entities.Cards;
+global using MegaCrit.Sts2.Core.Entities.Creatures;
 global using MegaCrit.Sts2.Core.Entities.Powers;
 global using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 global using MegaCrit.Sts2.Core.Models;

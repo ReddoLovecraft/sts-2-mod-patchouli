@@ -1,4 +1,4 @@
-using BaseLib.Abstracts;
+﻿using BaseLib.Abstracts;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -32,7 +32,8 @@ namespace TH_Patchouli.Scrpits.Powers
 				return;
 			}
 			this.Flash();
-			await PowerCmd.Apply<PoisonPower>(target, Amount, Owner, null);
+			await PowerCmd.Apply<PoisonPower>(choiceContext, target, Amount, Owner, null);
 		}
 	}
 }
+

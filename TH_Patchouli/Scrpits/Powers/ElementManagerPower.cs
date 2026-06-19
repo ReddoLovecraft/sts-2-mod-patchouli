@@ -1,4 +1,4 @@
-using BaseLib.Abstracts;
+﻿using BaseLib.Abstracts;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Combat;
@@ -30,7 +30,7 @@ namespace TH_Patchouli.Scrpits.Powers
 		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/EMP432.png";
 		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/EMP464.png";
 
-		public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+		public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
 		{
 			if (CombatState == null || power.Owner != Owner)
 			{
@@ -92,3 +92,4 @@ namespace TH_Patchouli.Scrpits.Powers
 		}
 	}
 }
+

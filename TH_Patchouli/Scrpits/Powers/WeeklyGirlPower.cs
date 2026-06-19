@@ -34,7 +34,7 @@ namespace TH_Patchouli.Scrpits.Powers
 
 		public override PowerType Type => PowerType.Buff;
 		public override PowerStackType StackType => PowerStackType.Counter;
-		public override bool IsInstanced => true;
+		public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 		public override Godot.Color AmountLabelColor => PowerModel._normalAmountLabelColor;
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [Tools.GetStaticKeyword("Element")];
 		protected override IEnumerable<DynamicVar> CanonicalVars => [new StringVar("NextElement")];
@@ -90,3 +90,4 @@ namespace TH_Patchouli.Scrpits.Powers
 		}
 	}
 }
+

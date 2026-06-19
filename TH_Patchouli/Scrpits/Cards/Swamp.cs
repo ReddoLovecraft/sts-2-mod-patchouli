@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -46,10 +46,10 @@ namespace TH_Patchouli.Scrpits.Cards
 		{
 			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			NCombatRoom.Instance?.RadialBlur(VfxPosition.Right);
-			await PowerCmd.Apply<SlowPower>(CombatState.HittableEnemies, DynamicVars.Cards.IntValue, Owner.Creature, this);
-			await PowerCmd.Apply<WeakPower>(CombatState.HittableEnemies, DynamicVars.Cards.IntValue, Owner.Creature, this);
-			await PowerCmd.Apply<VulnerablePower>(CombatState.HittableEnemies, DynamicVars.Cards.IntValue, Owner.Creature, this);
-			await PowerCmd.Apply<DebilitatePower>(CombatState.HittableEnemies, DynamicVars.Cards.IntValue, Owner.Creature, this);
+			await PowerCmd.Apply<SlowPower>(choiceContext, CombatState.HittableEnemies, DynamicVars.Cards.IntValue, Owner.Creature, this);
+			await PowerCmd.Apply<WeakPower>(choiceContext, CombatState.HittableEnemies, DynamicVars.Cards.IntValue, Owner.Creature, this);
+			await PowerCmd.Apply<VulnerablePower>(choiceContext, CombatState.HittableEnemies, DynamicVars.Cards.IntValue, Owner.Creature, this);
+			await PowerCmd.Apply<DebilitatePower>(choiceContext, CombatState.HittableEnemies, DynamicVars.Cards.IntValue, Owner.Creature, this);
 		}
 
 		protected override void OnUpgrade()
@@ -58,3 +58,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

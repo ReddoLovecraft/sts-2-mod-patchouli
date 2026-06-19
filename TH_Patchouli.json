@@ -3,9 +3,18 @@
   "name": "帕秋莉·诺蕾姬",
   "author": "Reddo",
   "description": "加入了来自东方Project的角色，七曜的魔女，帕秋莉·诺蕾姬，包含116张卡牌（含衍生牌和状态牌），以及46张可组合的符卡卡牌，22件新遗物和6瓶新药水以及6个新事件。",
-  "version": "1.2",
+  "version": "1.5.0",
   "has_pck": true,
   "has_dll": true,
-  "dependencies": [ "BaseLib", "Patchoulib" ],
+  "dependencies": [
+    {
+      "id": "BaseLib",
+      "min_version": "3.2.0"
+    },
+    {
+      "id": "Patchoulib",
+      "min_version": "1.8.0"
+    }
+  ],
   "affects_gameplay": true
 }

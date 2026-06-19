@@ -1,4 +1,4 @@
-using BaseLib.Abstracts;
+﻿using BaseLib.Abstracts;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Combat;
@@ -63,10 +63,10 @@ namespace TH_Patchouli.Scrpits.Powers
 
 			Flash();
 			TryPlayFlipVfx();
-			await CardPileCmd.AddGeneratedCardsToCombat(generated, PileType.Hand, addedByPlayer: true);
+			await CardPileCmd.AddGeneratedCardsToCombat(generated, PileType.Hand, creator: Owner.Player);
 		}
 
-		public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+		public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
 		{
 			if (side == Owner.Side)
 			{
@@ -100,3 +100,5 @@ namespace TH_Patchouli.Scrpits.Powers
 		}
 	}
 }
+
+

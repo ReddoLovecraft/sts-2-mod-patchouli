@@ -1,4 +1,4 @@
-using BaseLib.Abstracts;
+﻿using BaseLib.Abstracts;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -37,7 +37,7 @@ namespace TH_Patchouli.Scrpits.Powers
 			{
 				TryPlayVfx(enemy);
 				Flash();
-				await PowerCmd.Apply<FreezePower>(enemy, Amount, Owner, null);
+				await PowerCmd.Apply<FreezePower>(choiceContext, enemy, Amount, Owner, null);
 			}
 		}
 
@@ -56,3 +56,4 @@ namespace TH_Patchouli.Scrpits.Powers
 		}
 	}
 }
+

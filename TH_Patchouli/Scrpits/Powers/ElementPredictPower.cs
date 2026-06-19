@@ -1,4 +1,4 @@
-using BaseLib.Abstracts;
+﻿using BaseLib.Abstracts;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -51,25 +51,25 @@ namespace TH_Patchouli.Scrpits.Powers
 					switch (roll)
 					{
 						case 0:
-							await PowerCmd.Apply<SunElement>(Owner, 1, Owner, null);
+							await PowerCmd.Apply<SunElement>(choiceContext, Owner, 1, Owner, null);
 							break;
 						case 1:
-							await PowerCmd.Apply<LunarElement>(Owner, 1, Owner, null);
+							await PowerCmd.Apply<LunarElement>(choiceContext, Owner, 1, Owner, null);
 							break;
 						case 2:
-							await PowerCmd.Apply<FireElement>(Owner, 1, Owner, null);
+							await PowerCmd.Apply<FireElement>(choiceContext, Owner, 1, Owner, null);
 							break;
 						case 3:
-							await PowerCmd.Apply<WaterElement>(Owner, 1, Owner, null);
+							await PowerCmd.Apply<WaterElement>(choiceContext, Owner, 1, Owner, null);
 							break;
 						case 4:
-							await PowerCmd.Apply<WoodElement>(Owner, 1, Owner, null);
+							await PowerCmd.Apply<WoodElement>(choiceContext, Owner, 1, Owner, null);
 							break;
 						case 5:
-							await PowerCmd.Apply<GoldElement>(Owner, 1, Owner, null);
+							await PowerCmd.Apply<GoldElement>(choiceContext, Owner, 1, Owner, null);
 							break;
 						case 6:
-							await PowerCmd.Apply<DirtElement>(Owner, 1, Owner, null);
+							await PowerCmd.Apply<DirtElement>(choiceContext, Owner, 1, Owner, null);
 							break;
 					}
 				}
@@ -79,3 +79,4 @@ namespace TH_Patchouli.Scrpits.Powers
 		}
 	}
 }
+

@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.Models;
@@ -33,9 +33,10 @@ namespace TH_Patchouli.Scrpits.Cards
 
 			if (IsUpgraded)
 			{
-				await PowerCmd.Apply<WitchTeaEndOfCombatPower>(Owner.Creature, 1, Owner.Creature, this);
+				await PowerCmd.Apply<WitchTeaEndOfCombatPower>(choiceContext, Owner.Creature, 1, Owner.Creature, this);
 			}
 		}
 	}
 }
+
 

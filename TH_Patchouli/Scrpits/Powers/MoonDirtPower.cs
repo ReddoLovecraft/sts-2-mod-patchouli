@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models.Powers;
 using System;
+using MegaCrit.Sts2.Core.Entities.Players;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -19,9 +20,9 @@ namespace TH_Patchouli.Scrpits.Powers
 
 		protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromKeyword(CardKeyword.Retain)];
 
-		public override Task AfterCardRetained(CardModel card)
+		public override Task AfterFlush(PlayerChoiceContext choiceContext, Player player, IReadOnlyCollection<CardModel> flushedCards, IReadOnlyCollection<CardModel> retainedCards)
 		{
-			if (card.Owner != Owner.Player)
+			if (player != Owner.Player)
 			{
 				return Task.CompletedTask;
 			}
@@ -32,8 +33,16 @@ namespace TH_Patchouli.Scrpits.Powers
 				return Task.CompletedTask;
 			}
 
-			Flash();
-			card.EnergyCost.AddThisCombat(-reduction, reduceOnly: true);
+			foreach (CardModel card in retainedCards)
+			{
+				if (card.Owner != Owner.Player)
+				{
+					continue;
+				}
+
+				Flash();
+				card.EnergyCost.AddThisCombat(-reduction, reduceOnly: true);
+			}
 			return Task.CompletedTask;
 		}
 	}

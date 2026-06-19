@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Combat.History.Entries;
@@ -60,7 +60,7 @@ namespace TH_Patchouli.Scrpits.Cards
 			_playedThisTurn++;
 		}
 
-		public override Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+		public override Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
 		{
 			if (side == Owner.Creature.Side)
 			{
@@ -83,3 +83,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

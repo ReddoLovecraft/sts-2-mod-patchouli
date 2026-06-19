@@ -1,4 +1,4 @@
-using BaseLib.Abstracts;
+﻿using BaseLib.Abstracts;
 using BaseLib.Extensions;
 using Godot;
 using MegaCrit.Sts2.Core.Combat;
@@ -39,9 +39,10 @@ namespace TH_Patchouli.Scrpits.Powers
                 return;
             }
             this.Flash();
-            await PowerCmd.Apply<FreezePower>(CombatState.HittableEnemies,Amount,Owner,null);
+            await PowerCmd.Apply<FreezePower>(choiceContext, CombatState.HittableEnemies,Amount,Owner,null);
 			 if(Owner.Player.GetRelic<EmeraldTablet>()==null)
 			await PowerCmd.Decrement(this);
         }
     }
 }
+

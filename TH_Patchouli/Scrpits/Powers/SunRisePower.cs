@@ -45,7 +45,7 @@ namespace TH_Patchouli.Scrpits.Powers
 						continue;
 					}
 					triggered = true;
-					await ignite.AfterSideTurnStart(enemy.Side, CombatState);
+					await ignite.AfterSideTurnStart(enemy.Side, new[] { enemy }, CombatState);
 				}
 
 				if (triggered)

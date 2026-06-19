@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -47,7 +47,7 @@ namespace TH_Patchouli.Scrpits.Cards
 			Color color = new Color("00b77380");
 			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			NRun.Instance?.GlobalUi.AddChildSafely(NSmokyVignetteVfx.Create(color, color));
-			await PowerCmd.Apply<StaticGreenPower>(Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
+			await PowerCmd.Apply<StaticGreenPower>(choiceContext, Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
 		}
 
 		protected override void OnUpgrade()
@@ -56,3 +56,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

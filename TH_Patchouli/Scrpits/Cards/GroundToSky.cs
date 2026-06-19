@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -47,7 +47,7 @@ namespace TH_Patchouli.Scrpits.Cards
 			int strDown = Math.Max(0, DynamicVars.Cards.IntValue);
 			if (strDown > 0)
 			{
-				await PowerCmd.Apply<StrengthPower>(CombatState.HittableEnemies, -strDown, Owner.Creature, this);
+				await PowerCmd.Apply<StrengthPower>(choiceContext, CombatState.HittableEnemies, -strDown, Owner.Creature, this);
 			}
 		}
 
@@ -58,3 +58,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

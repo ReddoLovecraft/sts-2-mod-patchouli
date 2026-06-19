@@ -10,6 +10,7 @@ using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using Patchouib.Scrpits.Main;
+using MegaCrit.Sts2.Core.Entities.Players;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -29,14 +30,22 @@ namespace TH_Patchouli.Scrpits.Powers
 			HoverTipFactory.FromKeyword(CardKeyword.Retain)
 		];
 
-		public override async Task AfterCardRetained(CardModel card)
+		public override async Task AfterFlush(PlayerChoiceContext choiceContext, Player player, IReadOnlyCollection<CardModel> flushedCards, IReadOnlyCollection<CardModel> retainedCards)
 		{
-			if (card.Owner != Owner.Player)
+			if (player != Owner.Player)
 			{
 				return;
 			}
-			Flash();
-			await CreatureCmd.GainBlock(Owner, Amount, ValueProp.Move, null);
+			foreach (CardModel card in retainedCards)
+			{
+				if (card.Owner != Owner.Player)
+				{
+					continue;
+				}
+
+				Flash();
+				await CreatureCmd.GainBlock(Owner, Amount, ValueProp.Move, null);
+			}
 		}
 	}
 }

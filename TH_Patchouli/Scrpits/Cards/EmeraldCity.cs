@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Combat;
@@ -49,7 +49,7 @@ namespace TH_Patchouli.Scrpits.Cards
 		{
 			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
-			await PowerCmd.Apply<EmeraldCityPower>(Owner.Creature, 1, Owner.Creature, this);
+			await PowerCmd.Apply<EmeraldCityPower>(choiceContext, Owner.Creature, 1, Owner.Creature, this);
 		}
 
 		protected override void OnUpgrade()
@@ -58,3 +58,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

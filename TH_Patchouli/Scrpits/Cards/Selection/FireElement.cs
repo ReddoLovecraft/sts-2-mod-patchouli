@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Helpers;
@@ -38,8 +38,10 @@ namespace TH_Patchouli.Scrpits.Cards
 
         public override async Task<PowerModel> OnChosen(int amount)
         {
-           return await PowerCmd.Apply<TH_Patchouli.Scrpits.Powers.FireElement>(Owner.Creature,amount,Owner.Creature,null);
+           return await PowerCmd.Apply<TH_Patchouli.Scrpits.Powers.FireElement>(new MegaCrit.Sts2.Core.GameActions.Multiplayer.ThrowingPlayerChoiceContext(), Owner.Creature,amount,Owner.Creature,null);
         }
     }
 
 }
+
+

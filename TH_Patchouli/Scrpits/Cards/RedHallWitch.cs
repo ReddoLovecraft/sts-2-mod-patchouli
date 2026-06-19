@@ -35,7 +35,7 @@ namespace TH_Patchouli.Scrpits.Cards
 				return;
 			}
 			AttackCommand attack = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)	.WithHitFx("vfx/vfx_attack_slash", null, "heavy_attack.mp3").Targeting(cardPlay.Target).Execute(choiceContext);
-			int totalDamage = attack.Results.Sum(r => r.TotalDamage+r.OverkillDamage);
+			int totalDamage = attack.Results.SelectMany(r => r).Sum(r => r.TotalDamage + r.OverkillDamage);
 			if (totalDamage > 0)
 			{
 				await CreatureCmd.Heal(Owner.Creature, totalDamage);
@@ -48,4 +48,3 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
-

@@ -1,4 +1,4 @@
-using BaseLib.Abstracts;
+﻿using BaseLib.Abstracts;
 using BaseLib.Utils;
 using System;
 using System.Collections.Generic;
@@ -126,7 +126,7 @@ public class RedHallRocket : CustomRelicModel,IRightCilckable
 		return Task.CompletedTask;
 	}
 
-    public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
+    public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
 	{
 		if (!IsEffectEnabled)
 		{
@@ -243,3 +243,4 @@ public class RedHallRocket : CustomRelicModel,IRightCilckable
 	}
 }
 }
+

@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -50,7 +50,7 @@ namespace TH_Patchouli.Scrpits.Cards
 				int stacks = DynamicVars.Cards.IntValue * (isAttack ? 1 : 2);
 				if (stacks > 0)
 				{
-					await PowerCmd.Apply<IgnitePower>(enemy, stacks, Owner.Creature, this);
+					await PowerCmd.Apply<IgnitePower>(choiceContext, enemy, stacks, Owner.Creature, this);
 				}
 			}
 		}
@@ -62,3 +62,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

@@ -52,8 +52,8 @@ namespace TH_Patchouli.Scrpits.Cards
             .Execute(choiceContext);
 			if(cardPlay.Target!=null&&cardPlay.Target.IsAlive)
 			{
-				int res=attackCommand.Results.Sum((DamageResult r) => r.TotalDamage + r.OverkillDamage);
-				await PowerCmd.Apply<IgnitePower>(cardPlay.Target, res, Owner.Creature, this);
+				int res = attackCommand.Results.SelectMany(r => r).Sum(r => r.TotalDamage + r.OverkillDamage);
+				await PowerCmd.Apply<IgnitePower>(choiceContext, cardPlay.Target, res, Owner.Creature, this);
 			}
 		}
 
@@ -63,3 +63,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

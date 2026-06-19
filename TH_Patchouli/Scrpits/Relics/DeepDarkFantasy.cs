@@ -59,7 +59,7 @@ public class DeepDarkFantasy : CustomRelicModel
 		return Task.CompletedTask;
 	}
 
-	public override Task AfterSideTurnStart(CombatSide side, CombatState combatState)
+	public override Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
 	{
 		TrySetEnemyIntentHidden(hidden: true);
 		return Task.CompletedTask;
@@ -78,7 +78,7 @@ public class DeepDarkFantasy : CustomRelicModel
 			return;
 		}
 
-		CombatState? combatState = Owner.Creature.CombatState;
+		ICombatState? combatState = Owner.Creature.CombatState;
 		if (combatState == null)
 		{
 			return;
@@ -116,3 +116,4 @@ public class DeepDarkFantasy : CustomRelicModel
 
 }
 }
+

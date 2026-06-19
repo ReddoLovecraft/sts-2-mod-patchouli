@@ -1,4 +1,4 @@
-using BaseLib.Abstracts;
+﻿using BaseLib.Abstracts;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
@@ -59,7 +59,7 @@ public class CardPrepare : CustomRelicModel
         }
         return amount +Counter;
     }
-	public override Task BeforeTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+	public override Task BeforeSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
 	{
 		if (side != CombatSide.Player)
 		{
@@ -78,3 +78,4 @@ public class CardPrepare : CustomRelicModel
 	}
 }
 }
+

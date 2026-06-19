@@ -1,4 +1,4 @@
-using BaseLib.Abstracts;
+﻿using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -30,7 +30,8 @@ namespace TH_Patchouli.Scrpits.Powers
 			}
 
 			Flash();
-			await PowerCmd.Apply<PoisonPower>(target, result.UnblockedDamage, Owner, null);
+			await PowerCmd.Apply<PoisonPower>(choiceContext, target, result.UnblockedDamage, Owner, null);
 		}
 	}
 }
+

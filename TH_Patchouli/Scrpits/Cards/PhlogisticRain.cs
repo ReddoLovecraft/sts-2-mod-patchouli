@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -38,7 +38,7 @@ namespace TH_Patchouli.Scrpits.Cards
 		protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
 		{
 			DynamicVars["Power"].BaseValue = DynamicVars.Cards.BaseValue;
-			await PowerCmd.Apply<FireRainPower>(Owner.Creature, 1, Owner.Creature, this);
+			await PowerCmd.Apply<FireRainPower>(choiceContext, Owner.Creature, 1, Owner.Creature, this);
 		}
 
 		protected override void OnUpgrade()
@@ -48,3 +48,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

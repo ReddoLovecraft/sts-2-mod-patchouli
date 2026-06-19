@@ -1,4 +1,4 @@
-using BaseLib.Abstracts;
+﻿using BaseLib.Abstracts;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
@@ -37,7 +37,7 @@ public class RedHallMooncake : CustomRelicModel
 	{
 		await CreatureCmd.GainMaxHp(base.Owner.Creature, 9);
 	}
-	public override async Task BeforeTurnEndEarly(PlayerChoiceContext choiceContext, CombatSide side)
+	public override async Task BeforeSideTurnEndEarly(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         if (side == base.Owner.Creature.Side)
         {
@@ -48,3 +48,4 @@ public class RedHallMooncake : CustomRelicModel
 
 }
 }
+

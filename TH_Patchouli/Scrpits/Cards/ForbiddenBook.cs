@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -29,11 +29,12 @@ namespace TH_Patchouli.Scrpits.Cards
 			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			if (IsUpgraded)
 			{
-				await PowerCmd.Apply<ForbiddenBookPowerPlus>(Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
+				await PowerCmd.Apply<ForbiddenBookPowerPlus>(choiceContext, Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
 				return;
 			}
-			await PowerCmd.Apply<ForbiddenBookPower>(Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
+			await PowerCmd.Apply<ForbiddenBookPower>(choiceContext, Owner.Creature, DynamicVars.Cards.IntValue, Owner.Creature, this);
 		}
 	}
 }
+
 

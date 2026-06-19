@@ -131,7 +131,7 @@ namespace TH_Patchouli.Scripts.Main
 				return;
 			}
 
-			CombatState? combatState = __instance.Entity.CombatState;
+			ICombatState? combatState = __instance.Entity.CombatState;
 			if (combatState == null)
 			{
 				return;

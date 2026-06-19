@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -49,7 +49,7 @@ namespace TH_Patchouli.Scrpits.Cards
 				{
 					NFireBurstVfx child = NFireBurstVfx.Create(enemy, 0.75f);
 					NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(child);
-					await PowerCmd.Apply<IgnitePower>(enemy, DynamicVars.Cards.IntValue, Owner.Creature, this);
+					await PowerCmd.Apply<IgnitePower>(choiceContext, enemy, DynamicVars.Cards.IntValue, Owner.Creature, this);
 				}
 			}
 		}
@@ -60,3 +60,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

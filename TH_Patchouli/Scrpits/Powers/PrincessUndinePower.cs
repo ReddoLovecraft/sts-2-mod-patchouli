@@ -1,4 +1,4 @@
-using BaseLib.Abstracts;
+﻿using BaseLib.Abstracts;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -36,7 +36,8 @@ namespace TH_Patchouli.Scrpits.Powers
 			{
 				cards.Add(CombatState.CreateCard(ModelDb.Card<WaterSpirit>(), Owner.Player));
 			}
-			await CardPileCmd.AddGeneratedCardsToCombat(cards, PileType.Hand, addedByPlayer: true);
+			await CardPileCmd.AddGeneratedCardsToCombat(cards, PileType.Hand, creator: Owner.Player);
 		}
 	}
 }
+

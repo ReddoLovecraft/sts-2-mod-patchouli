@@ -44,7 +44,7 @@ namespace TH_Patchouli.Scrpits.Powers
 					if (amt > 0)
 					{
 						total += amt;
-						await PowerCmd.ModifyAmount(p, -amt, Owner, null);
+						await PowerCmd.ModifyAmount(choiceContext, p, -amt, Owner, null);
 					}
 				}
 			}

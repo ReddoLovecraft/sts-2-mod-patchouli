@@ -29,7 +29,7 @@ namespace TH_Patchouli.Scrpits.Powers
 
 		public override PowerType Type => PowerType.Buff;
 		public override PowerStackType StackType => PowerStackType.Counter;
-		public override bool IsInstanced => true;
+		public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/BS32.png";
 		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/BS64.png";
 
@@ -91,7 +91,7 @@ namespace TH_Patchouli.Scrpits.Powers
 			{
 				int dec = _pendingDecrement;
 				_pendingDecrement = 0;
-				await PowerCmd.ModifyAmount(this, -dec, null, null);
+				await PowerCmd.ModifyAmount(choiceContext, this, -dec, null, null);
 			}
 		}
 
@@ -155,3 +155,4 @@ namespace TH_Patchouli.Scrpits.Powers
 		}
 	}
 }
+

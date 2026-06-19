@@ -1,4 +1,4 @@
-using BaseLib.Abstracts;
+﻿using BaseLib.Abstracts;
 using Godot;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -27,7 +27,7 @@ namespace TH_Patchouli.Scrpits.Powers
 		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/SHP32.png";
 		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/SHP64.png";
 
-		public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
+		public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
 		{
 			if (side != Owner.Side || Owner.Player == null)
 			{
@@ -91,3 +91,4 @@ namespace TH_Patchouli.Scrpits.Powers
 		}
 	}
 }
+

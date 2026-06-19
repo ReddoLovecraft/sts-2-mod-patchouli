@@ -59,6 +59,11 @@ namespace TH_Patchouli.Scrpits.Powers
 
 		public override async Task BeforeDamageReceived(PlayerChoiceContext choiceContext, Creature target, decimal amount, ValueProp props, Creature? dealer, CardModel? cardSource)
 		{
+			if (target != Owner)
+			{
+				return;
+			}
+
 			if (!_pendingDiscard)
 			{
 				return;

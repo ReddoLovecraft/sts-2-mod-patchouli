@@ -37,7 +37,8 @@ namespace TH_Patchouli.Scrpits.Powers
 			}
 
 			Flash();
-			await PowerCmd.Apply<IgnitePower>(CombatState.HittableEnemies, ignite, Owner, null);
+			await PowerCmd.Apply<IgnitePower>(new ThrowingPlayerChoiceContext(), CombatState.HittableEnemies, ignite, Owner, null);
 		}
 	}
 }
+

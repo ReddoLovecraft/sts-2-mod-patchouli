@@ -48,7 +48,7 @@ namespace TH_Patchouli.Scrpits.Cards
 				{
 					continue;
 				}
-				if(buff.IsInstanced)
+				if (buff.InstanceType != PowerInstanceType.None)
 				{
 					continue;
 				}
@@ -56,7 +56,7 @@ namespace TH_Patchouli.Scrpits.Cards
 			}
 			foreach(PowerModel buff in bounsPowers)
 			{
-				await PowerCmd.Apply(buff, Owner.Creature, buff.Amount, Owner.Creature, null);
+				await PowerCmd.Apply(choiceContext, buff, Owner.Creature, buff.Amount, Owner.Creature, null);
 			}
 		}
 
@@ -66,3 +66,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

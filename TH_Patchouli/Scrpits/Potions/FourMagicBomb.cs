@@ -1,4 +1,4 @@
-using BaseLib.Abstracts;
+﻿using BaseLib.Abstracts;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -40,7 +40,8 @@ public sealed class FourMagicBomb : CustomPotionModel
 		}
 		await Cmd.CustomScaledWait(0.2f, 0.3f);
 		await CreatureCmd.Damage(choiceContext, targets, new DamageVar(4,ValueProp.Unpowered), player, null);
-        await PowerCmd.Apply<IgnitePower>(targets,4,Owner.Creature,null);
-        await PowerCmd.Apply<FreezePower>(targets,4,Owner.Creature,null);
+        await PowerCmd.Apply<IgnitePower>(choiceContext, targets,4,Owner.Creature,null);
+        await PowerCmd.Apply<FreezePower>(choiceContext, targets,4,Owner.Creature,null);
     }
 }
+

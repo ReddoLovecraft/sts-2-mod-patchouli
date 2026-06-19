@@ -38,7 +38,7 @@ namespace TH_Patchouli.Scrpits.Powers
 			return Task.CompletedTask;
 		}
 
-		public override Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, CombatState combatState)
+		public override Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
 		{
 			if (side == Owner.Side)
 			{
@@ -47,7 +47,7 @@ namespace TH_Patchouli.Scrpits.Powers
 			return Task.CompletedTask;
 		}
 
-		public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
+		public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
 		{
 			if (side != Owner.Side)
 			{
@@ -63,7 +63,7 @@ namespace TH_Patchouli.Scrpits.Powers
 			}
 
 			_pendingNextTurnBlock = 0;
-			await PowerCmd.Apply<BlockNextTurnPower>(Owner, block, Owner, null);
+			await PowerCmd.Apply<BlockNextTurnPower>(new ThrowingPlayerChoiceContext(), Owner, block, Owner, null);
 		}
 
 		private void OnOwnerBlockChanged(int oldBlock, int newBlock)
@@ -87,7 +87,9 @@ namespace TH_Patchouli.Scrpits.Powers
 				return;
 			}
 
-			_ = PowerCmd.Apply<BlockNextTurnPower>(Owner, lost, Owner, null);
+			_ = PowerCmd.Apply<BlockNextTurnPower>(new ThrowingPlayerChoiceContext(), Owner, lost, Owner, null);
 		}
 	}
 }
+
+

@@ -1,4 +1,4 @@
-using BaseLib.Abstracts;
+﻿using BaseLib.Abstracts;
 using Godot;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -24,7 +24,7 @@ namespace TH_Patchouli.Scrpits.Powers
 
 		public override PowerType Type => PowerType.Buff;
 		public override PowerStackType StackType => PowerStackType.Counter;
-		public override bool IsInstanced => true;
+		public override PowerInstanceType InstanceType => PowerInstanceType.Instanced;
 		public override Color AmountLabelColor => PowerModel._normalAmountLabelColor;
 		public override string? CustomPackedIconPath => "res://TH_Patchouli/ArtWorks/Powers/KWP32.png";
 		public override string? CustomBigIconPath => "res://TH_Patchouli/ArtWorks/Powers/KWP64.png";
@@ -46,7 +46,7 @@ namespace TH_Patchouli.Scrpits.Powers
 			return Task.CompletedTask;
 		}
 
-		public override Task BeforeTurnEndVeryEarly(PlayerChoiceContext choiceContext, CombatSide side)
+		public override Task BeforeSideTurnEndVeryEarly(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
 		{
 			if (side == Owner.Side)
 			{
@@ -58,7 +58,7 @@ namespace TH_Patchouli.Scrpits.Powers
 			return Task.CompletedTask;
 		}
 
-		public override Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, CombatState combatState)
+		public override Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
 		{
 			if (side == Owner.Side)
 			{
@@ -83,3 +83,5 @@ namespace TH_Patchouli.Scrpits.Powers
 		}
 	}
 }
+
+

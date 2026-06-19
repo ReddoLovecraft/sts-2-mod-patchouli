@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -52,7 +52,7 @@ namespace TH_Patchouli.Scrpits.Cards
 			int strength = Math.Max(0, totalIgnite) / divisor;
 			if (strength > 0)
 			{
-				await PowerCmd.Apply<StrengthPower>(Owner.Creature, strength, Owner.Creature, this);
+				await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, strength, Owner.Creature, this);
 			}
 		}
 
@@ -82,9 +82,9 @@ namespace TH_Patchouli.Scrpits.Cards
 			container.AddChild(vfx);
 		}
 
-		public override async Task AfterCardRetained(CardModel card)
+		public override async Task AfterFlush(PlayerChoiceContext choiceContext, MegaCrit.Sts2.Core.Entities.Players.Player player, IReadOnlyCollection<CardModel> flushedCards, IReadOnlyCollection<CardModel> retainedCards)
 		{
-			if (card != this || CombatState == null)
+			if (player != Owner || !retainedCards.Contains(this) || CombatState == null)
 			{
 				return;
 			}
@@ -95,7 +95,7 @@ namespace TH_Patchouli.Scrpits.Cards
 				return;
 			}
 
-			await PowerCmd.Apply<IgnitePower>(CombatState.HittableEnemies, ignite, Owner.Creature, this);
+			await PowerCmd.Apply<IgnitePower>(choiceContext, CombatState.HittableEnemies, ignite, Owner.Creature, this);
 		}
 
 		protected override void OnUpgrade()
@@ -105,3 +105,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

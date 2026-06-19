@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -43,8 +43,9 @@ namespace TH_Patchouli.Scrpits.Cards
 				{
 					copy.EnergyCost.SetThisTurnOrUntilPlayed(0);
 				}
-				await CardPileCmd.AddGeneratedCardsToCombat(new List<CardModel> { copy }, PileType.Hand, addedByPlayer: true);
+				await CardPileCmd.AddGeneratedCardsToCombat(new List<CardModel> { copy }, PileType.Hand, creator: Owner);
         	}
 		}
 	}
 }
+

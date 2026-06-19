@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using Godot;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
@@ -57,7 +57,7 @@ namespace TH_Patchouli.Scrpits.Cards
 			NCombatRoom.Instance?.RadialBlur(VfxPosition.Right);
 			NGame.Instance?.ScreenShake(ShakeStrength.Strong, ShakeDuration.Normal, 180f + MegaCrit.Sts2.Core.Random.Rng.Chaotic.NextFloat(-10f, 10f));
 			VfxCmd.PlayOnCreatureCenters(CombatState.HittableEnemies, "vfx/vfx_attack_blunt");
-			await PowerCmd.Apply<SlowPower>(CombatState.HittableEnemies, 1, Owner.Creature, this);
+			await PowerCmd.Apply<SlowPower>(choiceContext, CombatState.HittableEnemies, 1, Owner.Creature, this);
 			NGame.Instance?.DoHitStop(ShakeStrength.Strong, ShakeDuration.Normal);
 				SfxCmd.Play("event:/sfx/enemy/enemy_attacks/ceremonial_beast/ceremonial_beast_plow_end");
 			int mult = Math.Max(0, DynamicVars.Cards.IntValue);
@@ -80,3 +80,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

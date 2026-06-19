@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Commands.Builders;
@@ -48,7 +48,7 @@ namespace TH_Patchouli.Scrpits.Cards
 			{
 				return;
 			}
-			await PowerCmd.Apply<FreezePower>(cardPlay.Target, DynamicVars["Power"].IntValue, Owner.Creature, this);
+			await PowerCmd.Apply<FreezePower>(choiceContext, cardPlay.Target, DynamicVars["Power"].IntValue, Owner.Creature, this);
 			TryPlayWaterBuryXStreamVfx(Owner.Creature, cardPlay.Target);
 			await DamageCmd.Attack(DynamicVars.Damage.BaseValue).WithHitCount(DynamicVars.Cards.IntValue).FromCard(this).Targeting(cardPlay.Target).Execute(choiceContext);
 		}
@@ -186,3 +186,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

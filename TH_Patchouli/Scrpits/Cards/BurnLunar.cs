@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -68,10 +68,10 @@ namespace TH_Patchouli.Scrpits.Cards
 
 			if (cardPlay.Target.GetPower<IgniteMark>() != null)
 			{
-				await PowerCmd.Apply<IgnitePower>(cardPlay.Target, amount, Owner.Creature, this);
+				await PowerCmd.Apply<IgnitePower>(choiceContext, cardPlay.Target, amount, Owner.Creature, this);
 			}
 
-			await PowerCmd.Apply<IgniteMark>(cardPlay.Target, amount, Owner.Creature, this);
+			await PowerCmd.Apply<IgniteMark>(choiceContext, cardPlay.Target, amount, Owner.Creature, this);
 		}
 
 		protected override void OnUpgrade()
@@ -80,3 +80,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

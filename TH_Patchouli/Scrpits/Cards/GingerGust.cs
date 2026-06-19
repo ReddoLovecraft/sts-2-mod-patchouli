@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -55,11 +55,11 @@ namespace TH_Patchouli.Scrpits.Cards
 			int strength = Owner.Creature.GetPower<StrengthPower>()?.Amount ?? 0;
 			if (strength > 0)
 			{
-				await PowerCmd.Apply<StrengthPower>(Owner.Creature, strength * (mult - 1), Owner.Creature, this);
+				await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, strength * (mult - 1), Owner.Creature, this);
 			}
 			else
 			{
-				await PowerCmd.Apply<StrengthPower>(Owner.Creature, mult, Owner.Creature, this);
+				await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, mult, Owner.Creature, this);
 			}
 		}
 
@@ -69,3 +69,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

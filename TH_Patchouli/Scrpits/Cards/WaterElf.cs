@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -43,7 +43,7 @@ namespace TH_Patchouli.Scrpits.Cards
 				{
 					generated.Add(CombatState.CreateCard(ModelDb.Card<WaterSpirit>(), Owner));
 				}
-				await CardPileCmd.AddGeneratedCardsToCombat(generated, PileType.Hand, addedByPlayer: true);
+				await CardPileCmd.AddGeneratedCardsToCombat(generated, PileType.Hand, creator: Owner);
 			}
 
 			DynamicVars.Cards.BaseValue = Math.Max(0m, DynamicVars.Cards.BaseValue + 1m);
@@ -55,3 +55,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

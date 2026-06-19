@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Combat;
@@ -78,7 +78,7 @@ namespace TH_Patchouli.Scrpits.Cards
 			foreach(Creature enemy in CombatState.HittableEnemies.ToList())
 			{
 				VfxCmd.PlayOnCreatureCenter(enemy, PatchouliVfxManager.ToPatchouliVfxPath("royalfire"));
-				await PowerCmd.Apply<IgnitePower>(enemy, count * DynamicVars.Cards.IntValue, Owner.Creature, this);
+				await PowerCmd.Apply<IgnitePower>(choiceContext, enemy, count * DynamicVars.Cards.IntValue, Owner.Creature, this);
 			}
 			}
 		}
@@ -89,3 +89,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

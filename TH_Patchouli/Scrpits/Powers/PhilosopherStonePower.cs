@@ -1,4 +1,4 @@
-using BaseLib.Abstracts;
+﻿using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -53,13 +53,13 @@ namespace TH_Patchouli.Scrpits.Powers
 			int gold = Owner.GetPower<GoldElement>()?.Amount ?? 0;
 			if (gold > 0)
 			{
-				await PowerCmd.Apply<FlexPotionPower>(Owner, gold, Owner, null);
+				await PowerCmd.Apply<FlexPotionPower>(context, Owner, gold, Owner, null);
 			}
 
 			int water = Owner.GetPower<WaterElement>()?.Amount ?? 0;
 			if (water > 0)
 			{
-				await PowerCmd.Apply<FreezePower>(CombatState.HittableEnemies, water, Owner, null);
+				await PowerCmd.Apply<FreezePower>(context, CombatState.HittableEnemies, water, Owner, null);
 			}
 
 			int sun = Owner.GetPower<SunElement>()?.Amount ?? 0;
@@ -91,7 +91,7 @@ namespace TH_Patchouli.Scrpits.Powers
 			Flash();
 		}
 
-		public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+		public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
 		{
 			if (side == Owner.Side)
 			{
@@ -100,3 +100,6 @@ namespace TH_Patchouli.Scrpits.Powers
 		}
 	}
 }
+
+
+

@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -33,7 +33,7 @@ namespace TH_Patchouli.Scrpits.Cards
 			await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
 			TryPlayScreenDistortVfx();
 			
-			await PowerCmd.Apply<UnpredictablePower>(Owner.Creature, 1, Owner.Creature, this);
+			await PowerCmd.Apply<UnpredictablePower>(choiceContext, Owner.Creature, 1, Owner.Creature, this);
 		}
 
 		private static void TryPlayScreenDistortVfx()
@@ -134,3 +134,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Combat.History.Entries;
@@ -57,7 +57,7 @@ namespace TH_Patchouli.Scrpits.Cards
 			{
 				await PlayerCmd.GainEnergy(gain, Owner);
 			}
-			await PowerCmd.Apply<NoEnergyGainPower>(Owner.Creature, 1, Owner.Creature, this);
+			await PowerCmd.Apply<NoEnergyGainPower>(choiceContext, Owner.Creature, 1, Owner.Creature, this);
 		}
 
 		protected override void OnUpgrade()
@@ -79,3 +79,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

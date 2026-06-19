@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -47,8 +47,9 @@ namespace TH_Patchouli.Scrpits.Cards
 			{
 				return;
 			}
-			await PowerCmd.Apply<WeakPower>(Owner.Creature, 1, Owner.Creature, this);
-			await PowerCmd.Apply<VulnerablePower>(Owner.Creature, 1, Owner.Creature, this);
+			await PowerCmd.Apply<WeakPower>(choiceContext, Owner.Creature, 1, Owner.Creature, this);
+			await PowerCmd.Apply<VulnerablePower>(choiceContext, Owner.Creature, 1, Owner.Creature, this);
 		}
 	}
 }
+

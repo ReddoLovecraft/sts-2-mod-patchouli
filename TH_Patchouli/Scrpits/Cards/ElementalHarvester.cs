@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -63,7 +63,7 @@ namespace TH_Patchouli.Scrpits.Cards
 				generatedCards[i].EnergyCost.SetThisTurnOrUntilPlayed(0, reduceOnly: true);
 			}
 
-			await CardPileCmd.AddGeneratedCardsToCombat(generatedCards, PileType.Hand, addedByPlayer: true);
+			await CardPileCmd.AddGeneratedCardsToCombat(generatedCards, PileType.Hand, creator: Owner);
 		}
 
 		protected override void OnUpgrade()
@@ -72,3 +72,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

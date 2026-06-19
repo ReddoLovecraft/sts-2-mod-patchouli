@@ -1,4 +1,4 @@
-using BaseLib.Abstracts;
+﻿using BaseLib.Abstracts;
 using BaseLib.Extensions;
 using BaseLib.Patches.Content;
 using Godot;
@@ -512,7 +512,7 @@ namespace TH_Patchouli.Scripts.Main
 			}
 		}
 
-		private static int GetSpellCardPoolIndex(CombatState combatState, Player owner, CardModel card)
+		private static int GetSpellCardPoolIndex(ICombatState combatState, Player owner, CardModel card)
 		{
 			List<CardModel> pool = CreateSpellCardPoolPreviewCards(owner);
 			for (int i = 0; i < pool.Count; i++)
@@ -614,13 +614,13 @@ namespace TH_Patchouli.Scripts.Main
 
 			return element switch
 			{
-				ElementEnum.Gold => PowerCmd.Apply<ElementPowers.GoldElement>(owner, -amount, owner, source),
-				ElementEnum.Lunar => PowerCmd.Apply<ElementPowers.LunarElement>(owner, -amount, owner, source),
-				ElementEnum.Sun => PowerCmd.Apply<ElementPowers.SunElement>(owner, -amount, owner, source),
-				ElementEnum.Fire => PowerCmd.Apply<ElementPowers.FireElement>(owner, -amount, owner, source),
-				ElementEnum.Water => PowerCmd.Apply<ElementPowers.WaterElement>(owner, -amount, owner, source),
-				ElementEnum.Wood => PowerCmd.Apply<ElementPowers.WoodElement>(owner, -amount, owner, source),
-				ElementEnum.Dirt => PowerCmd.Apply<ElementPowers.DirtElement>(owner, -amount, owner, source),
+				ElementEnum.Gold => PowerCmd.Apply<ElementPowers.GoldElement>(new ThrowingPlayerChoiceContext(), owner, -amount, owner, source),
+				ElementEnum.Lunar => PowerCmd.Apply<ElementPowers.LunarElement>(new ThrowingPlayerChoiceContext(), owner, -amount, owner, source),
+				ElementEnum.Sun => PowerCmd.Apply<ElementPowers.SunElement>(new ThrowingPlayerChoiceContext(), owner, -amount, owner, source),
+				ElementEnum.Fire => PowerCmd.Apply<ElementPowers.FireElement>(new ThrowingPlayerChoiceContext(), owner, -amount, owner, source),
+				ElementEnum.Water => PowerCmd.Apply<ElementPowers.WaterElement>(new ThrowingPlayerChoiceContext(), owner, -amount, owner, source),
+				ElementEnum.Wood => PowerCmd.Apply<ElementPowers.WoodElement>(new ThrowingPlayerChoiceContext(), owner, -amount, owner, source),
+				ElementEnum.Dirt => PowerCmd.Apply<ElementPowers.DirtElement>(new ThrowingPlayerChoiceContext(), owner, -amount, owner, source),
 				_ => Task.CompletedTask
 			};
 		}
@@ -637,7 +637,7 @@ namespace TH_Patchouli.Scripts.Main
 		}
 
 		private static List<CardModel> GetTransformTargetsFromSpellPool(
-			CombatState combatState,
+			ICombatState combatState,
 			Player owner,
 			PatchouliCardModel original,
 			List<ElementEnum> originalElements,
@@ -768,7 +768,7 @@ namespace TH_Patchouli.Scripts.Main
 			return cards;
 		}
 
-		internal static CardModel? CreateSpellCardFromPoolIndex(CombatState combatState, Player owner, int index)
+		internal static CardModel? CreateSpellCardFromPoolIndex(ICombatState combatState, Player owner, int index)
 		{
 			return index switch
 			{

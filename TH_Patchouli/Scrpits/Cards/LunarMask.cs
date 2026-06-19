@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Helpers;
@@ -47,8 +47,8 @@ namespace TH_Patchouli.Scrpits.Cards
 			NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NHorizontalLinesVfx.Create(color, 4.8f));
 			SfxCmd.Play("event:/sfx/characters/ironclad/ironclad_whirlwind");
 			NRun.Instance?.GlobalUi.AddChildSafely(NSmokyVignetteVfx.Create(color, color));
-			await PowerCmd.Apply<WeakPower>(CombatState.HittableEnemies, DynamicVars.Cards.IntValue, Owner.Creature, this);
-			await PowerCmd.Apply<VulnerablePower>(CombatState.HittableEnemies, DynamicVars.Cards.IntValue, Owner.Creature, this);
+			await PowerCmd.Apply<WeakPower>(choiceContext, CombatState.HittableEnemies, DynamicVars.Cards.IntValue, Owner.Creature, this);
+			await PowerCmd.Apply<VulnerablePower>(choiceContext, CombatState.HittableEnemies, DynamicVars.Cards.IntValue, Owner.Creature, this);
 		}
 
 		protected override void OnUpgrade()
@@ -57,3 +57,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

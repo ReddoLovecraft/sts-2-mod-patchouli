@@ -38,7 +38,7 @@ namespace TH_Patchouli.Scrpits.Powers
 			return Task.CompletedTask;
 		}
 
-		public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
+		public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
 		{
 			if (side != Owner.Side || Owner.Player?.PlayerCombatState == null)
 			{
@@ -52,7 +52,7 @@ namespace TH_Patchouli.Scrpits.Powers
 			}
 
 			Flash();
-			await PowerCmd.Apply<RegenPower>(Owner, maxEnergy, Owner, null);
+			await PowerCmd.Apply<RegenPower>(new ThrowingPlayerChoiceContext(), Owner, maxEnergy, Owner, null);
 		}
 
 		public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)

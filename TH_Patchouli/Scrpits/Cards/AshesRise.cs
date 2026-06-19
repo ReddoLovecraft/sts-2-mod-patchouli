@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -45,7 +45,7 @@ namespace TH_Patchouli.Scrpits.Cards
 				NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NFireSmokePuffVfx.Create(enemy));
 				await Cmd.CustomScaledWait(0.15f, 0.3f);
 				await CreatureCmd.Heal(enemy, heal);
-				await PowerCmd.Apply<IgnitePower>(enemy, heal, Owner.Creature, this);
+				await PowerCmd.Apply<IgnitePower>(choiceContext, enemy, heal, Owner.Creature, this);
 			}
 		}
 
@@ -55,3 +55,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

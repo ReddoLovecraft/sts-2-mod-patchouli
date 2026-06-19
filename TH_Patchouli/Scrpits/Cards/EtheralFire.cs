@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -57,7 +57,7 @@ namespace TH_Patchouli.Scrpits.Cards
 					NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(enemy,VfxColor.Red));
 					TryPlayLocalDistortVfx(enemy);
 					
-					await PowerCmd.Apply<IgnitePower>(enemy, ignite, Owner.Creature, this);
+					await PowerCmd.Apply<IgnitePower>(choiceContext, enemy, ignite, Owner.Creature, this);
 				}
 			}
 		}
@@ -161,3 +161,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

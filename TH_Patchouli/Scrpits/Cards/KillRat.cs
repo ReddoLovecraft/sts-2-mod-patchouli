@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -37,7 +37,7 @@ namespace TH_Patchouli.Scrpits.Cards
 				await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).WithHitFx("vfx/vfx_chain").Targeting(cardPlay.Target).Execute(choiceContext);
 			if (cardPlay.Target != null)
 			{
-							await PowerCmd.Apply<KillRatPower>(CombatState.HittableEnemies, DynamicVars.Cards.IntValue, Owner.Creature, this);
+							await PowerCmd.Apply<KillRatPower>(choiceContext, CombatState.HittableEnemies, DynamicVars.Cards.IntValue, Owner.Creature, this);
 			}
 		}
 
@@ -47,3 +47,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+

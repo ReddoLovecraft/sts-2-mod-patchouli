@@ -1,4 +1,4 @@
-using BaseLib.Utils;
+﻿using BaseLib.Utils;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Commands.Builders;
@@ -46,7 +46,7 @@ namespace TH_Patchouli.Scrpits.Cards
 		{
 			//NCombatRoom.Instance?.CombatVfxContainer.AddChildSafely(NGroundFireVfx.Create(cardPlay.Target, VfxColor.Red));
 			await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).WithHitFx(null, null, "blunt_attack.mp3").WithHitVfxNode(target => PatchouliVfxManager.CreateProjectileToTarget("fireball", Owner.Creature, target, new Vector2(0f, -180f),  new Vector2(0f, -40f))).Targeting(cardPlay.Target).Execute(choiceContext);
-			await PowerCmd.Apply<IgnitePower>(cardPlay.Target, DynamicVars.Cards.IntValue, Owner.Creature, this);
+			await PowerCmd.Apply<IgnitePower>(choiceContext, cardPlay.Target, DynamicVars.Cards.IntValue, Owner.Creature, this);
 		}
 
 		public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
@@ -78,3 +78,4 @@ namespace TH_Patchouli.Scrpits.Cards
 		}
 	}
 }
+
